@@ -79,11 +79,12 @@ Dark mode state is initialized by reading the OS preference or to `light` if tha
 API endpoints for the app and their usage is explained in the following table.  
 A [JSON Web Token](https://datatracker.ietf.org/doc/html/rfc7519) is required for each request.
 
-| Endpoint                                         | Method |                                                                                                            Payload |                    Usage |
-| ------------------------------------------------ | :----: | -----------------------------------------------------------------------------------------------------------------: | -----------------------: |
-| `https://release-racconBE.com/todos/me/follow`   |  POST  | [`ListEl` Obj](https://github.com/stavros-liaskos/release-raccoon/blob/master/components/List/List.types.ts#L1-L6) |        Follow new artist |
-| `https://release-racconBE.com/todos/me/unfollow` |  POST  | [`ListEl` Obj](https://github.com/stavros-liaskos/release-raccoon/blob/master/components/List/List.types.ts#L1-L6) |          Unfollow artist |
-| `https://release-racconBE.com/todos/me/search`   |  GET   |                                                                                                     `query` string | Search artists for query |
+| Endpoint                                          | Method |                                                                                                            Payload |                    Usage |
+| ------------------------------------------------- | :----: | -----------------------------------------------------------------------------------------------------------------: | -----------------------: |
+| `https://release-racconBE.com/todos/me/follow`    |  POST  | [`ListEl` Obj](https://github.com/stavros-liaskos/release-raccoon/blob/master/components/List/List.types.ts#L1-L6) |        Follow new artist |
+| `https://release-racconBE.com/todos/me/unfollow`  |  POST  | [`ListEl` Obj](https://github.com/stavros-liaskos/release-raccoon/blob/master/components/List/List.types.ts#L1-L6) |          Unfollow artist |
+| `https://release-racconBE.com/todos/me/search`    |  GET   |                                                                                                     `query` string | Search artists for query |
+| `https://release-racconBE.com/todos/me/myArtists` |  GET   |                                                                                                                    |  Get my followed artists |
 
 > API endpoints can be found on the backend project [here](https://github.com/jaivalis/release-raccoon#readmeTODO)
 

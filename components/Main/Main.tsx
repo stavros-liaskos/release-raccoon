@@ -1,27 +1,38 @@
 import { MainProps } from './Main.types';
 import List from '../List/List';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ListEl } from '../List/List.types';
 import Search from '../Search/Search';
 import { searchI18n } from '../Search/Search.data';
 import { listI18n } from '../List/List.data';
-import mockedResponse from '../../mocks/searchResult.json';
 import { useUser } from '@auth0/nextjs-auth0';
 import Login from '../Login/Login';
 
-const Main: React.FunctionComponent<MainProps> = ({ i18n, defaultList = [] }) => {
-  const { user, error, isLoading } = useUser();
+const Main: React.FunctionComponent<MainProps> = ({ i18n }) => {
+  const { user, error } = useUser(); // TODO use isLoading or try Suspense
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [list, setList] = useState<ListEl[]>(
-    !defaultList.length ? mockedResponse.artistsPerResource.fromLastfm : defaultList,
-  ); // todo rm hardcoded data, get scrapped from db
+  const [list, setList] = useState<ListEl[]>();
+
+  useEffect(() => {
+    console.warn(`${process.env.BE_BASE_URL}/todos/me/myArtists`);
+    fetch(`${process.env.BE_BASE_URL}/todos/me/myArtists`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      referrerPolicy: 'no-referrer',
+    })
+      .then(response => response.json())
+      .then(data => setList(data));
+  }, []);
 
   if (!i18n || !i18n.todo) {
     return null;
   }
 
-  if (isLoading) return <div>Loading...</div>;
+  // if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
   return (
