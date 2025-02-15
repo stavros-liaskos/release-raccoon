@@ -5,15 +5,20 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 import ThemeProvider from '../contexts/Theme/ThemeProvider';
 import ArtistsListProvider from '../contexts/ArtistsList/ArtistsListProvider';
 import Meta from '../components/Meta/Meta';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
       <UserProvider>
-        <ArtistsListProvider>
-          <Meta />
-          <Component {...pageProps} />
-        </ArtistsListProvider>
+        <QueryClientProvider client={queryClient}>
+          <ArtistsListProvider>
+            <Meta />
+            <Component {...pageProps} />
+          </ArtistsListProvider>
+        </QueryClientProvider>
       </UserProvider>
     </ThemeProvider>
   );

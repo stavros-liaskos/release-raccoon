@@ -1,4 +1,4 @@
-import { act, fireEvent, render } from '@testing-library/react';
+import { act, fireEvent } from '@testing-library/react';
 import Recommendations from './Recommendations';
 import { initServer, renderWithAct } from '../../utils/test-utils';
 import { mswAuth, mswFollow, mswFollowedArtists, mswRecommendedArtists } from '../../mocks/mockApi';
@@ -36,15 +36,11 @@ describe('Recommendations', () => {
 
   it('handles follow artist', async () => {
     const recommendedArtists = recommendedArtistsRes.rows;
-    server.use(mswRecommendedArtists.success(), mswFollow.success());
+    server.use(mswAuth.success(), mswFollowedArtists.success(), mswRecommendedArtists.success(), mswFollow.success());
 
     const followArtistSpy = jest.spyOn(followArtist, 'default');
-    const setStateMock = jest.fn();
-    const useStateMock = () => [0, setStateMock];
-    // @ts-ignore
-    jest.spyOn(React, 'useState').mockImplementation(useStateMock);
 
-    const { findAllByText } = render(<Recommendations i18n={recommendationsI18n} />);
+    const { findAllByText } = await renderWithAct(<Recommendations i18n={recommendationsI18n} />);
 
     const recommendedArtistButtons = await findAllByText(recommendationsI18n.artistList.btnTxt);
     act(() => {
@@ -52,12 +48,11 @@ describe('Recommendations', () => {
     });
 
     expect(followArtistSpy).toHaveBeenCalledWith(recommendedArtists[0], expect.anything());
-    expect(setStateMock).toHaveBeenCalledWith(recommendedArtists[0].id);
   });
 
   it('matches snapshot', async () => {
-    server.use(mswRecommendedArtists.success());
-    const { container } = render(<Recommendations i18n={recommendationsI18n} />);
+    server.use(mswAuth.success(), mswFollowedArtists.success(), mswRecommendedArtists.success());
+    const { container } = await renderWithAct(<Recommendations i18n={recommendationsI18n} />);
     expect(container).toMatchSnapshot();
   });
 });

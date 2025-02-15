@@ -4,12 +4,17 @@ import ThemeProvider from '../contexts/Theme/ThemeProvider';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import ArtistsListProvider from '../contexts/ArtistsList/ArtistsListProvider';
 import { setupServer } from 'msw/node';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeProvider>
       <UserProvider>
-        <ArtistsListProvider>{children}</ArtistsListProvider>
+        <QueryClientProvider client={queryClient}>
+          <ArtistsListProvider>{children}</ArtistsListProvider>
+        </QueryClientProvider>
       </UserProvider>
     </ThemeProvider>
   );
