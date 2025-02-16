@@ -1,6 +1,6 @@
 import ScrapeButton from './components/ScrapeButton';
 import React, { useEffect, useRef, useState } from 'react';
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { useUser } from '@auth0/nextjs-auth0';
 import { components } from '../../types/schema';
 import Endpoints from '../../types/endpoints';
 import { scrapersI18n } from '../../i18n';

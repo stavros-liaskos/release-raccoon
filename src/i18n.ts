@@ -15,6 +15,10 @@ export const searchI18n: SearchI18n = {
   },
 };
 
+export const headerI18n = {
+  logoutBtn: 'Logout',
+};
+
 export const followedArtistListI18n = {
   title: 'Artists you follow',
   filter: 'filter followed artists',
@@ -29,7 +33,8 @@ export const followedArtistListI18n = {
 
 export const loginI18n = {
   welcome: 'Welcome to Release Raccoon!',
-  loginBtn: 'Register',
+  loginBtn: 'Log in',
+  registerBtn: 'Register',
   text: "Receive your favorite artists' music in your email every week!",
   artistsCount: 'Artists',
   releasesCount: 'Releases',

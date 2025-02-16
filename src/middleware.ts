@@ -1,17 +1,19 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getAccessToken } from '@auth0/nextjs-auth0/edge';
+import { NextRequest } from 'next/server';
+import { auth0 } from './lib/auth0';
 
 export async function middleware(req: NextRequest) {
-  const res = NextResponse.next();
-
   let accessToken = null;
+  const authRes = await auth0.middleware(req);
 
   try {
-    ({ accessToken } = await getAccessToken(req, res));
-    res.headers.set('Authorization', `Bearer ${accessToken}`);
-  } catch (e) {}
+    // console.warn(req.nextUrl.pathname);
+    accessToken = await auth0.getAccessToken(req, authRes);
+    accessToken?.token && authRes.headers.set('Authorization', `Bearer ${accessToken.token}`);
+  } catch (e) {
+    console.warn(e);
+  }
 
-  return res;
+  return authRes;
 }
 
 export const config = {
@@ -23,6 +25,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|noflash.js).*)',
   ],
 };
