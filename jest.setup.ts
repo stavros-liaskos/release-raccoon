@@ -6,5 +6,6 @@ import 'whatwg-fetch'; // https://github.com/jestjs/jest/issues/13834#issuecomme
 
 process.env = Object.assign(process.env, {
   API_BASE_URL: 'http://localhost',
+  API_AUDIENCE: 'https://my.api.com',
 });
 global.TextEncoder = require('util').TextEncoder;

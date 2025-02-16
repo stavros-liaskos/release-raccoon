@@ -1,10 +1,8 @@
 import { Auth0Client } from '@auth0/nextjs-auth0/server';
 
-export const auth0 = new Auth0Client();
-// TODO add audience and scope for connecting to API
-/*{
+export const auth0 = new Auth0Client({
   authorizationParameters: {
     scope: 'openid profile email',
-    audience: 'urn:my:api',
+    audience: process.env.API_AUDIENCE,
   },
-}*/
+});

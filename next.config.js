@@ -20,6 +20,7 @@ module.exports = withPWA({
   },
   env: {
     API_BASE_URL: process.env.API_BASE_URL,
+    API_AUDIENCE: process.env.API_AUDIENCE,
   },
   // https://github.com/vercel/next.js/tree/canary/examples/with-why-did-you-render
   webpack(config, { dev, isServer }) {
