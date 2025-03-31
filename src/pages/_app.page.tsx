@@ -2,7 +2,6 @@ import '../scripts/wdyr';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import ThemeProvider from '../contexts/Theme/ThemeProvider';
-import ArtistsListProvider from '../contexts/ArtistsList/ArtistsListProvider';
 import Meta from '../components/Meta/Meta';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { auth0 } from '../lib/auth0';
@@ -15,13 +14,11 @@ function MyApp({ Component, pageProps, session }: AppProps & { session: { user: 
   return (
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
-        <ArtistsListProvider>
-          {/* @ts-ignore */}
-          <Auth0Provider user={session?.user}>
-            <Meta />
-            <Component {...pageProps} />
-          </Auth0Provider>
-        </ArtistsListProvider>
+        {/* @ts-ignore */}
+        <Auth0Provider user={session?.user}>
+          <Meta />
+          <Component {...pageProps} />
+        </Auth0Provider>
       </QueryClientProvider>
     </ThemeProvider>
   );

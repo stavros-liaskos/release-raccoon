@@ -54,7 +54,6 @@ const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
       })
         .then(res => res.json())
         .then(result => {
-          getFollowedArtists();
           return setResults(result.artists);
         })
         .catch(console.error));
@@ -70,6 +69,7 @@ const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
       setDisabled(false);
     };
     await followArtist(artist, finallyCb);
+    getFollowedArtists();
   }
 };
 Search.whyDidYouRender = true;
