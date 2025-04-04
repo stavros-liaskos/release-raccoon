@@ -5,6 +5,7 @@ export async function middleware(req: NextRequest) {
   let accessToken = null;
   const authRes = await auth0.middleware(req);
 
+  // console.warn(authRes.cookies);
   if (req.nextUrl.pathname.startsWith('/auth')) {
     console.log(`\nAUTH Middleware called for url: ${req.url}\n`);
     return authRes;
@@ -23,7 +24,15 @@ export async function middleware(req: NextRequest) {
     // @ts-ignore
     console.error(e?.message);
   }
-  // console.warn(response.headers); // TODO debug only
+
+  let cookie = req.cookies.get('__session');
+  if (cookie?.value) {
+    response.headers.set('cookie', `__session=${cookie.value}`);
+  }
+  console.log(`Authorization header set to: ${response.headers.get('Authorization')}`);
+  console.log(`x-scope header set to: ${response.headers.get('x-scope')}`);
+  console.log(`origin header set to: ${response.headers.get('origin')}`);
+  console.log(`cookie set to: ${response.headers.get('cookie')}`);
   return response;
 }
 
