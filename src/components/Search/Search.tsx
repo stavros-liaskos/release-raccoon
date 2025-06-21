@@ -8,6 +8,7 @@ import followArtist from '../../utils/followArtist';
 import { useArtistsListContext } from '../../contexts/ArtistsList/ArtistsListContext';
 import Close from '../Icons/close';
 import HandGlass from '../Icons/handGlass';
+import { Paths } from '../../types/endpoints';
 
 const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
   const { getFollowedArtists } = useArtistsListContext();
@@ -46,7 +47,7 @@ const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
 
   async function handleSearch(inputValue: string) {
     inputValue &&
-      (await fetch(`/artist/search?${new URLSearchParams({ pattern: inputValue })}`, {
+      (await fetch(`${Paths.Search}?${new URLSearchParams({ pattern: inputValue })}`, {
         method: 'GET',
       })
         .then(res => res.json())

@@ -1,10 +1,9 @@
-// import React from 'react';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import React from 'react';
 import { resetMocks, renderWithAct, initServer } from '../../utils/test-utils';
-// import Main from './Main';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import Main from './Main';
 import { mswAuth, mswFollowedArtists, mswRaccoonUser, mswRecommendedArtists } from '../../mocks/mockApi';
-xdescribe('Main', () => {
+
+describe('Main', () => {
   const server = initServer();
 
   afterEach(() => {
@@ -16,35 +15,25 @@ xdescribe('Main', () => {
     server.use(mswFollowedArtists.success(2));
   });
 
-  it.todo('does something');
+  it('renders without data without crashing', async () => {
+    server.use(mswAuth.success(), mswRecommendedArtists.success(), mswRaccoonUser.success());
 
-  // it('renders without data without crashing', async () => {
-  //   server.use(mswAuth.success(), mswRecommendedArtists.success(), mswRaccoonUser.success());
-  //
-  //   // @ts-ignore
-  //   await renderWithAct(<Main />);
-  // });
+    // @ts-ignore
+    await renderWithAct(<Main />);
+  });
 
-  // it('shows registration button', async () => {
-  //   server.use(mswAuth.fail());
-  //   const { findAllByText } = await renderWithAct(
-  //     <Auth0Provider>
-  //       <Main />
-  //     </Auth0Provider>,
-  //   );
-  //
-  //   expect(await findAllByText(/Register/)).toHaveLength(1);
-  // });
-  //
-  // it('shows artist search for logged in user', async () => {
-  //   server.use(mswAuth.success(), mswRecommendedArtists.success());
-  //
-  //   const { findAllByRole } = await renderWithAct(
-  //     <Auth0Provider user={{ user: 'john.doe' }}>
-  //       <Main />
-  //     </Auth0Provider>,
-  //   );
-  //
-  //   expect(await findAllByRole('textbox')).toHaveLength(2); // Search, Filter (Recommendations)
-  // });
+  xit('shows registration button', async () => {
+    server.use(mswAuth.fail());
+    const { findAllByText } = await renderWithAct(<Main />);
+
+    expect(await findAllByText(/Register/)).toHaveLength(1);
+  });
+
+  it('shows artist search for logged in user', async () => {
+    server.use(mswAuth.success(), mswRecommendedArtists.success());
+
+    const { findAllByRole } = await renderWithAct(<Main />);
+
+    expect(await findAllByRole('textbox')).toHaveLength(2); // Search, Filter (Recommendations)
+  });
 });

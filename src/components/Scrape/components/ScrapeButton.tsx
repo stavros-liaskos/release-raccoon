@@ -3,7 +3,7 @@ import Spotify from '../../Icons/spotify';
 import LastFm from '../../Icons/lastfm';
 import IconTypes from '../../Icons/iconTypes';
 import Button from '../../Button/Button';
-import Endpoints from '../../../types/endpoints';
+import { Paths } from '../../../types/endpoints';
 
 export type MusicServiceType = 'Spotify' | 'LastFm';
 
@@ -65,9 +65,9 @@ export async function handleScrape(musicService: MusicServiceType) {
 export function getMusicServiceUrl(musicService: MusicServiceType): string {
   switch (musicService) {
     case 'LastFm':
-      return Endpoints.ScrapeLastFM;
+      return Paths.ScrapeLastFM;
     case 'Spotify':
-      return Endpoints.ScrapeSpotify;
+      return Paths.ScrapeSpotify;
     default:
       throw new Error(`Failed to getMusicServicePath for: ${musicService}`);
   }

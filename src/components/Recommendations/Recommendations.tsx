@@ -2,7 +2,7 @@ import ArtistsList, { ArtistsListI18n } from '../ArtistsList/ArtistsList';
 import React from 'react';
 import { components } from '../../types/schema';
 import followArtist from '../../utils/followArtist';
-import Endpoints from '../../types/endpoints';
+import { Paths } from '../../types/endpoints';
 import { useQuery } from '@tanstack/react-query';
 
 type RecommendationsI18n = {
@@ -15,7 +15,7 @@ const Recommendations = ({ i18n }: { i18n: RecommendationsI18n }) => {
 
   const { data: recommendedArtists } = useQuery({
     queryKey: ['recommendedArtists'],
-    queryFn: () => fetch(`${Endpoints.Recommended}?page=1&size=10`).then(res => res.json()),
+    queryFn: () => fetch(`${Paths.Recommended}?page=1&size=10`).then(res => res.json()),
   });
 
   if (!i18n || !i18n.title) {

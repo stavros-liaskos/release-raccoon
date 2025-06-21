@@ -5,7 +5,7 @@ import Spotify from '../../Icons/spotify';
 import React from 'react';
 import LastFm from '../../Icons/lastfm';
 import { mswScrape } from '../../../mocks/mockApi';
-import Endpoints from '../../../types/endpoints';
+import { Paths } from '../../../types/endpoints';
 import { initServer } from '../../../utils/test-utils';
 
 describe('Scrape', () => {
@@ -67,7 +67,7 @@ describe('Scrape', () => {
       { musicService: 'LastFm', path: 'ScrapeLastFM' },
       { musicService: 'Spotify', path: 'ScrapeSpotify' },
     ])('returns correct path', ({ musicService, path }) => {
-      expect(getMusicServiceUrl(musicService)).toBe(Endpoints[path]);
+      expect(getMusicServiceUrl(musicService)).toBe(Paths[path]);
     });
 
     it('throws error when music service does not match', () => {
