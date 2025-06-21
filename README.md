@@ -56,6 +56,7 @@ $ yarn test
 ```
 
 ## Mock Data
+TODO update this to be enabled via env var or even better use [MSW](https://mswjs.io/) and keep prod code clean.
 
 You can work with mock server data.  
 Simply set env `API_BASE_URL` to `https://localhost:3000` and all API calls will be forwarded to NextJS local API and served with mocked data from `/mocks/responses/`
