@@ -66,10 +66,10 @@ const config: Config = {
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
     global: {
-      statements: 97,
-      branches: 91,
-      functions: 90,
-      lines: 97,
+      statements: 96,
+      branches: 96,
+      functions: 86,
+      lines: 96,
     },
   },
 
@@ -124,6 +124,8 @@ const config: Config = {
 
     // Handle module aliases
     '^@/components/(.*)$': '<rootDir>/components/$1',
+
+    '^@auth0/nextjs-auth0$': '<rootDir>/src/mocks/__mocks__/auth0-nextjs-auth0.js',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

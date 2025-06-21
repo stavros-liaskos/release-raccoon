@@ -1,9 +1,9 @@
 import { components } from '../types/schema';
-import Endpoints from '../types/endpoints';
+import { Paths } from '../types/endpoints';
 
 async function followArtist(artist: components['schemas']['SearchResultArtistDto'], cb: () => void) {
   const headers = new Headers({ 'Content-Type': 'application/json' });
-  await fetch(Endpoints.Follow, {
+  await fetch(Paths.Follow, {
     method: 'POST',
     credentials: 'include',
     headers,

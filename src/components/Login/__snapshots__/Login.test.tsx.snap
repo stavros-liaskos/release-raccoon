@@ -16,12 +16,12 @@ exports[`Login renders login button 1`] = `
       Receive your favorite artists' music in your email every week!
     </p>
     <a
-      href="/api/auth/login"
+      href="/auth/login"
     >
       <button
         class="btn btn-large lg:ml-8 mt-8 mb-24 w-44 h-14"
       >
-        Register
+        Log in
       </button>
     </a>
   </div>

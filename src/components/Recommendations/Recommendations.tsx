@@ -2,8 +2,8 @@ import ArtistsList, { ArtistsListI18n } from '../ArtistsList/ArtistsList';
 import React from 'react';
 import { components } from '../../types/schema';
 import followArtist from '../../utils/followArtist';
-import resources from '../../utils/Resources';
-import Endpoints from '../../types/endpoints';
+import { Paths } from '../../types/endpoints';
+import { useQuery } from '@tanstack/react-query';
 
 type RecommendationsI18n = {
   title: string;
@@ -12,9 +12,11 @@ type RecommendationsI18n = {
 
 const Recommendations = ({ i18n }: { i18n: RecommendationsI18n }) => {
   const [artistLoading, setArtistLoading] = React.useState<number>(0);
-  const url = `${Endpoints.Recommended}?page=1&size=10`;
 
-  const { rows: recommendedArtists } = resources.fetch(url) as components['schemas']['FollowedArtistsResponse'];
+  const { data: recommendedArtists } = useQuery({
+    queryKey: ['recommendedArtists'],
+    queryFn: () => fetch(`${Paths.Recommended}?page=1&size=10`).then(res => res.json()),
+  });
 
   if (!i18n || !i18n.title) {
     return null;
@@ -25,7 +27,7 @@ const Recommendations = ({ i18n }: { i18n: RecommendationsI18n }) => {
       <h3 className={'h3'}>{i18n.title}</h3>
       <ArtistsList
         i18n={i18n.artistList}
-        artistsList={recommendedArtists!}
+        artistsList={recommendedArtists?.rows ?? []}
         onButtonClick={handleFollow}
         artistLoading={artistLoading}
       />

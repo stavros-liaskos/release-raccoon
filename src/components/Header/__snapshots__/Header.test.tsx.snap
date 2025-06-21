@@ -28,7 +28,7 @@ exports[`Header shows Logout btn when user is logged in 1`] = `
         </svg>
       </button>
       <a
-        href="/api/auth/logout"
+        href="/auth/logout"
       >
         <button
           class="btn btn-small"

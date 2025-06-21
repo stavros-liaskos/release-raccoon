@@ -1,4 +1,3 @@
-import React from 'react';
 import Home from './index.page';
 import { resetMocks, renderWithAct, initServer } from '../utils/test-utils';
 import { mswAuth, mswFollowedArtists, mswRaccoonUser, mswRecommendedArtists } from '../mocks/mockApi';

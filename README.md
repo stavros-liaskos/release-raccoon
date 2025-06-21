@@ -28,7 +28,7 @@ Start the development server:
 $ yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to view the website. That's it!
+Open [https://localhost:3000](https://localhost:3000) with your browser to view the website. That's it!
 
 Do some changes on the code. The changes are automatically applied with the help of Next.js [Fast Refresh](https://nextjs.org/docs/basic-features/fast-refresh).
 
@@ -57,8 +57,10 @@ $ yarn test
 
 ## Mock Data
 
+TODO update this to be enabled via env var or even better use [MSW](https://mswjs.io/) and keep prod code clean.
+
 You can work with mock server data.  
-Simply set env `BE_BASE_URL` to `http://localhost:3000` and all API calls will be forwarded to NextJS local API and served with mocked data from `/mocks/responses/`
+Simply set env `API_BASE_URL` to `https://localhost:3000` and all API calls will be forwarded to NextJS local API and served with mocked data from `/mocks/responses/`
 
 ## Deployments
 

@@ -19,7 +19,9 @@ module.exports = withPWA({
     ]);
   },
   env: {
-    BE_BASE_URL: process.env.BE_BASE_URL,
+    API_BASE_URL: process.env.API_BASE_URL,
+    API_AUDIENCE: process.env.API_AUDIENCE,
+    API_SCOPE: process.env.API_SCOPE,
   },
   // https://github.com/vercel/next.js/tree/canary/examples/with-why-did-you-render
   webpack(config, { dev, isServer }) {

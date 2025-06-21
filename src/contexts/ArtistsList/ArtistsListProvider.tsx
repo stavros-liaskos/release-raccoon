@@ -1,7 +1,7 @@
 import { FC, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { ArtistsListContext } from './ArtistsListContext';
 import { components } from '../../types/schema';
-import Endpoints from '../../types/endpoints';
+import { Paths } from '../../types/endpoints';
 
 interface ChildrenProps {
   children: ReactNode;
@@ -16,7 +16,7 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
     setLoading(true);
 
     const headers = new Headers({ 'Content-Type': 'application/json' });
-    fetch(Endpoints.FollowedArtists, {
+    fetch(Paths.FollowedArtists, {
       method: 'GET',
       headers,
       credentials: 'include',

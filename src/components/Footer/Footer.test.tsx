@@ -10,7 +10,7 @@ describe('Footer', () => {
   });
 
   it('renders with data', () => {
-    const { container } = render(<Footer i18n={footerI18n} />);
+    const { container } = render(<Footer />);
     const footerPowered = getByText(container, 'Powered by');
 
     expect(footerPowered).toContainHTML(footerI18n.powered);

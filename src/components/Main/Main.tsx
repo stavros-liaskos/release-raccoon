@@ -1,12 +1,13 @@
 import FollowedArtistList from '../FollowedArtistList/FollowedArtistList';
 import React, { Suspense } from 'react';
 import Search from '../Search/Search';
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { useUser } from '@auth0/nextjs-auth0';
 import Login from '../Login/Login';
 import Scrapers from '../Scrape/Scrapers';
 import Recommendations from '../Recommendations/Recommendations';
 import Loading from '../Loading/Loading';
 import { searchI18n, followedArtistListI18n, loginI18n, recommendationsI18n } from '../../i18n';
+import ArtistsListProvider from '../../contexts/ArtistsList/ArtistsListProvider';
 
 const Main: React.FunctionComponent = () => {
   const { user } = useUser();
@@ -15,7 +16,7 @@ const Main: React.FunctionComponent = () => {
     <main className="rr-column flex-auto">
       <div className="flex flex-col flex-auto w-full lg:w-9/12">
         {user ? (
-          <>
+          <ArtistsListProvider>
             <Search i18n={searchI18n} />
             <Scrapers />
             <div className="flex flex-auto flex-col h24">
@@ -24,7 +25,7 @@ const Main: React.FunctionComponent = () => {
                 <Recommendations i18n={recommendationsI18n} />
               </Suspense>
             </div>
-          </>
+          </ArtistsListProvider>
         ) : (
           <Login i18n={loginI18n} />
         )}

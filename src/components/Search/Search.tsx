@@ -8,6 +8,7 @@ import followArtist from '../../utils/followArtist';
 import { useArtistsListContext } from '../../contexts/ArtistsList/ArtistsListContext';
 import Close from '../Icons/close';
 import HandGlass from '../Icons/handGlass';
+import { Paths } from '../../types/endpoints';
 
 const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
   const { getFollowedArtists } = useArtistsListContext();
@@ -45,16 +46,13 @@ const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
   );
 
   async function handleSearch(inputValue: string) {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
     inputValue &&
-      (await fetch(`${process.env.BE_BASE_URL}/artist/search?${new URLSearchParams({ pattern: inputValue })}`, {
+      (await fetch(`${Paths.Search}?${new URLSearchParams({ pattern: inputValue })}`, {
         method: 'GET',
-        headers,
-        credentials: 'include',
       })
         .then(res => res.json())
         .then(result => {
-          getFollowedArtists();
+          console.log(result);
           return setResults(result.artists);
         })
         .catch(console.error));
@@ -70,6 +68,7 @@ const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
       setDisabled(false);
     };
     await followArtist(artist, finallyCb);
+    getFollowedArtists();
   }
 };
 Search.whyDidYouRender = true;

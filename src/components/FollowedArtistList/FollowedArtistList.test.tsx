@@ -30,7 +30,7 @@ describe('FollowedArtistList', () => {
     const buttons = await component.findAllByText(followedArtistListI18n.artistList.btnTxt);
 
     expect(buttons).toHaveLength(2);
-    expect(fetchSpy).toHaveBeenCalledTimes(2);
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
   });
 
   it('renders loading state', async () => {
@@ -40,7 +40,7 @@ describe('FollowedArtistList', () => {
 
     const loadingIcon = await component.findByRole('img');
     expect(loadingIcon).toBeInTheDocument();
-    expect(fetchSpy).toHaveBeenCalledTimes(2);
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
   });
 
   it('unfollows artist on btn click', async () => {

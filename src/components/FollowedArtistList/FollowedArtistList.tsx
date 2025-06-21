@@ -4,7 +4,7 @@ import { useArtistsListContext } from '../../contexts/ArtistsList/ArtistsListCon
 import ArtistsList from '../ArtistsList/ArtistsList';
 import FormInput from '../FormInput/FormInput';
 import { components } from '../../types/schema';
-import Endpoints from '../../types/endpoints';
+import { Paths } from '../../types/endpoints';
 import Loading from '../Loading/Loading';
 
 const FollowedArtistList: React.FunctionComponent<ListProps> = ({ i18n }) => {
@@ -37,7 +37,7 @@ const FollowedArtistList: React.FunctionComponent<ListProps> = ({ i18n }) => {
 
   function unfollowArtist(artistID: number) {
     setArtistLoading(artistID);
-    fetch(`${Endpoints.UnfollowArtist}/${artistID}`, {
+    fetch(`${Paths.UnfollowArtist}/${artistID}`, {
       method: 'DELETE',
       credentials: 'include',
     })

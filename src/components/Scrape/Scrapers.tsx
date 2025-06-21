@@ -1,8 +1,8 @@
 import ScrapeButton from './components/ScrapeButton';
 import React, { useEffect, useRef, useState } from 'react';
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { useUser } from '@auth0/nextjs-auth0';
 import { components } from '../../types/schema';
-import Endpoints from '../../types/endpoints';
+import { Paths } from '../../types/endpoints';
 import { scrapersI18n } from '../../i18n';
 
 const Scrapers = () => {
@@ -11,13 +11,10 @@ const Scrapers = () => {
   const areScrapersInitialised = useRef(false);
 
   useEffect(() => {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-
     !areScrapersInitialised.current &&
       user?.email &&
-      fetch(`${Endpoints.RaccoonUser}?email=${user.email}`, {
+      fetch(`${Paths.RaccoonUser}?email=${user.email}`, {
         method: 'GET',
-        headers,
         credentials: 'include',
       })
         .then(res => res.json())
