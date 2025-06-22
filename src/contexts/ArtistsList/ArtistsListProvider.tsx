@@ -1,3 +1,4 @@
+'use client';
 import { FC, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { ArtistsListContext } from './ArtistsListContext';
 import { components } from '../../types/schema';
@@ -15,11 +16,8 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   const getFollowedArtists = useCallback(() => {
     setLoading(true);
 
-    const headers = new Headers({ 'Content-Type': 'application/json' });
     fetch(Paths.FollowedArtists, {
       method: 'GET',
-      headers,
-      credentials: 'include',
     })
       .then(res => res.json())
       .then((followedArtistsResponse: components['schemas']['FollowedArtistsResponse']) => {

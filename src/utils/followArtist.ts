@@ -1,7 +1,7 @@
 import { components } from '../types/schema';
 import { Paths } from '../types/endpoints';
 
-async function followArtist(artist: components['schemas']['SearchResultArtistDto'], cb: () => void) {
+async function followArtist(artist: components['schemas']['SearchResultArtistDto'], cb?: () => void) {
   const headers = new Headers({ 'Content-Type': 'application/json' });
   await fetch(Paths.Follow, {
     method: 'POST',
@@ -16,7 +16,7 @@ async function followArtist(artist: components['schemas']['SearchResultArtistDto
       console.error('Error:', JSON.stringify(error));
     })
     .finally(() => {
-      cb();
+      typeof cb === 'function' && cb();
     });
 }
 export default followArtist;

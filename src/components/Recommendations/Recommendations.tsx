@@ -1,46 +1,41 @@
 import ArtistsList, { ArtistsListI18n } from '../ArtistsList/ArtistsList';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { components } from '../../types/schema';
 import followArtist from '../../utils/followArtist';
 import { Paths } from '../../types/endpoints';
-import { useQuery } from '@tanstack/react-query';
+import Loading from '../Loading/Loading';
 
 type RecommendationsI18n = {
   title: string;
   artistList: ArtistsListI18n;
 };
 
-const Recommendations = ({ i18n }: { i18n: RecommendationsI18n }) => {
-  const [artistLoading, setArtistLoading] = React.useState<number>(0);
-
-  const { data: recommendedArtists } = useQuery({
-    queryKey: ['recommendedArtists'],
-    queryFn: () => fetch(`${Paths.Recommended}?page=1&size=10`).then(res => res.json()),
-  });
-
+const Recommendations = async ({ i18n }: { i18n: RecommendationsI18n }) => {
   if (!i18n || !i18n.title) {
     return null;
   }
 
+  const data = await fetch(`https://localhost:3000/api${Paths.Recommended}?page=1&size=10`);
+  const recommendedArtists = await data.json();
+
+  console.warn(recommendedArtists);
   return (
     <div className="flex flex-col lg:justify-center items-center mb-2 w-full">
       <h3 className={'h3'}>{i18n.title}</h3>
-      <ArtistsList
-        i18n={i18n.artistList}
-        artistsList={recommendedArtists?.rows ?? []}
-        onButtonClick={handleFollow}
-        artistLoading={artistLoading}
-      />
+
+      <Suspense fallback={<Loading />}>
+        <ArtistsList
+          i18n={i18n.artistList}
+          artistsList={recommendedArtists?.rows ?? []}
+          // onButtonClick={handleFollow}
+          artistLoading={0}
+        />
+      </Suspense>
     </div>
   );
 
   async function handleFollow(artist: components['schemas']['SearchResultArtistDto']) {
-    artist?.id && setArtistLoading(artist.id);
-
-    const resetArtistLoadingSpinner = () => {
-      artistLoading && setArtistLoading(0);
-    };
-    await followArtist(artist, resetArtistLoadingSpinner);
+    await followArtist(artist);
   }
 };
 

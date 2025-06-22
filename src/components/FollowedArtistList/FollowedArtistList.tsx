@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import { ListI18n, ListProps } from './FollowedArtistList.types';
 import { useArtistsListContext } from '../../contexts/ArtistsList/ArtistsListContext';

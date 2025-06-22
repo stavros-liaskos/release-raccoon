@@ -10,14 +10,14 @@ export type ArtistsListI18n = {
 export type ArtistsListProp = {
   i18n: ArtistsListI18n;
   artistsList: components['schemas']['SearchResultArtistDto'][];
-  onButtonClick: (artist: components['schemas']['SearchResultArtistDto'] | components['schemas']['ArtistDto']) => void;
+  onButtonClick?: (artist: components['schemas']['SearchResultArtistDto'] | components['schemas']['ArtistDto']) => void;
   artistLoading: number;
 };
 
 const ArtistsList = ({ i18n, artistsList, onButtonClick, artistLoading }: ArtistsListProp) => {
-  if (!i18n || !i18n.btnTxt || !i18n.noArtists || typeof onButtonClick !== 'function') {
-    return null;
-  }
+  // if (!i18n || !i18n.btnTxt || !i18n.noArtists || typeof onButtonClick !== 'function') {
+  //   return null;
+  // }
 
   return (
     <div className="overflow-auto w-full flex-auto h-64">

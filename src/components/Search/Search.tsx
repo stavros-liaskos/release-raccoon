@@ -1,3 +1,4 @@
+'use client';
 import { SearchProps } from './Search.types';
 import React, { useState } from 'react';
 import Button from '../Button/Button';
