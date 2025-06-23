@@ -11,12 +11,12 @@ interface ChildrenProps {
 const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   const [followedArtistList, setFollowedArtistList] = useState<components['schemas']['ArtistDto'][]>([]);
   const [loading, setLoading] = useState(false);
-  const areFollowedArtistsInitiliased = useRef(false);
+  const areFollowedArtistsInitialised = useRef(false);
 
   const getFollowedArtists = useCallback(() => {
     setLoading(true);
 
-    fetch(Paths.FollowedArtists, {
+    fetch(`${Paths.FollowedArtists}`, {
       method: 'GET',
     })
       .then(res => res.json())
@@ -32,16 +32,14 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   }, [followedArtistList]);
 
   useEffect(() => {
-    if (!areFollowedArtistsInitiliased.current) {
+    if (!areFollowedArtistsInitialised.current) {
       getFollowedArtists();
-      areFollowedArtistsInitiliased.current = true;
+      areFollowedArtistsInitialised.current = true;
     }
   }, [getFollowedArtists]);
 
   return (
-    <ArtistsListContext.Provider value={{ followedArtistList, getFollowedArtists, loading }}>
-      {children}
-    </ArtistsListContext.Provider>
+    <ArtistsListContext value={{ followedArtistList, getFollowedArtists, loading }}>{children}</ArtistsListContext>
   );
 };
 

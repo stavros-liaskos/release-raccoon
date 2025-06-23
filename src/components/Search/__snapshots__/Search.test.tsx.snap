@@ -168,7 +168,7 @@ exports[`Search should handle the search action of the user 1`] = `
             </a>
           </div>
           <button
-            class="btn flex btn-small lg:ml-8 my-2 "
+            class="btn flex "
             type="button"
           >
             Follow
@@ -209,7 +209,7 @@ exports[`Search should handle the search action of the user 1`] = `
             </a>
           </div>
           <button
-            class="btn flex btn-small lg:ml-8 my-2 !border-gh-dark"
+            class="btn flex "
             type="button"
           >
             Follow

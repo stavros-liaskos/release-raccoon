@@ -26,7 +26,7 @@ describe('FollowedArtistList', () => {
   it('renders artists with "unfollow" btn', async () => {
     server.use(mswFollowedArtists.success(), mswAuth.success());
     const fetchSpy = jest.spyOn(window, 'fetch');
-    const component = render(<FollowedArtistList i18n={followedArtistListI18n} />);
+    const component = render(<FollowedArtistList />);
     const buttons = await component.findAllByText(followedArtistListI18n.artistList.btnTxt);
 
     expect(buttons).toHaveLength(2);
@@ -36,7 +36,7 @@ describe('FollowedArtistList', () => {
   it('renders loading state', async () => {
     server.use(mswFollowedArtists.fail(), mswAuth.success());
     const fetchSpy = jest.spyOn(window, 'fetch');
-    const component = render(<FollowedArtistList i18n={followedArtistListI18n} />);
+    const component = render(<FollowedArtistList />);
 
     const loadingIcon = await component.findByRole('img');
     expect(loadingIcon).toBeInTheDocument();
@@ -58,7 +58,7 @@ describe('FollowedArtistList', () => {
   it('matches snapshot', async () => {
     server.use(mswAuth.success(), mswFollowedArtists.success(2));
 
-    const component = await renderWithAct(<FollowedArtistList i18n={followedArtistListI18n} />);
+    const component = await renderWithAct(<FollowedArtistList />);
     let buttons = await component.findAllByText(followedArtistListI18n.artistList.btnTxt);
     expect(buttons).toHaveLength(2);
     expect(component.container).toMatchSnapshot();

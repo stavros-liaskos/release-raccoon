@@ -1,6 +1,8 @@
+'use client';
 import React, { useCallback } from 'react';
 import { ButtonProps } from './Button.types';
 import Spin from '../Icons/spin';
+import followArtist from '../../utils/followArtist';
 
 const Button: React.FunctionComponent<ButtonProps> = ({
   className,
@@ -12,9 +14,9 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   handleClickArg,
   children,
 }) => {
-  const handleClickCallback = useCallback(() => {
+  const handleClickCallback = useCallback(async () => {
     if (!disabled) {
-      handleClickArg ? handleClick(handleClickArg) : handleClick();
+      handleClickArg ? await followArtist(handleClickArg) : await handleClick();
     }
   }, [handleClick, handleClickArg, disabled]);
 

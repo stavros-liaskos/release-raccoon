@@ -30,7 +30,7 @@ const ThemeProvider: FC<ChildrenProps> = ({ children }) => {
     }
   }, [dark]);
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return <ThemeContext value={value}>{children}</ThemeContext>;
 };
 
 export default ThemeProvider;

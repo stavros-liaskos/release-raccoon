@@ -1,13 +1,13 @@
 import LastFm from '../../../Icons/lastfm';
 import Spotify from '../../../Icons/spotify';
-import Button from '../../../Button/Button';
 import React from 'react';
 import { ArtistsListProp } from '../../ArtistsList';
+import ButtonFollowArtist from '../../../ButtonFollowArtist/ButtonFollowArtist';
 
 const ICON_SIZE = 30;
 
-const List = ({ i18n, artistsList, onButtonClick, artistLoading }: ArtistsListProp) => {
-  if (!i18n || !i18n.btnTxt || !i18n.noArtists || !artistsList?.length || !onButtonClick) {
+const List = ({ i18n, artistsList, artistLoading, buttonAction }: ArtistsListProp) => {
+  if (!i18n || !i18n.noArtists || !artistsList?.length || !buttonAction) {
     return null;
   }
 
@@ -31,13 +31,12 @@ const List = ({ i18n, artistsList, onButtonClick, artistLoading }: ArtistsListPr
               </a>
             )}
           </div>
-          <Button
-            i18n={i18n.btnTxt}
-            handleClick={() => onButtonClick(artist)}
-            handleClickArg={artist.id}
+          <ButtonFollowArtist
+            artist={artist}
             className={`btn-small lg:ml-8 my-2 ${index % 2 ? 'border-gh-dark!' : ''}`}
             disabled={!!artistLoading && artist.id === artistLoading}
             loading={!!artistLoading && artist.id === artistLoading}
+            buttonAction={buttonAction}
           />
         </div>
       ))}

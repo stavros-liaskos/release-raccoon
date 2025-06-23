@@ -19,7 +19,7 @@ export const mswAuth = {
 export const mswFollowedArtists = {
   success: (artistQuantity: number = 2) => {
     followedArtists.rows.splice(1, 2 - artistQuantity);
-    return http.get(Paths.FollowedArtists, () => {
+    return http.get(`${Paths.FollowedArtists}`, () => {
       return HttpResponse.json(followedArtists, { status: 200 });
     });
   },

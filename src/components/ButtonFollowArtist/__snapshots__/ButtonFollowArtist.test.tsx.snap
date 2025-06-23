@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonFollowArtist matches snapshot 1`] = `
+<div>
+  <button
+    class="btn flex "
+    type="button"
+  >
+    Follow
+  </button>
+</div>
+`;

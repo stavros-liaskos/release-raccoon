@@ -2,7 +2,7 @@ import { act, fireEvent } from '@testing-library/react';
 import Recommendations from './Recommendations';
 import { initServer, renderWithAct } from '../../utils/test-utils';
 import { mswAuth, mswFollow, mswFollowedArtists, mswRecommendedArtists } from '../../mocks/mockApi';
-import { recommendationsI18n } from '../../i18n';
+import { buttonFollowI18n, recommendationsI18n } from '../../i18n';
 import * as followArtist from '../../utils/followArtist';
 import React from 'react';
 import * as recommendedArtistsRes from '../../mocks/fixtures/responses/followed-artists.json';
@@ -30,7 +30,7 @@ describe('Recommendations', () => {
 
     expect(getByText(recommendationsI18n.title)).toBeInTheDocument();
 
-    const buttons = await findAllByText(recommendationsI18n.artistList.btnTxt);
+    const buttons = await findAllByText(buttonFollowI18n.btnFollow);
     expect(buttons).toHaveLength(2);
   });
 
@@ -42,7 +42,7 @@ describe('Recommendations', () => {
 
     const { findAllByText } = await renderWithAct(<Recommendations i18n={recommendationsI18n} />);
 
-    const recommendedArtistButtons = await findAllByText(recommendationsI18n.artistList.btnTxt);
+    const recommendedArtistButtons = await findAllByText(buttonFollowI18n.btnFollow);
     act(() => {
       fireEvent.click(recommendedArtistButtons[0]);
     });
