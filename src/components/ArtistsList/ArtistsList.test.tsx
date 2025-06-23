@@ -57,7 +57,7 @@ describe('ArtistsList', () => {
 
   it('renders all elements', () => {
     const { queryAllByRole } = render(
-      <ArtistsList i18n={artistsListI18n} artistsList={artistsList.rows} onButtonClick={jest.fn} artistLoading={0} />,
+      <ArtistsList buttonAction={'follow'} artistsList={artistsList.rows} artistLoading={0} />,
     );
     expect(queryAllByRole('button')).toHaveLength(2);
     expect(queryAllByRole('img')).toHaveLength(3);
@@ -65,7 +65,7 @@ describe('ArtistsList', () => {
 
   it('matches snapshot', () => {
     const { container } = render(
-      <ArtistsList i18n={artistsListI18n} artistsList={artistsList.rows} onButtonClick={jest.fn} artistLoading={0} />,
+      <ArtistsList buttonAction={'follow'} artistsList={artistsList.rows} artistLoading={0} />,
     );
     expect(container).toMatchSnapshot();
   });

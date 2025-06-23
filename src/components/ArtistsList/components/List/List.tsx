@@ -6,8 +6,8 @@ import ButtonFollowArtist from '../../../ButtonFollowArtist/ButtonFollowArtist';
 
 const ICON_SIZE = 30;
 
-const List = ({ i18n, artistsList, artistLoading, buttonAction }: ArtistsListProp) => {
-  if (!i18n || !i18n.noArtists || !artistsList?.length || !buttonAction) {
+const List = ({ artistsList, artistLoading, buttonAction }: ArtistsListProp) => {
+  if (!artistsList?.length || !buttonAction) {
     return null;
   }
 

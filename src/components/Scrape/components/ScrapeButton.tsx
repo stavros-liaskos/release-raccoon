@@ -47,11 +47,8 @@ export function getMusicServiceIcon(iconName: MusicServiceType): React.FunctionC
 }
 
 export async function handleScrape(musicService: MusicServiceType) {
-  const headers = new Headers({ 'Content-Type': 'application/json' });
   await fetch(`${getMusicServiceUrl(musicService)}`, {
     method: 'GET',
-    headers,
-    credentials: 'include',
   })
     .then(res => res.json())
     .then(() => {

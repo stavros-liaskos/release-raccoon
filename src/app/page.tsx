@@ -1,6 +1,6 @@
 import '../scripts/wdyr';
 import type { Metadata, Viewport } from 'next';
-import { followedArtistListI18n, loginI18n, metaI18n, recommendationsI18n, searchI18n } from '../i18n';
+import { loginI18n, metaI18n, recommendationsI18n, searchI18n } from '../i18n';
 import { auth0 } from '../lib/auth0';
 import Login from '../components/Login/Login';
 import React from 'react';
@@ -30,7 +30,7 @@ export default async function Page() {
       <Search i18n={searchI18n} />
       {session?.user?.email && <Scrapers userEmail={session.user.email} />}
       <div className="flex flex-auto flex-col h24">
-        <FollowedArtistList i18n={followedArtistListI18n} />
+        <FollowedArtistList />
         <Recommendations i18n={recommendationsI18n} />
       </div>
     </ArtistsListProvider>

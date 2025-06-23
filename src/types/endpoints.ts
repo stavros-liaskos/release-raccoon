@@ -1,8 +1,8 @@
 export const Paths: { [key: string]: string } = {
   Auth: '/api/auth/me',
-  Search: `/artist/search`,
+  Search: `api/artist/search`,
   Recommended: `api/artists/recommended`,
-  Follow: `/me/follow`,
+  Follow: `api/me/follow`,
   FollowedArtists: `api/me/followed-artists`,
   UnfollowArtist: `api/me/unfollow`,
   RaccoonUser: `api/raccoon-user`,

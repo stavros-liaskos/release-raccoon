@@ -12,7 +12,7 @@ const Scrapers = ({ userEmail }: { userEmail: string }) => {
   useEffect(() => {
     !areScrapersInitialised.current &&
       userEmail &&
-      fetch(`api/${Paths.RaccoonUser}?email=${userEmail}`, {
+      fetch(`${Paths.RaccoonUser}?email=${userEmail}`, {
         method: 'GET',
         credentials: 'include',
       })

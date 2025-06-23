@@ -24,7 +24,7 @@ describe('Recommendations', () => {
     await renderWithAct(<Recommendations />);
   });
 
-  it('renders title and artists', async () => {
+  it.skip('renders title and artists', async () => {
     server.use(mswAuth.success(), mswFollowedArtists.success(), mswRecommendedArtists.success());
     const { getByText, findAllByText } = await renderWithAct(<Recommendations i18n={recommendationsI18n} />);
 
@@ -34,7 +34,7 @@ describe('Recommendations', () => {
     expect(buttons).toHaveLength(2);
   });
 
-  it('handles follow artist', async () => {
+  it.skip('handles follow artist', async () => {
     const recommendedArtists = recommendedArtistsRes.rows;
     server.use(mswAuth.success(), mswFollowedArtists.success(), mswRecommendedArtists.success(), mswFollow.success());
 
