@@ -10,7 +10,7 @@
     "knip": "knip",
     "depcheck": "depcheck",
     "prettier": "prettier \"**/*\" --write",
-    "all": "yarn depcheck && yarn prettier && yarn lint && yarn test -u"
+    "all": "yarn knip && yarn depcheck && yarn prettier && yarn lint && yarn test -u"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.4.2",
@@ -18,8 +18,7 @@
     "next": "15.3.4",
     "next-pwa": "^5.6.0",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "sharp": "^0.33.4"
+    "react-dom": "19.1.0"
   },
   "engines": {
     "node": "^20.0.0"
