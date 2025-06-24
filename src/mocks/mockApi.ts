@@ -16,7 +16,7 @@ export const mswFollowedArtists = {
 
 export const mswRecommendedArtists = {
   success: () =>
-    http.get(Paths.Recommended, () => {
+    http.get(`${process.env.APP_BASE_URL}/${Paths.Recommended}`, () => {
       return HttpResponse.json(followedArtists, { status: 200 });
     }),
 };

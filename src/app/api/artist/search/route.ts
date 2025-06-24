@@ -24,6 +24,6 @@ export async function GET(): Promise<
     const data = await response.json();
     return NextResponse.json(data);
   } catch (err) {
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ message: 'Internal Server Error', error: JSON.stringify(err) }, { status: 500 });
   }
 }

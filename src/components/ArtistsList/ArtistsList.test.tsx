@@ -34,13 +34,13 @@ describe('ArtistsList', () => {
     expect(render(<ArtistsList {...props} />)).toBeTruthy();
   });
 
-  it.each([{ artistsList: {} }, { artistsList: undefined }])(
+  it.each([{ artistsList: [] }, { artistsList: undefined }])(
     'shows text when no artist is available',
     ({ artistsList }) => {
       const { getByText } = render(
-        // @ts-ignore
         <ArtistsList
           i18n={artistsListI18n}
+          /*@ts-ignore*/
           artistsList={artistsList}
           buttonAction={ButtonAction.Follow}
           artistLoading={0}

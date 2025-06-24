@@ -56,3 +56,27 @@ export function initServer() {
 
   return server;
 }
+
+// use to render async RSC for unit testing https://github.com/vercel/next.js/issues/47131#issuecomment-1481289418
+export async function resolvedComponent(Component: React.FunctionComponent, props: Record<string, unknown> = {}) {
+  const ComponentResolved = await Component(props);
+  return () => ComponentResolved;
+}
+
+// Use to parse response of api unit test
+export async function readableStreamToString(readableStream: ReadableStream) {
+  const reader = readableStream.getReader();
+  let result = '';
+  let done = false;
+
+  while (!done) {
+    const { value, done: readDone } = await reader.read();
+    if (readDone) {
+      done = true;
+    } else {
+      result += new TextDecoder().decode(value);
+    }
+  }
+
+  return JSON.parse(result);
+}
