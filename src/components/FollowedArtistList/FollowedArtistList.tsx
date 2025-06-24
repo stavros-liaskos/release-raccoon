@@ -6,6 +6,7 @@ import FormInput from '../FormInput/FormInput';
 import { components } from '../../types/schema';
 import Loading from '../Loading/Loading';
 import { followedArtistListI18n } from '../../i18n';
+import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 const FollowedArtistList: React.FunctionComponent = () => {
   const { followedArtistList, loading } = useArtistsListContext();
@@ -27,7 +28,7 @@ const FollowedArtistList: React.FunctionComponent = () => {
         <ArtistsList
           i18n={followedArtistListI18n.artistList}
           artistsList={filterArtists(filterInput, followedArtistList)}
-          buttonAction={'unfollow'}
+          buttonAction={ButtonAction.Unfollow}
         />
       )}
     </div>

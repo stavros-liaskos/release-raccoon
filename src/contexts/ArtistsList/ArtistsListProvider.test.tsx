@@ -1,6 +1,6 @@
 import { useArtistsListContext } from './ArtistsListContext';
 import { resetMocks, renderWithAct, initServer } from '../../utils/test-utils';
-import { mswAuth, mswFollowedArtists } from '../../mocks/mockApi';
+import { mswFollowedArtists } from '../../mocks/mockApi';
 
 describe('ArtistsListContext', () => {
   const server = initServer();
@@ -26,7 +26,7 @@ describe('ArtistsListContext', () => {
   };
 
   it('gets/sets followed artists', async () => {
-    server.use(mswFollowedArtists.success(2), mswAuth.success());
+    server.use(mswFollowedArtists.success(2));
     const { findAllByText } = await renderWithAct(<ArtistList />);
 
     const artists = await findAllByText(/Artist/i);

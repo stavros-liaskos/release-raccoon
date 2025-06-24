@@ -1,7 +1,7 @@
 import { act, fireEvent } from '@testing-library/react';
 import Recommendations from './Recommendations';
 import { initServer, renderWithAct } from '../../utils/test-utils';
-import { mswAuth, mswFollow, mswFollowedArtists, mswRecommendedArtists } from '../../mocks/mockApi';
+import { mswFollow, mswFollowedArtists, mswRecommendedArtists } from '../../mocks/mockApi';
 import { buttonFollowI18n, recommendationsI18n } from '../../i18n';
 import * as followArtist from '../../utils/followArtist';
 import React from 'react';
@@ -17,16 +17,9 @@ jest.mock('../../utils/followArtist', () => {
 describe('Recommendations', () => {
   const server = initServer();
 
-  it('renders without data without crashing', async () => {
-    server.use(mswAuth.success(), mswFollowedArtists.success(), mswRecommendedArtists.success());
-
-    // @ts-ignore
-    await renderWithAct(<Recommendations />);
-  });
-
   it.skip('renders title and artists', async () => {
-    server.use(mswAuth.success(), mswFollowedArtists.success(), mswRecommendedArtists.success());
-    const { getByText, findAllByText } = await renderWithAct(<Recommendations i18n={recommendationsI18n} />);
+    server.use(mswFollowedArtists.success(), mswRecommendedArtists.success());
+    const { getByText, findAllByText } = await renderWithAct(<Recommendations />);
 
     expect(getByText(recommendationsI18n.title)).toBeInTheDocument();
 
@@ -36,11 +29,11 @@ describe('Recommendations', () => {
 
   it.skip('handles follow artist', async () => {
     const recommendedArtists = recommendedArtistsRes.rows;
-    server.use(mswAuth.success(), mswFollowedArtists.success(), mswRecommendedArtists.success(), mswFollow.success());
+    server.use(mswFollowedArtists.success(), mswRecommendedArtists.success(), mswFollow.success());
 
     const followArtistSpy = jest.spyOn(followArtist, 'default');
 
-    const { findAllByText } = await renderWithAct(<Recommendations i18n={recommendationsI18n} />);
+    const { findAllByText } = await renderWithAct(<Recommendations />);
 
     const recommendedArtistButtons = await findAllByText(buttonFollowI18n.btnFollow);
     act(() => {
@@ -51,8 +44,8 @@ describe('Recommendations', () => {
   });
 
   it('matches snapshot', async () => {
-    server.use(mswAuth.success(), mswFollowedArtists.success(), mswRecommendedArtists.success());
-    const { container } = await renderWithAct(<Recommendations i18n={recommendationsI18n} />);
+    server.use(mswFollowedArtists.success(), mswRecommendedArtists.success());
+    const { container } = await renderWithAct(<Recommendations />);
     expect(container).toMatchSnapshot();
   });
 });

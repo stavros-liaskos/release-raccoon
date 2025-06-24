@@ -1,12 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import ButtonFollowArtist from './ButtonFollowArtist';
+import { ButtonAction } from './ButtonFollowArtist.types';
 
 describe('ButtonFollowArtist', () => {
   it('renders an enabled button by default and not a loading spinner', () => {
-    // TODO use enum buttonAction
     const { getByRole, queryByRole } = render(
-      <ButtonFollowArtist artist={{ name: 'Cabin Crew' }} buttonAction={'follow'} />,
+      <ButtonFollowArtist artist={{ name: 'Cabin Crew' }} buttonAction={ButtonAction.Follow} />,
     );
     const btn = getByRole('button');
     const svg = queryByRole('img');
@@ -16,7 +16,9 @@ describe('ButtonFollowArtist', () => {
   });
 
   it('matches snapshot', () => {
-    const { container } = render(<ButtonFollowArtist artist={{ name: 'Cabin Crew' }} buttonAction={'follow'} />);
+    const { container } = render(
+      <ButtonFollowArtist artist={{ name: 'Cabin Crew' }} buttonAction={ButtonAction.Follow} />,
+    );
     expect(container).toMatchSnapshot();
   });
 });

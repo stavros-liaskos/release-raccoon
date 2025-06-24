@@ -3,5 +3,10 @@ import { ButtonProps } from '../Button/Button.types';
 
 export type ButtonFollowArtistType = ButtonProps & {
   artist: components['schemas']['SearchResultArtistDto'];
-  buttonAction: 'follow' | 'unfollow';
+  buttonAction: ButtonAction;
 };
+
+export enum ButtonAction {
+  Follow = 'follow',
+  Unfollow = 'unfollow',
+}

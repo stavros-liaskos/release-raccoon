@@ -1,20 +1,8 @@
 import followedArtists from './fixtures/responses/followed-artists.json';
-import auth from './fixtures/responses/auth.json';
 import raccoonUser from './fixtures/responses/raccoon-user.json';
 import { components } from '../types/schema';
 import { http, HttpResponse } from 'msw';
 import { Paths } from '../types/endpoints';
-
-export const mswAuth = {
-  success: () =>
-    http.get(Paths.Auth, () => {
-      return HttpResponse.json(auth, { status: 200 });
-    }),
-  fail: () =>
-    http.get(Paths.Auth, () => {
-      return HttpResponse.error();
-    }),
-};
 
 export const mswFollowedArtists = {
   success: (artistQuantity: number = 2) => {

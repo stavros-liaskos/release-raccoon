@@ -4,7 +4,7 @@ import FollowedArtistList, { filterArtists } from './FollowedArtistList';
 import { initServer, render, renderWithAct } from '../../utils/test-utils';
 import followedArtists from '../../mocks/fixtures/responses/followed-artists.json';
 import { components } from '../../types/schema';
-import { mswAuth, mswFollowedArtists, mswUnfollow } from '../../mocks/mockApi';
+import { mswFollowedArtists, mswUnfollow } from '../../mocks/mockApi';
 import { followedArtistListI18n } from '../../i18n';
 
 describe('FollowedArtistList', () => {
@@ -18,13 +18,13 @@ describe('FollowedArtistList', () => {
     },
     { props: {} },
   ])('renders without data without crashing', async ({ props }) => {
-    server.use(mswFollowedArtists.success(), mswAuth.success());
+    server.use(mswFollowedArtists.success());
     // @ts-ignore
     await renderWithAct(<FollowedArtistList {...props} />);
   });
 
   it('renders artists with "unfollow" btn', async () => {
-    server.use(mswFollowedArtists.success(), mswAuth.success());
+    server.use(mswFollowedArtists.success());
     const fetchSpy = jest.spyOn(window, 'fetch');
     const component = render(<FollowedArtistList />);
     const buttons = await component.findAllByText(followedArtistListI18n.artistList.btnTxt);
@@ -34,7 +34,7 @@ describe('FollowedArtistList', () => {
   });
 
   it('renders loading state', async () => {
-    server.use(mswFollowedArtists.fail(), mswAuth.success());
+    server.use(mswFollowedArtists.fail());
     const fetchSpy = jest.spyOn(window, 'fetch');
     const component = render(<FollowedArtistList />);
 
@@ -44,8 +44,8 @@ describe('FollowedArtistList', () => {
   });
 
   it('unfollows artist on btn click', async () => {
-    server.use(mswAuth.success(), mswFollowedArtists.success(2), mswUnfollow.success());
-    const { findAllByText } = await renderWithAct(<FollowedArtistList i18n={followedArtistListI18n} />);
+    server.use(mswFollowedArtists.success(2), mswUnfollow.success());
+    const { findAllByText } = await renderWithAct(<FollowedArtistList />);
 
     let buttons = await findAllByText(followedArtistListI18n.artistList.btnTxt);
     expect(buttons).toHaveLength(2);
@@ -56,7 +56,7 @@ describe('FollowedArtistList', () => {
   });
 
   it('matches snapshot', async () => {
-    server.use(mswAuth.success(), mswFollowedArtists.success(2));
+    server.use(mswFollowedArtists.success(2));
 
     const component = await renderWithAct(<FollowedArtistList />);
     let buttons = await component.findAllByText(followedArtistListI18n.artistList.btnTxt);

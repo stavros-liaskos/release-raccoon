@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback } from 'react';
-import type { ButtonFollowArtistType } from './ButtonFollowArtist.types';
+import { ButtonAction, ButtonFollowArtistType } from './ButtonFollowArtist.types';
 import followArtist from '../../utils/followArtist';
 import Button from '../Button/Button';
 import { buttonFollowI18n } from '../../i18n';
@@ -14,7 +14,7 @@ const ButtonFollowArtist: React.FunctionComponent<ButtonFollowArtistType> = ({
 }) => {
   const handleClickCallback = useCallback(async () => {
     if (!disabled) {
-      buttonAction === 'follow' ? await followArtist(artist) : await unfollowArtist(artist);
+      buttonAction === ButtonAction.Follow ? await followArtist(artist) : await unfollowArtist(artist);
     }
   }, [artist, buttonAction, disabled]);
 
@@ -23,7 +23,7 @@ const ButtonFollowArtist: React.FunctionComponent<ButtonFollowArtistType> = ({
       handleClick={handleClickCallback}
       disabled={disabled}
       loading={loading}
-      i18n={buttonAction === 'follow' ? buttonFollowI18n.btnFollow : buttonFollowI18n.btnUnfollow}
+      i18n={buttonAction === ButtonAction.Follow ? buttonFollowI18n.btnFollow : buttonFollowI18n.btnUnfollow}
     />
   );
 };

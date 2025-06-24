@@ -3,7 +3,7 @@ import { fireEvent, act } from '@testing-library/react';
 import Search from './Search';
 import { resetMocks, renderWithAct, initServer } from '../../utils/test-utils';
 import artistSearch from '../../mocks/fixtures/responses/artist-search.json';
-import { mswAuth, mswFollowedArtists, mswSearch } from '../../mocks/mockApi';
+import { mswFollowedArtists, mswSearch } from '../../mocks/mockApi';
 import { components } from '../../types/schema';
 import { searchI18n } from '../../i18n';
 
@@ -28,7 +28,7 @@ describe('Search', () => {
 
   beforeEach(() => {
     resetMocks();
-    server.use(mswAuth.success(), mswFollowedArtists.success(2));
+    server.use(mswFollowedArtists.success(2));
   });
 
   it('renders without data without crashing', async () => {
