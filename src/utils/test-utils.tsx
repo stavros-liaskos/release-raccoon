@@ -64,8 +64,8 @@ export async function resolvedComponent(Component: React.FunctionComponent, prop
 }
 
 // Use to parse response of api unit test
-export async function readableStreamToString(readableStream: ReadableStream) {
-  const reader = readableStream.getReader();
+export async function readableStreamToString(readableStream: ReadableStream | null) {
+  const reader = readableStream!.getReader();
   let result = '';
   let done = false;
 

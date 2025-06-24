@@ -8,7 +8,7 @@ describe('/artists/recommended API', () => {
   it('should return 200 and recommended artists', async () => {
     const res = await GET();
 
-    const body = await readableStreamToString(res.body!);
+    const body = await readableStreamToString(res.body);
 
     expect(res.status).toBe(200);
     expect(body.rows).toHaveLength(4);

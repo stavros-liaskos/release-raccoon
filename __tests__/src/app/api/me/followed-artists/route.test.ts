@@ -8,7 +8,7 @@ describe('/me/followed-artists API', () => {
   it('should return 200 and followed artist', async () => {
     const res = await GET();
 
-    const body = await readableStreamToString(res.body!);
+    const body = await readableStreamToString(res.body);
 
     expect(res.status).toBe(200);
     expect(body.rows).toHaveLength(2);

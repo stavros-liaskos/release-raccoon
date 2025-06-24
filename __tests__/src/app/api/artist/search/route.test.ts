@@ -10,7 +10,7 @@ describe('/artist/search API', () => {
   it('should return 500 when failing authorization', async () => {
     const res = await GET();
 
-    const body = await readableStreamToString(res.body!);
+    const body = await readableStreamToString(res.body);
 
     expect(res.status).toBe(500);
     expect(body.message).toBe('Internal Server Error');
