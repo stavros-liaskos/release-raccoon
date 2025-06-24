@@ -16,7 +16,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
 }) => {
   const handleClickCallback = useCallback(async () => {
     if (!disabled) {
-      handleClickArg ? await followArtist(handleClickArg) : await handleClick();
+      handleClickArg ? await followArtist(handleClickArg) : handleClick();
     }
   }, [handleClick, handleClickArg, disabled]);
 

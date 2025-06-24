@@ -24,5 +24,5 @@ const Recommendations = async () => {
   );
 };
 
-// Recommendations.whyDidYouRender = true;
+Recommendations.whyDidYouRender = true;
 export default Recommendations;

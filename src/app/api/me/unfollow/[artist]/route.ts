@@ -7,7 +7,6 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ artis
     const accessToken = await auth0.getAccessToken();
 
     console.warn(req);
-    // TODO call the API to unfollow the artist
     const response = await fetch('https://poc-working-be-ef1ac90ed45e.herokuapp.com/api/secured', {
       headers: {
         authorization: `Bearer ${accessToken.token}`,

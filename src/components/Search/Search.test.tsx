@@ -45,7 +45,7 @@ describe('Search', () => {
 
   it.each<{ searchQuery: string; searchRes: components['schemas']['ArtistSearchResponse']; goal: string }>([
     { searchQuery: 'Sam Gendel', searchRes: artistSearch, goal: 'should handle the search action of the user' },
-    // { searchQuery: 'No match', searchRes: { artists: [], count: 0 }, goal: 'handles no search results' }, // TODO
+    // { searchQuery: 'No match', searchRes: { artists: [], count: 0 }, goal: 'handles no search results' },
   ])('$goal', async ({ searchQuery, searchRes }) => {
     server.use(mswSearch.success(searchRes));
     const { container, input, searchBtn } = await setup();

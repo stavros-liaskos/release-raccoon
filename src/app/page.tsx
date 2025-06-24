@@ -10,7 +10,7 @@ import FollowedArtistList from '../components/FollowedArtistList/FollowedArtistL
 import ArtistsListProvider from '../contexts/ArtistsList/ArtistsListProvider';
 import Recommendations from '../components/Recommendations/Recommendations';
 
-// TODO migrate metadata to app router
+// migrate metadata to app router
 export const metadata: Metadata = {
   title: metaI18n.title,
   description: metaI18n.description,
