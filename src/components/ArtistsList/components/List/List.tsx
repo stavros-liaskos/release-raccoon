@@ -1,8 +1,8 @@
-import LastFm from '../../../Icons/lastfm';
-import Spotify from '../../../Icons/spotify';
+import LastFm from '@/components/Icons/lastfm';
+import Spotify from '@/components/Icons/spotify';
 import React from 'react';
 import { ArtistsListProp } from '../../ArtistsList';
-import ButtonFollowArtist from '../../../ButtonFollowArtist/ButtonFollowArtist';
+import ButtonFollowArtist from '@/components/ButtonFollowArtist/ButtonFollowArtist';
 
 const ICON_SIZE = 30;
 

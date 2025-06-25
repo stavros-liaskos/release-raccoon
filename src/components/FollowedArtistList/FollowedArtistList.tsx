@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { useArtistsListContext } from '../../contexts/ArtistsList/ArtistsListContext';
 import ArtistsList from '../ArtistsList/ArtistsList';
 import FormInput from '../FormInput/FormInput';
-import { components } from '../../types/schema';
+import { components } from '@/types/schema';
 import Loading from '../Loading/Loading';
-import { followedArtistListI18n } from '../../i18n';
+import { followedArtistListI18n } from '@/i18n';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 const FollowedArtistList: React.FunctionComponent = () => {

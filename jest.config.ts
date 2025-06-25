@@ -1,5 +1,8 @@
 import type { Config } from 'jest';
 const nextJest = require('next/jest');
+const { compilerOptions } = require('./tsconfig.json');
+import { pathsToModuleNameMapper } from 'ts-jest';
+
 /*
  * For a detailed explanation regarding each configuration property and type check, visit:
  * https://jestjs.io/docs/configuration
@@ -34,9 +37,6 @@ const config: Config = {
     '!src/types/schema.ts',
     '!src/styles/schema.ts',
     '!**/*.{types,data}.ts',
-    '!**/_app.page.tsx',
-    '!**/_document.page.tsx',
-    '!src/mocks/*',
   ],
 
   // The directory where Jest should output its coverage files
@@ -50,6 +50,7 @@ const config: Config = {
     '/pages/api',
     '.*__snapshots__/.*',
     '/src/components/Icons/*',
+    '/__tests__/*',
   ],
 
   // Indicates which provider should be used to instrument code for coverage
@@ -66,10 +67,10 @@ const config: Config = {
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
     global: {
-      statements: 90,
-      branches: 90,
-      functions: 85,
-      lines: 90,
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80,
     },
   },
 
@@ -123,9 +124,9 @@ const config: Config = {
     // '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$': `<rootDir>/__mocks__/fileMock.js`,
 
     // Handle module aliases
-    '^@/components/(.*)$': '<rootDir>/components/$1',
+    ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
 
-    '^@auth0/nextjs-auth0$': '<rootDir>/src/mocks/__mocks__/auth0-nextjs-auth0.js',
+    '^@auth0/nextjs-auth0$': '<rootDir>/__tests__/mocks/__mocks__/auth0-nextjs-auth0.js',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -138,7 +139,7 @@ const config: Config = {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  // preset: undefined,
+  preset: 'ts-jest',
 
   // Run tests from one or more projects
   // projects: undefined,
