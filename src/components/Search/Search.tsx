@@ -1,14 +1,16 @@
 'use client';
-import type { SearchProps } from './Search.types';
 import React, { useState } from 'react';
-import Button from '@/components/Button/Button';
-import type { components } from '@/types/schema';
-import FormInput from '@/components/FormInput/FormInput';
+
 import ArtistsList from '@/components/ArtistsList/ArtistsList';
+import Button from '@/components/Button/Button';
+import FormInput from '@/components/FormInput/FormInput';
 import Close from '@/components/Icons/close';
 import HandGlass from '@/components/Icons/handGlass';
 import { Paths } from '@/types/endpoints';
+import type { components } from '@/types/schema';
+
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
+import type { SearchProps } from './Search.types';
 
 // close search when artists is followed
 const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {

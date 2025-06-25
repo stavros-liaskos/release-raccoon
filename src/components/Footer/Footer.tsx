@@ -1,6 +1,8 @@
 import React from 'react';
-import Github from '../Icons/github';
+
 import { footerI18n } from '@/i18n';
+
+import Github from '../Icons/github';
 
 const Footer: React.FunctionComponent = () => {
   if (!footerI18n || !footerI18n.powered) {

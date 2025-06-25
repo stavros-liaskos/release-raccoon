@@ -1,4 +1,5 @@
 import React from 'react';
+
 import IconTypes from './iconTypes';
 
 const Spin: React.FunctionComponent<IconTypes> = ({ width = 15, height }) => (

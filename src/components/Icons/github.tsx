@@ -1,4 +1,5 @@
 import React from 'react';
+
 import IconTypes from './iconTypes';
 
 const Github: React.FunctionComponent<IconTypes> = ({ width = 24, height = 24, colour = 'currentColor' }) => (

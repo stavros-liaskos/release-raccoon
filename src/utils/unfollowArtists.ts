@@ -1,5 +1,5 @@
-import { components } from '@/types/schema';
 import { Paths } from '@/types/endpoints';
+import { components } from '@/types/schema';
 
 async function unfollowArtist(artist: components['schemas']['SearchResultArtistDto']) {
   await fetch(`${Paths.UnfollowArtist}/${artist.id}`, {

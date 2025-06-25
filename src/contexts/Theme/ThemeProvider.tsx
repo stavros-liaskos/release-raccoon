@@ -1,5 +1,6 @@
 'use client';
 import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
+
 import { ThemeContext } from './ThemeContext';
 
 const isWindow = () => typeof window !== 'undefined';

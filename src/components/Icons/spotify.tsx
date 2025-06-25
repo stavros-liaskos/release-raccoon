@@ -1,4 +1,5 @@
 import React from 'react';
+
 import IconTypes from './iconTypes';
 
 const Spotify: React.FunctionComponent<IconTypes> = ({ width = 40, height }) => (

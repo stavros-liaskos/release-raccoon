@@ -1,7 +1,9 @@
-import React from 'react';
-import DarkMode from '../DarkMode/DarkMode';
 import Link from 'next/link';
+import React from 'react';
+
 import { headerI18n } from '@/i18n';
+
+import DarkMode from '../DarkMode/DarkMode';
 
 const Header: React.FunctionComponent = () => (
   <header className="rr-column justify-center flex-none h-14 rr-border border-b-2">

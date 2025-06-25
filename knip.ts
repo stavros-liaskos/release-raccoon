@@ -10,6 +10,7 @@ const config: KnipConfig = {
     'eslint-config-next',
     'eslint-config-prettier',
     '@typescript-eslint/eslint-plugin',
+    'eslint-plugin-simple-import-sort',
   ],
   ignore: ['public/noflash.js', 'src/types/schema.ts'],
   ignoreUnresolved: ['babel-jest'],

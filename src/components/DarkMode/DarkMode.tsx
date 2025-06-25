@@ -1,8 +1,9 @@
 'use client';
 import React from 'react';
-import Sun from '../Icons/sun';
-import Moon from '../Icons/moon';
+
 import { useThemeContext } from '../../contexts/Theme/ThemeContext';
+import Moon from '../Icons/moon';
+import Sun from '../Icons/sun';
 
 const DarkMode: React.FunctionComponent = () => {
   const { dark, loaded, setDark } = useThemeContext();

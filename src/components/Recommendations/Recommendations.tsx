@@ -1,8 +1,10 @@
-import ArtistsList from '../ArtistsList/ArtistsList';
 import React, { Suspense } from 'react';
-import { Paths } from '@/types/endpoints';
+
 import Loading from '@/components/Loading/Loading';
 import { recommendationsI18n } from '@/i18n';
+import { Paths } from '@/types/endpoints';
+
+import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 const Recommendations = async () => {

@@ -1,8 +1,10 @@
 'use client';
 import React, { useCallback } from 'react';
-import { ButtonProps } from './Button.types';
-import Spin from '../Icons/spin';
+
 import followArtist from '@/utils/followArtist';
+
+import Spin from '../Icons/spin';
+import { ButtonProps } from './Button.types';
 
 const Button: React.FunctionComponent<ButtonProps> = ({
   className,

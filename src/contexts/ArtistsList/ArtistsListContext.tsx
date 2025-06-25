@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from 'react';
+
 import { components } from '@/types/schema';
 
 interface ArtistsListContextType {
