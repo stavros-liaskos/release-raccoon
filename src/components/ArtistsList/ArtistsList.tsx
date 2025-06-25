@@ -1,4 +1,4 @@
-import { components } from '../../types/schema';
+import { components } from '@/types/schema';
 import React from 'react';
 import List from './components/List/List';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';

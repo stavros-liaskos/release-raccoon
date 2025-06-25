@@ -1,6 +1,6 @@
 import '../scripts/wdyr';
 import type { Metadata, Viewport } from 'next';
-import { loginI18n, metaI18n, searchI18n } from '../i18n';
+import { loginI18n, metaI18n, searchI18n } from '@/i18n';
 import { auth0 } from '../lib/auth0';
 import Login from '../components/Login/Login';
 import React from 'react';

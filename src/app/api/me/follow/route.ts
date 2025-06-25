@@ -1,5 +1,5 @@
-import { components } from '../../../../types/schema';
-import follow from '../../../../../src/mocks/fixtures/responses/follow.json';
+import { components } from '@/types/schema';
+import follow from '../../../../../__tests__/mocks/fixtures/responses/follow.json';
 
 import { NextResponse } from 'next/server';
 

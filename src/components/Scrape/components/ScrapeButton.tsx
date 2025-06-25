@@ -3,7 +3,7 @@ import Spotify from '../../Icons/spotify';
 import LastFm from '../../Icons/lastfm';
 import IconTypes from '../../Icons/iconTypes';
 import Button from '../../Button/Button';
-import { Paths } from '../../../types/endpoints';
+import { Paths } from '@/types/endpoints';
 
 export type MusicServiceType = 'Spotify' | 'LastFm';
 

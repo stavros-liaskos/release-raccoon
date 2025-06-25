@@ -2,7 +2,7 @@
 import React, { useCallback } from 'react';
 import { ButtonProps } from './Button.types';
 import Spin from '../Icons/spin';
-import followArtist from '../../utils/followArtist';
+import followArtist from '@/utils/followArtist';
 
 const Button: React.FunctionComponent<ButtonProps> = ({
   className,
@@ -16,6 +16,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
 }) => {
   const handleClickCallback = useCallback(async () => {
     if (!disabled) {
+      // fix duplication of logic with ButtonFollowArtist
       handleClickArg ? await followArtist(handleClickArg) : handleClick();
     }
   }, [handleClick, handleClickArg, disabled]);

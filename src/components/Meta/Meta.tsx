@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
-import { metaI18n } from '../../i18n';
+import { metaI18n } from '@/i18n';
 
 const Meta: React.FunctionComponent = () => {
   return (

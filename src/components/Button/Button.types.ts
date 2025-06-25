@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { components } from '../../types/schema';
+import { components } from '@/types/schema';
 
 export interface ButtonProps {
   i18n?: string;

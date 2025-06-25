@@ -1,6 +1,6 @@
-import searchResults from '../../../../mocks/fixtures/responses/artist-search.json';
-import { components } from '../../../../types/schema';
-import { auth0 } from '../../../../lib/auth0';
+import searchResults from '@/mocks/fixtures/responses/artist-search.json';
+import { components } from '@/types/schema';
+import { auth0 } from '@/lib/auth0';
 import { NextResponse } from 'next/server';
 
 export async function GET(): Promise<

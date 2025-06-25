@@ -1,4 +1,4 @@
-import { components } from '../../types/schema';
+import { components } from '@/types/schema';
 import { ButtonProps } from '../Button/Button.types';
 
 export type ButtonFollowArtistType = ButtonProps & {

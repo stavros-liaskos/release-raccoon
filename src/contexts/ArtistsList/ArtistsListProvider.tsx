@@ -1,8 +1,8 @@
 'use client';
 import { FC, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { ArtistsListContext } from './ArtistsListContext';
-import { components } from '../../types/schema';
-import { Paths } from '../../types/endpoints';
+import { components } from '@/types/schema';
+import { Paths } from '@/types/endpoints';
 
 interface ChildrenProps {
   children: ReactNode;

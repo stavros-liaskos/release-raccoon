@@ -1,10 +1,10 @@
 'use client';
 import React, { useCallback } from 'react';
 import { ButtonAction, ButtonFollowArtistType } from './ButtonFollowArtist.types';
-import followArtist from '../../utils/followArtist';
+import followArtist from '@/utils/followArtist';
 import Button from '../Button/Button';
-import { buttonFollowI18n } from '../../i18n';
-import unfollowArtist from '../../utils/unfollowArtists';
+import { buttonFollowI18n } from '@/i18n';
+import unfollowArtist from '@/utils/unfollowArtists';
 
 const ButtonFollowArtist: React.FunctionComponent<ButtonFollowArtistType> = ({
   disabled = false,
