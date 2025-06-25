@@ -1,17 +1,18 @@
 'use client';
-import { SearchProps } from './Search.types';
+import type { SearchProps } from './Search.types';
 import React, { useState } from 'react';
-import Button from '../Button/Button';
-import { components } from '../../types/schema';
-import FormInput from '../FormInput/FormInput';
-import ArtistsList from '../ArtistsList/ArtistsList';
-import Close from '../Icons/close';
-import HandGlass from '../Icons/handGlass';
-import { Paths } from '../../types/endpoints';
+import Button from '@/components/Button/Button';
+import type { components } from '@/types/schema';
+import FormInput from '@/components/FormInput/FormInput';
+import ArtistsList from '@/components/ArtistsList/ArtistsList';
+import Close from '@/components/Icons/close';
+import HandGlass from '@/components/Icons/handGlass';
+import { Paths } from '@/types/endpoints';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 // close search when artists is followed
 const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
+  // use custom hooke e.g. const { results, search, clear } = useSearchArtists();
   const [results, setResults] = useState<components['schemas']['SearchResultArtistDto'][] | null>(null);
 
   return (

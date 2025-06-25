@@ -1,5 +1,5 @@
 if (typeof window !== 'undefined') {
-  // "if" used to avoid errors in non-browser environments like Node.js
+  // "if" is used to avoid errors in non-browser environments like Node.js
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: jest.fn().mockImplementation(query => ({

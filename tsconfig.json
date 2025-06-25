@@ -18,7 +18,17 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@/app/*": ["./src/app/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/contexts/*": ["./src/contexts/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/scripts/*": ["./src/scripts/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/utils/*": ["./src/utils/*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./jest-setup.ts", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

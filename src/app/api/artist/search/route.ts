@@ -1,3 +1,4 @@
+import searchResults from '../../../../mocks/fixtures/responses/artist-search.json';
 import { components } from '../../../../types/schema';
 import { auth0 } from '../../../../lib/auth0';
 import { NextResponse } from 'next/server';
@@ -22,7 +23,7 @@ export async function GET(): Promise<
       method: 'GET',
     });
     const data = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json({ ...searchResults, ...data });
   } catch (err) {
     return NextResponse.json({ message: 'Internal Server Error', error: JSON.stringify(err) }, { status: 500 });
   }
