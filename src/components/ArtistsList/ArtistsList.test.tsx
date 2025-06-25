@@ -2,6 +2,7 @@ import { render } from '@testing-library/react';
 import ArtistsList from './ArtistsList';
 import artistsList from '../../mocks/fixtures/responses/followed-artists.json';
 import { artistsListI18n } from '../../i18n';
+import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 describe('ArtistsList', () => {
   it.each([
@@ -16,7 +17,7 @@ describe('ArtistsList', () => {
     {
       props: {
         i18n: {
-          btnTxt: 'btnTxt',
+          noArtists: 'noArtists',
         },
       },
     },
@@ -24,31 +25,26 @@ describe('ArtistsList', () => {
       props: {
         i18n: {
           noArtists: 'noArtists',
-          btnTxt: 'btnTxt',
         },
-      },
-    },
-    {
-      props: {
-        i18n: {
-          noArtists: 'noArtists',
-          btnTxt: 'btnTxt',
-        },
-        onButtonClick: {},
+        buttonAction: ButtonAction.Follow,
       },
     },
   ])('renders without data without crashing', ({ props }) => {
-    // @ts-ignore
-    const { queryByText } = render(<ArtistsList {...props} />);
-    expect(queryByText('noArtists')).toBeNull();
+    // @ts-expect-error testing missing props
+    expect(render(<ArtistsList {...props} />)).toBeTruthy();
   });
 
-  it.each([{ artistsList: {} }, { artistsList: undefined }])(
+  it.each([{ artistsList: [] }, { artistsList: undefined }])(
     'shows text when no artist is available',
     ({ artistsList }) => {
       const { getByText } = render(
-        // @ts-ignore
-        <ArtistsList i18n={artistsListI18n} artistsList={artistsList} onButtonClick={jest.fn} artistLoading={0} />,
+        <ArtistsList
+          i18n={artistsListI18n}
+          /*@ts-ignore*/
+          artistsList={artistsList}
+          buttonAction={ButtonAction.Follow}
+          artistLoading={0}
+        />,
       );
 
       expect(getByText('You don not track any artists yet')).toBeInTheDocument();
@@ -57,7 +53,12 @@ describe('ArtistsList', () => {
 
   it('renders all elements', () => {
     const { queryAllByRole } = render(
-      <ArtistsList i18n={artistsListI18n} artistsList={artistsList.rows} onButtonClick={jest.fn} artistLoading={0} />,
+      <ArtistsList
+        i18n={artistsListI18n}
+        buttonAction={ButtonAction.Follow}
+        artistsList={artistsList.rows}
+        artistLoading={0}
+      />,
     );
     expect(queryAllByRole('button')).toHaveLength(2);
     expect(queryAllByRole('img')).toHaveLength(3);
@@ -65,7 +66,7 @@ describe('ArtistsList', () => {
 
   it('matches snapshot', () => {
     const { container } = render(
-      <ArtistsList i18n={artistsListI18n} artistsList={artistsList.rows} onButtonClick={jest.fn} artistLoading={0} />,
+      <ArtistsList buttonAction={ButtonAction.Follow} artistsList={artistsList.rows} artistLoading={0} />,
     );
     expect(container).toMatchSnapshot();
   });

@@ -1,8 +1,8 @@
-import { act, fireEvent } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
 import Recommendations from './Recommendations';
-import { initServer, renderWithAct } from '../../utils/test-utils';
-import { mswAuth, mswFollow, mswFollowedArtists, mswRecommendedArtists } from '../../mocks/mockApi';
-import { recommendationsI18n } from '../../i18n';
+import { initServer, renderWithAct, resolvedComponent } from '../../utils/test-utils';
+import { mswFollow, mswFollowedArtists, mswRecommendedArtists } from '../../mocks/mockApi';
+import { buttonFollowI18n, recommendationsI18n } from '../../i18n';
 import * as followArtist from '../../utils/followArtist';
 import React from 'react';
 import * as recommendedArtistsRes from '../../mocks/fixtures/responses/followed-artists.json';
@@ -17,42 +17,40 @@ jest.mock('../../utils/followArtist', () => {
 describe('Recommendations', () => {
   const server = initServer();
 
-  it('renders without data without crashing', async () => {
-    server.use(mswAuth.success(), mswFollowedArtists.success(), mswRecommendedArtists.success());
-
-    // @ts-ignore
-    await renderWithAct(<Recommendations />);
-  });
-
   it('renders title and artists', async () => {
-    server.use(mswAuth.success(), mswFollowedArtists.success(), mswRecommendedArtists.success());
-    const { getByText, findAllByText } = await renderWithAct(<Recommendations i18n={recommendationsI18n} />);
+    server.use(mswRecommendedArtists.success());
+    const Rec = await resolvedComponent(Recommendations);
+
+    const { getByText, findAllByText } = render(<Rec />);
 
     expect(getByText(recommendationsI18n.title)).toBeInTheDocument();
 
-    const buttons = await findAllByText(recommendationsI18n.artistList.btnTxt);
+    const buttons = await findAllByText(buttonFollowI18n.btnFollow);
     expect(buttons).toHaveLength(2);
   });
 
   it('handles follow artist', async () => {
     const recommendedArtists = recommendedArtistsRes.rows;
-    server.use(mswAuth.success(), mswFollowedArtists.success(), mswRecommendedArtists.success(), mswFollow.success());
+    server.use(mswFollowedArtists.success(), mswRecommendedArtists.success(), mswFollow.success());
 
     const followArtistSpy = jest.spyOn(followArtist, 'default');
 
-    const { findAllByText } = await renderWithAct(<Recommendations i18n={recommendationsI18n} />);
+    const Rec = await resolvedComponent(Recommendations);
 
-    const recommendedArtistButtons = await findAllByText(recommendationsI18n.artistList.btnTxt);
+    const { findAllByText } = render(<Rec />);
+
+    const recommendedArtistButtons = await findAllByText(buttonFollowI18n.btnFollow);
     act(() => {
       fireEvent.click(recommendedArtistButtons[0]);
     });
 
-    expect(followArtistSpy).toHaveBeenCalledWith(recommendedArtists[0], expect.anything());
+    expect(followArtistSpy).toHaveBeenCalledWith(recommendedArtists[0]);
   });
 
   it('matches snapshot', async () => {
-    server.use(mswAuth.success(), mswFollowedArtists.success(), mswRecommendedArtists.success());
-    const { container } = await renderWithAct(<Recommendations i18n={recommendationsI18n} />);
+    server.use(mswFollowedArtists.success(), mswRecommendedArtists.success());
+    const Rec = await resolvedComponent(Recommendations);
+    const { container } = await renderWithAct(<Rec />);
     expect(container).toMatchSnapshot();
   });
 });

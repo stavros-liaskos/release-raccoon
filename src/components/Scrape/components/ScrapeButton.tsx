@@ -27,7 +27,7 @@ const ScrapeButton = ({
   return (
     <div className="flex justify-center items-center w-full">
       <Button
-        className={`flex justify-between py-2 px-3 w-full md:w-48${connected ? ' !rr-text-confirm' : ''}`}
+        className={`flex justify-between py-2 px-3 w-full md:w-48${connected ? ' rr-text-confirm!' : ''}`}
         i18n={buttonText}
         handleClick={() => handleScrape(musicService)}
         disabled={connected}
@@ -47,11 +47,8 @@ export function getMusicServiceIcon(iconName: MusicServiceType): React.FunctionC
 }
 
 export async function handleScrape(musicService: MusicServiceType) {
-  const headers = new Headers({ 'Content-Type': 'application/json' });
   await fetch(`${getMusicServiceUrl(musicService)}`, {
     method: 'GET',
-    headers,
-    credentials: 'include',
   })
     .then(res => res.json())
     .then(() => {

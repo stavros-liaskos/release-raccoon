@@ -1,30 +1,29 @@
 import { components } from '../../types/schema';
 import React from 'react';
 import List from './components/List/List';
+import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 export type ArtistsListI18n = {
-  btnTxt: string;
   noArtists: string;
 };
 
 export type ArtistsListProp = {
-  i18n: ArtistsListI18n;
   artistsList: components['schemas']['SearchResultArtistDto'][];
-  onButtonClick: (artist: components['schemas']['SearchResultArtistDto'] | components['schemas']['ArtistDto']) => void;
-  artistLoading: number;
+  artistLoading?: number;
+  buttonAction: ButtonAction;
+  i18n?: ArtistsListI18n;
 };
 
-const ArtistsList = ({ i18n, artistsList, onButtonClick, artistLoading }: ArtistsListProp) => {
-  if (!i18n || !i18n.btnTxt || !i18n.noArtists || typeof onButtonClick !== 'function') {
+const ArtistsList = ({ i18n, artistsList, artistLoading, buttonAction }: ArtistsListProp) => {
+  if (!i18n || !i18n.noArtists || !buttonAction) {
     return null;
   }
-
   return (
     <div className="overflow-auto w-full flex-auto h-64">
       {!artistsList?.length ? (
         <p className="rr-text flex justify-center">{i18n.noArtists}</p>
       ) : (
-        <List artistsList={artistsList} i18n={i18n} onButtonClick={onButtonClick} artistLoading={artistLoading} />
+        <List artistsList={artistsList} artistLoading={artistLoading} buttonAction={buttonAction} />
       )}
     </div>
   );

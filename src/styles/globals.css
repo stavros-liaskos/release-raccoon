@@ -1,35 +1,70 @@
 /* purgecss start ignore */
-@tailwind base;
-@tailwind components;
-/* purgecss end ignore */
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer components {
-  .rr-border {
-    @apply dark:border-gh-border border-black;
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-gh-dark: #0d1117;
+  --color-gh-darkly: #161b22;
+  --color-gh-border: #30363d;
+}
+
+@utility container {
+  margin-inline: auto;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
   }
-  .rr-text {
-    @apply dark:text-slate-300;
-  }
-  .rr-text-confirm {
-    @apply text-green-700 dark:text-green-400 !important;
-  }
-  .h3 {
-    @apply rr-text my-4;
-  }
-  .btn {
-    @apply font-semibold text-sm rounded-sm shadow border-2 rr-border rr-text flex items-center justify-center;
-  }
-  .btn-large {
-    @apply py-2 px-3;
-  }
-  .btn-small {
-    @apply py-1 px-3;
-  }
-  .icon-colour {
-    @apply text-gh-dark dark:text-slate-300;
-  }
-  .rr-column {
-    @apply flex flex-col items-center w-full px-3;
-  }
+}
+
+/* purgecss end ignore */
+
+@utility rr-border {
+  @apply dark:border-gh-border border-black;
+}
+
+@utility rr-text {
+  @apply dark:text-slate-300;
+}
+
+@utility rr-text-confirm {
+  @apply text-green-700! dark:text-green-400!;
+}
+
+@utility h3 {
+  @apply rr-text my-4;
+}
+
+@utility btn {
+  @apply font-semibold text-sm rounded-xs shadow-sm border-2 rr-border rr-text flex items-center justify-center;
+}
+
+@utility btn-large {
+  @apply py-2 px-3;
+}
+
+@utility btn-small {
+  @apply py-1 px-3;
+}
+
+@utility icon-colour {
+  @apply text-gh-dark dark:text-slate-300;
+}
+
+@utility rr-column {
+  @apply flex flex-col items-center w-full px-3;
 }

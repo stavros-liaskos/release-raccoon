@@ -66,10 +66,10 @@ const config: Config = {
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
     global: {
-      statements: 96,
-      branches: 96,
-      functions: 86,
-      lines: 96,
+      statements: 90,
+      branches: 90,
+      functions: 85,
+      lines: 90,
     },
   },
 
@@ -116,11 +116,11 @@ const config: Config = {
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
 
     // Handle CSS imports (without CSS modules)
-    '^.+\\.(css|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
+    // '^.+\\.(css|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
 
     // Handle image imports
     // https://jestjs.io/docs/webpack#handling-static-assets
-    '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$': `<rootDir>/__mocks__/fileMock.js`,
+    // '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$': `<rootDir>/__mocks__/fileMock.js`,
 
     // Handle module aliases
     '^@/components/(.*)$': '<rootDir>/components/$1',

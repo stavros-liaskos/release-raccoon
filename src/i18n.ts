@@ -10,7 +10,6 @@ export const searchI18n: SearchI18n = {
   label: 'Here goes the artist...',
   button: 'Search',
   searchList: {
-    btnTxt: 'Follow',
     noArtists: 'No artists found',
   },
 };
@@ -43,9 +42,13 @@ export const loginI18n = {
 export const recommendationsI18n = {
   title: 'Others follow',
   artistList: {
-    btnTxt: 'Follow',
     noArtists: 'There are no recommended artists for you :(',
   },
+};
+
+export const buttonFollowI18n = {
+  btnFollow: 'Follow',
+  btnUnfollow: 'Unfollow',
 };
 
 export const scrapersI18n = {
@@ -61,6 +64,5 @@ export const footerI18n = {
   powered: 'Powered by',
 };
 export const artistsListI18n = {
-  btnTxt: 'Unfollow',
   noArtists: 'You don not track any artists yet',
 };

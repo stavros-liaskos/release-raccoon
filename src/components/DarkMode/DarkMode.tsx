@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Sun from '../Icons/sun';
 import Moon from '../Icons/moon';

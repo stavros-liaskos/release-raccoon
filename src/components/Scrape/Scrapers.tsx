@@ -1,19 +1,18 @@
+'use client';
 import ScrapeButton from './components/ScrapeButton';
 import React, { useEffect, useRef, useState } from 'react';
-import { useUser } from '@auth0/nextjs-auth0';
 import { components } from '../../types/schema';
 import { Paths } from '../../types/endpoints';
 import { scrapersI18n } from '../../i18n';
 
-const Scrapers = () => {
-  const { user } = useUser();
+const Scrapers = ({ userEmail }: { userEmail: string }) => {
   const [scrapers, setScrapers] = useState<{ spotify: boolean; lastfm: boolean }>({ spotify: false, lastfm: false });
   const areScrapersInitialised = useRef(false);
 
   useEffect(() => {
     !areScrapersInitialised.current &&
-      user?.email &&
-      fetch(`${Paths.RaccoonUser}?email=${user.email}`, {
+      userEmail &&
+      fetch(`${Paths.RaccoonUser}?email=${userEmail}`, {
         method: 'GET',
         credentials: 'include',
       })
@@ -27,7 +26,7 @@ const Scrapers = () => {
           }
         })
         .catch(console.error);
-  }, [scrapers.lastfm, scrapers.spotify, user?.email]);
+  }, [scrapers.lastfm, scrapers.spotify, userEmail]);
 
   return (
     <div className="flex lg:justify-center flex-none gap-2 my-2 md:my-5 w-full">

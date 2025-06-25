@@ -1,0 +1,2 @@
+ignores: ["husky", "postcss", "tailwindcss", "@tailwindcss/postcss", "postcss", "tailwindcss", "@next/eslint-plugin-next", "jest-environment-jsdom", "identity-obj-proxy", "@testing-library/react-hooks", "react-test-renderer", "ts-node","webpack"]
+skip-missing: true

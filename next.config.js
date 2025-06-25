@@ -7,8 +7,6 @@ const withPWA = require('next-pwa')({
 
 /** @type {import('next').NextConfig} */
 module.exports = withPWA({
-  reactStrictMode: true,
-  pageExtensions: ['page.tsx', 'ts'],
   async rewrites() {
     return createRewritePaths([
       '/me/:path*',

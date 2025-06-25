@@ -3,16 +3,11 @@ import { render, act } from '@testing-library/react';
 import ThemeProvider from '../contexts/Theme/ThemeProvider';
 import ArtistsListProvider from '../contexts/ArtistsList/ArtistsListProvider';
 import { setupServer } from 'msw/node';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-const queryClient = new QueryClient();
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeProvider>
-      <QueryClientProvider client={queryClient}>
-        <ArtistsListProvider>{children}</ArtistsListProvider>
-      </QueryClientProvider>
+      <ArtistsListProvider>{children}</ArtistsListProvider>
     </ThemeProvider>
   );
 };
@@ -55,4 +50,28 @@ export function initServer() {
   afterAll(() => server.close());
 
   return server;
+}
+
+// use to render async RSC for unit testing https://github.com/vercel/next.js/issues/47131#issuecomment-1481289418
+export async function resolvedComponent(Component: React.FunctionComponent, props: Record<string, unknown> = {}) {
+  const ComponentResolved = await Component(props);
+  return () => ComponentResolved;
+}
+
+// Use to parse response of api unit test
+export async function readableStreamToString(readableStream: ReadableStream | null) {
+  const reader = readableStream!.getReader();
+  let result = '';
+  let done = false;
+
+  while (!done) {
+    const { value, done: readDone } = await reader.read();
+    if (readDone) {
+      done = true;
+    } else {
+      result += new TextDecoder().decode(value);
+    }
+  }
+
+  return JSON.parse(result);
 }
