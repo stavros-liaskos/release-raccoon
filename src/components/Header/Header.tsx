@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React from 'react';
 
 import { headerI18n } from '@/i18n';
@@ -10,9 +9,9 @@ const Header: React.FunctionComponent = () => (
     <div className="flex justify-between items-center w-full lg:w-9/12">
       <DarkMode />
 
-      <Link href="/auth/logout">
+      <a href="/auth/logout">
         <button className="btn btn-small">{headerI18n.logoutBtn}</button>
-      </Link>
+      </a>
     </div>
   </header>
 );

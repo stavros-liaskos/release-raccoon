@@ -1,10 +1,10 @@
 'use client';
 import React, { useState } from 'react';
 
+import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
 import { followedArtistListI18n } from '@/i18n';
 import { components } from '@/types/schema';
 
-import { useArtistsListContext } from '../../contexts/ArtistsList/ArtistsListContext';
 import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 import FormInput from '../FormInput/FormInput';
