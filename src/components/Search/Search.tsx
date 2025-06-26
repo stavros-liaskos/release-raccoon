@@ -52,5 +52,4 @@ const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
         .catch(console.error));
   }
 };
-Search.whyDidYouRender = true;
 export default Search;

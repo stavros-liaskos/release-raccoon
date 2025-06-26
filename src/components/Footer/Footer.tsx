@@ -25,5 +25,4 @@ const Footer: React.FunctionComponent = () => {
     </footer>
   );
 };
-Footer.whyDidYouRender = true;
 export default Footer;

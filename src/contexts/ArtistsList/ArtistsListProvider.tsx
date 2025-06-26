@@ -45,5 +45,4 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   );
 };
 
-ArtistsListProvider.whyDidYouRender = true;
 export default ArtistsListProvider;

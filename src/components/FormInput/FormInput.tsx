@@ -46,5 +46,4 @@ const FormInput = ({ handleAction, i18n, children, actionEventTrigger }: FormInp
   );
 };
 
-FormInput.whyDidYouRender = true;
 export default FormInput;

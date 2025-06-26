@@ -18,5 +18,4 @@ const Login: React.FunctionComponent<LoginProps> = ({ i18n }) => {
     </div>
   );
 };
-Login.whyDidYouRender = true;
 export default Login;

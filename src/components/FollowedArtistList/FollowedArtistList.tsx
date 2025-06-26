@@ -37,7 +37,6 @@ const FollowedArtistList: React.FunctionComponent = () => {
   );
 };
 
-FollowedArtistList.whyDidYouRender = true;
 export default FollowedArtistList;
 
 export function filterArtists(

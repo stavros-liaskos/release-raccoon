@@ -29,5 +29,4 @@ const ButtonFollowArtist: React.FunctionComponent<ButtonFollowArtistType> = ({
     />
   );
 };
-ButtonFollowArtist.whyDidYouRender = true;
 export default ButtonFollowArtist;

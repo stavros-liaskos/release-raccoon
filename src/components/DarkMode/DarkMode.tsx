@@ -1,7 +1,8 @@
 'use client';
 import React from 'react';
 
-import { useThemeContext } from '../../contexts/Theme/ThemeContext';
+import { useThemeContext } from '@/contexts/Theme/ThemeContext';
+
 import Moon from '../Icons/moon';
 import Sun from '../Icons/sun';
 
@@ -14,5 +15,4 @@ const DarkMode: React.FunctionComponent = () => {
     </button>
   );
 };
-DarkMode.whyDidYouRender = true;
 export default DarkMode;
