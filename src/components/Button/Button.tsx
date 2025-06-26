@@ -44,5 +44,4 @@ const Button: React.FunctionComponent<ButtonProps> = ({
     </button>
   );
 };
-Button.whyDidYouRender = true;
 export default Button;

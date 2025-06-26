@@ -1,5 +1,3 @@
-import '../scripts/wdyr';
-
 import type { Metadata, Viewport } from 'next';
 import React from 'react';
 

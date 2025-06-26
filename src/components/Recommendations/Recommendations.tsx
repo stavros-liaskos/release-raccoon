@@ -26,5 +26,4 @@ const Recommendations = async () => {
   );
 };
 
-Recommendations.whyDidYouRender = true;
 export default Recommendations;

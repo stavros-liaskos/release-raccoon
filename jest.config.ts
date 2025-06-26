@@ -33,7 +33,6 @@ const config: Config = {
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
-    '!src/scripts/wdyr.js',
     '!src/types/schema.ts',
     '!src/styles/schema.ts',
     '!**/*.{types,data}.ts',
