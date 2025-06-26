@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+
 import { auth0 } from '@/lib/auth0';
 
 export async function DELETE(req: Request, { params }: { params: Promise<{ artist: string }> }): Promise<NextResponse> {

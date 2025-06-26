@@ -1,9 +1,11 @@
 'use client';
-import ScrapeButton from './components/ScrapeButton';
 import React, { useEffect, useRef, useState } from 'react';
-import { components } from '@/types/schema';
-import { Paths } from '@/types/endpoints';
+
 import { scrapersI18n } from '@/i18n';
+import { Paths } from '@/types/endpoints';
+import { components } from '@/types/schema';
+
+import ScrapeButton from './components/ScrapeButton';
 
 const Scrapers = ({ userEmail }: { userEmail: string }) => {
   const [scrapers, setScrapers] = useState<{ spotify: boolean; lastfm: boolean }>({ spotify: false, lastfm: false });

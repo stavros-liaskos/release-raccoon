@@ -1,7 +1,9 @@
-import { components } from '@/types/schema';
 import React from 'react';
-import List from './components/List/List';
+
+import { components } from '@/types/schema';
+
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
+import List from './components/List/List';
 
 export type ArtistsListI18n = {
   noArtists: string;

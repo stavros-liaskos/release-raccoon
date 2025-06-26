@@ -1,5 +1,5 @@
-import { components } from '@/types/schema';
 import { Paths } from '@/types/endpoints';
+import { components } from '@/types/schema';
 
 async function followArtist(artist: components['schemas']['SearchResultArtistDto'], cb?: () => void) {
   await fetch(Paths.Follow, {

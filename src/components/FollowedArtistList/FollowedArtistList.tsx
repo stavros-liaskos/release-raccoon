@@ -1,12 +1,14 @@
 'use client';
 import React, { useState } from 'react';
+
+import { followedArtistListI18n } from '@/i18n';
+import { components } from '@/types/schema';
+
 import { useArtistsListContext } from '../../contexts/ArtistsList/ArtistsListContext';
 import ArtistsList from '../ArtistsList/ArtistsList';
-import FormInput from '../FormInput/FormInput';
-import { components } from '@/types/schema';
-import Loading from '../Loading/Loading';
-import { followedArtistListI18n } from '@/i18n';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
+import FormInput from '../FormInput/FormInput';
+import Loading from '../Loading/Loading';
 
 const FollowedArtistList: React.FunctionComponent = () => {
   const { followedArtistList, loading } = useArtistsListContext();

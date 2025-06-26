@@ -1,9 +1,11 @@
 import React from 'react';
-import Spotify from '../../Icons/spotify';
-import LastFm from '../../Icons/lastfm';
-import IconTypes from '../../Icons/iconTypes';
-import Button from '../../Button/Button';
+
 import { Paths } from '@/types/endpoints';
+
+import Button from '../../Button/Button';
+import IconTypes from '../../Icons/iconTypes';
+import LastFm from '../../Icons/lastfm';
+import Spotify from '../../Icons/spotify';
 
 export type MusicServiceType = 'Spotify' | 'LastFm';
 

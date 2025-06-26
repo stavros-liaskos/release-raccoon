@@ -1,5 +1,6 @@
-import recommended from '../../../../../__tests__/mocks/fixtures/responses/recommended.json';
 import { NextResponse } from 'next/server';
+
+import recommended from '@/mocks/fixtures/responses/recommended.json';
 
 export async function GET(): Promise<NextResponse> {
   return NextResponse.json(recommended);
