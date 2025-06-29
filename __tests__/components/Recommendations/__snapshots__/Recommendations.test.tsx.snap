@@ -48,7 +48,7 @@ exports[`Recommendations matches snapshot 1`] = `
           </a>
         </div>
         <button
-          class="btn flex "
+          class="btn flex btn-small lg:ml-8 my-2"
           type="button"
         >
           Follow
@@ -116,7 +116,7 @@ exports[`Recommendations matches snapshot 1`] = `
           </a>
         </div>
         <button
-          class="btn flex "
+          class="btn flex btn-small lg:ml-8 my-2 border-gh-dark!"
           type="button"
         >
           Follow

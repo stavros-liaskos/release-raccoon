@@ -1,3 +1,4 @@
+import clsx from 'clsx/lite'; // Size (gzip): 140 bytes, CAUTION: Accepts ONLY string arguments!
 import React from 'react';
 
 import ButtonFollowArtist from '@/components/ButtonFollowArtist/ButtonFollowArtist';
@@ -5,7 +6,6 @@ import LastFm from '@/components/Icons/lastfm';
 import Spotify from '@/components/Icons/spotify';
 
 import { ArtistsListProp } from '../../ArtistsList';
-
 const ICON_SIZE = 30;
 
 const List = ({ artistsList, artistLoading, buttonAction }: ArtistsListProp) => {
@@ -35,7 +35,7 @@ const List = ({ artistsList, artistLoading, buttonAction }: ArtistsListProp) => 
           </div>
           <ButtonFollowArtist
             artist={artist}
-            className={`btn-small lg:ml-8 my-2 ${index % 2 ? 'border-gh-dark!' : ''}`}
+            className={clsx('btn-small lg:ml-8 my-2', index % 2 && 'border-gh-dark!')}
             disabled={!!artistLoading && artist.id === artistLoading}
             loading={!!artistLoading && artist.id === artistLoading}
             buttonAction={buttonAction}

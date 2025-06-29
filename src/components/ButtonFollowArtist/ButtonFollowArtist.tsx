@@ -13,6 +13,7 @@ const ButtonFollowArtist: React.FunctionComponent<ButtonFollowArtistType> = ({
   loading = false,
   artist,
   buttonAction,
+  className,
 }) => {
   const handleClickCallback = useCallback(async () => {
     if (!disabled) {
@@ -22,6 +23,7 @@ const ButtonFollowArtist: React.FunctionComponent<ButtonFollowArtistType> = ({
 
   return (
     <Button
+      className={className}
       handleClick={handleClickCallback}
       disabled={disabled}
       loading={loading}

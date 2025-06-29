@@ -13,7 +13,7 @@ const Recommendations = async () => {
 
   return (
     <div className="flex flex-col lg:justify-center items-center mb-2 w-full">
-      <h3 className={'h3'}>{recommendationsI18n.title}</h3>
+      <h3 className="h3">{recommendationsI18n.title}</h3>
 
       <Suspense fallback={<Loading />}>
         <ArtistsList

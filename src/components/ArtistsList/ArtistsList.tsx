@@ -17,7 +17,7 @@ export type ArtistsListProp = {
 };
 
 const ArtistsList = ({ i18n, artistsList, artistLoading, buttonAction }: ArtistsListProp) => {
-  if (!i18n || !i18n.noArtists || !buttonAction) {
+  if (!i18n?.noArtists || !buttonAction) {
     return null;
   }
   return (
