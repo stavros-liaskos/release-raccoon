@@ -1,4 +1,5 @@
 'use client';
+import clsx from 'clsx/lite';
 import React, { useCallback } from 'react';
 
 import followArtist from '@/utils/followArtist';
@@ -28,12 +29,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   }
 
   return (
-    <button
-      className={`btn flex ${className ? className : ''}`}
-      onClick={handleClickCallback}
-      disabled={disabled}
-      type={type}
-    >
+    <button className={clsx('btn flex', className)} onClick={handleClickCallback} disabled={disabled} type={type}>
       {loading && (
         <span className="flex justify-center items-center -ml-1 mr-3 h-5 w-5">
           <Spin width={20} />
