@@ -34,7 +34,7 @@ const config: Config = {
     'src/**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
     '!src/types/schema.ts',
-    '!src/styles/schema.ts',
+    '!src/styles/*',
     '!**/*.{types,data}.ts',
   ],
 

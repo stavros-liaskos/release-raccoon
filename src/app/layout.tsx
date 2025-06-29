@@ -2,6 +2,8 @@ import '../styles/globals.css';
 
 import React from 'react';
 
+import { interFonts } from '@/styles/fonts';
+
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import ThemeProvider from '../contexts/Theme/ThemeProvider';
@@ -9,7 +11,7 @@ import ThemeProvider from '../contexts/Theme/ThemeProvider';
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className="bg-white dark:bg-gh-dark">
+      <body className={`${interFonts.className} antialiased bg-white dark:bg-gh-dark`}>
         <div className="container max-auto">
           <div className="sm:border-x-2 rr-border flex flex-col h-screen">
             <Header />
