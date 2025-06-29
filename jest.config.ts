@@ -34,6 +34,7 @@ const config: Config = {
     'src/**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
     '!src/types/schema.ts',
+    '!src/lib/auth0.ts',
     '!src/styles/*',
     '!**/*.{types,data}.ts',
   ],
