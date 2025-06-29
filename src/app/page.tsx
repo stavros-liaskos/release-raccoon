@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
-import React from 'react';
+import React, { Suspense } from 'react';
 
+import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton/RecommendationsSkeleton';
 import { loginI18n, metaI18n, searchI18n } from '@/i18n';
 import { auth0 } from '@/lib/auth0';
 
@@ -32,7 +33,9 @@ export default async function Page() {
       {session?.user?.email && <Scrapers userEmail={session.user.email} />}
       <div className="flex flex-auto flex-col h24">
         <FollowedArtistList />
-        <Recommendations />
+        <Suspense fallback={<RecommendationsSkeleton />}>
+          <Recommendations />
+        </Suspense>
       </div>
     </ArtistsListProvider>
   );

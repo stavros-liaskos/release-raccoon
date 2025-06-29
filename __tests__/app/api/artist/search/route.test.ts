@@ -2,6 +2,7 @@
  * @jest-environment node
  */
 import { GET } from '@/app/api/artist/search/route';
+
 import { readableStreamToString } from '../../../../testUtils/testUtils';
 
 jest.mock('@/lib/auth0', () => ({}));
