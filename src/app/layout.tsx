@@ -12,19 +12,19 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="en">
       <body className={`${interFonts.className} antialiased bg-white dark:bg-gh-dark`}>
-        <div className="container max-auto">
-          <div className="sm:border-x-2 rr-border flex flex-col h-screen">
-            <Header />
+        <ThemeProvider>
+          <div className="container max-auto">
+            <div className="sm:border-x-2 rr-border flex flex-col h-screen">
+              <Header />
 
-            <main className="rr-column flex-auto">
-              <div className="flex flex-col flex-auto w-full lg:w-9/12">
-                <ThemeProvider>{children}</ThemeProvider>
-              </div>
-            </main>
+              <main className="rr-column flex-auto">
+                <div className="flex flex-col flex-auto w-full lg:w-9/12">{children}</div>
+              </main>
 
-            <Footer />
+              <Footer />
+            </div>
           </div>
-        </div>
+        </ThemeProvider>
         {/*<Script src="/noflash.js" strategy={'beforeInteractive'} />*/}
       </body>
     </html>

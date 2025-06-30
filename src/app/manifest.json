@@ -2,7 +2,7 @@
   "name": "Release Raccoon",
   "short_name": "RR",
   "description": "A music release newsletter",
-  "start_url": "https://www.releaseraccoon.online",
+  "start_url": "https://release-raccoon.vercel.app",
   "display": "fullscreen",
   "prefer_related_applications": false,
   "background_color": "#000000",
