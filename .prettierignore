@@ -18,3 +18,5 @@ LICENSE
 .yarn/releases/yarn-1.22.19.cjs
 raccoon_main.jpg
 .depcheckrc
+*.ico
+*.png
