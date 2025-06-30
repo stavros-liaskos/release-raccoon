@@ -29,7 +29,7 @@ const FollowedArtistList: React.FunctionComponent = () => {
       ) : (
         <ArtistsList
           i18n={followedArtistListI18n.artistList}
-          artistsList={filterArtists(filterInput, followedArtistList)}
+          artistsList={filterArtists(followedArtistList, filterInput)}
           buttonAction={ButtonAction.Unfollow}
         />
       )}
@@ -40,8 +40,8 @@ const FollowedArtistList: React.FunctionComponent = () => {
 export default FollowedArtistList;
 
 export function filterArtists(
-  inputValue: string = '',
   followedArtistList: components['schemas']['ArtistDto'][],
+  inputValue: string = '',
 ): components['schemas']['ArtistDto'][] {
   return followedArtistList.filter(followedArtistList => {
     if (inputValue === ' ' || inputValue.length === 1) {

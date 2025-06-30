@@ -1,11 +1,13 @@
-import React from 'react';
 import { act, fireEvent } from '@testing-library/react';
+import React from 'react';
+
 import FollowedArtistList, { filterArtists } from '@/components/FollowedArtistList/FollowedArtistList';
-import { initServer, render, renderWithAct } from '../../testUtils/testUtils';
-import followedArtists from '@/mocks/fixtures/responses/followed-artists.json';
-import { components } from '@/types/schema';
-import { mswFollowedArtists, mswUnfollow } from '@/mocks/mockApi';
 import { followedArtistListI18n } from '@/i18n';
+import followedArtists from '@/mocks/fixtures/responses/followed-artists.json';
+import { mswFollowedArtists, mswUnfollow } from '@/mocks/mockApi';
+import { components } from '@/types/schema';
+
+import { initServer, render, renderWithAct } from '../../testUtils/testUtils';
 
 describe('FollowedArtistList', () => {
   const server = initServer();
@@ -80,7 +82,7 @@ describe('FollowedArtistList', () => {
         result: followedArtists.rows.slice(-1),
       },
     ])('returns filtered artists for input $inputValue', ({ inputValue, followedArtistList, result }) => {
-      expect(filterArtists(inputValue, followedArtistList)).toEqual(result);
+      expect(filterArtists(followedArtistList, inputValue)).toEqual(result);
     });
   });
 });

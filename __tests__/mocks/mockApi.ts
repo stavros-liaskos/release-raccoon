@@ -1,8 +1,10 @@
+import { http, HttpResponse } from 'msw';
+
+import { Paths } from '@/types/endpoints';
+import { components } from '@/types/schema';
+
 import followedArtists from './fixtures/responses/followed-artists.json';
 import raccoonUser from './fixtures/responses/raccoon-user.json';
-import { components } from '@/types/schema';
-import { http, HttpResponse } from 'msw';
-import { Paths } from '@/types/endpoints';
 
 export const mswFollowedArtists = {
   success: (artistQuantity: number = 2) => {
@@ -45,7 +47,7 @@ export const mswFollow = {
 
 export const mswUnfollow = {
   success: () =>
-    http.delete(Paths.UnfollowArtist, () => {
+    http.delete(`${Paths.UnfollowArtist}/*`, () => {
       return HttpResponse.json('OK', { status: 200 });
     }),
 };
