@@ -2,6 +2,7 @@
  * @jest-environment node
  */
 import { GET } from '@/app/api/artists/recommended/route';
+
 import { readableStreamToString } from '../../../../testUtils/testUtils';
 
 describe('/artists/recommended API', () => {
