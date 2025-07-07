@@ -1,16 +1,18 @@
+import { render } from '@testing-library/react';
+import React from 'react';
+
+import IconTypes from '@/components/Icons/iconTypes';
+import LastFm from '@/components/Icons/lastfm';
+import Spotify from '@/components/Icons/spotify';
 import ScrapeButton, {
   getMusicServiceIcon,
   getMusicServiceUrl,
   handleScrape,
   MusicServiceType,
 } from '@/components/Scrape/components/ScrapeButton';
-import { render } from '@testing-library/react';
-import IconTypes from '@/components/Icons/iconTypes';
-import Spotify from '@/components/Icons/spotify';
-import React from 'react';
-import LastFm from '@/components/Icons/lastfm';
 import { mswScrape } from '@/mocks/mockApi';
 import { Paths } from '@/types/endpoints';
+
 import { initServer } from '../../../testUtils/testUtils';
 
 describe('Scrape', () => {
