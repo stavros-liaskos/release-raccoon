@@ -8,7 +8,7 @@ export async function GET(req: NextRequest): Promise<
   NextResponse<
     | components['schemas']['ArtistSearchResponse']
     | {
-        error: string;
+        error: unknown;
       }
   >
 > {
@@ -24,7 +24,8 @@ export async function GET(req: NextRequest): Promise<
     });
     const data = await response.json();
     return NextResponse.json(data);
-  } catch (err) {
-    return NextResponse.json({ message: 'Internal Server Error', error: JSON.stringify(err) }, { status: 500 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: 'Internal Server Error', error }, { status: 500 });
   }
 }

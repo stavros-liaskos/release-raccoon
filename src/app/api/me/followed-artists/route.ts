@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
 
 import { auth0 } from '@/lib/auth0';
+import { API_Paths } from '@/types/endpoints';
 
 export async function GET(): Promise<NextResponse> {
   try {
     const accessToken = await auth0.getAccessToken();
 
-    const response = await fetch(`${process.env.API_BASE_URL}/me/followed-artists`, {
+    const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.FollowedArtists}`, {
       headers: {
         authorization: `Bearer ${accessToken.token}`,
         'content-type': 'application/json',
@@ -16,7 +17,8 @@ export async function GET(): Promise<NextResponse> {
     });
     const data = await response.json();
     return NextResponse.json(data);
-  } catch (err) {
-    return NextResponse.json({ message: 'Internal Server Error', error: JSON.stringify(err) }, { status: 500 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: 'Internal Server Error', error: JSON.stringify(error) }, { status: 500 });
   }
 }

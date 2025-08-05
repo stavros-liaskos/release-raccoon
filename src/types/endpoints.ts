@@ -9,6 +9,8 @@ export const Paths: { [key: string]: string } = {
   RaccoonUser: `api/raccoon-user`,
   ScrapeLastFM: `api/scrape-taste/lastfm`,
   ScrapeSpotify: `api/scrape-taste/spotify`,
+  EnableSrapeServices: `api/me/enable-services`, // TODO
+  Settings: `api/me/settings`, // TODO
 };
 
 // Route handlers' external API paths
@@ -22,4 +24,6 @@ export const API_Paths: { [key: string]: string } = {
   RaccoonUser: `raccoon-user`,
   ScrapeLastFM: `scrape-taste/lastfm`,
   ScrapeSpotify: `scrape-taste/spotify`,
+  EnableSrapeServices: `me/enable-services`, // TODO
+  Settings: `me/settings`, // TODO
 };

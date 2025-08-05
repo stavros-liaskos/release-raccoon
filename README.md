@@ -98,7 +98,7 @@ A [JSON Web Token](https://datatracker.ietf.org/doc/html/rfc7519) is required fo
 To generate a ts schema:
 
 ```shell
-$ npx openapi-typescript openapi.yml --output types/schema.ts
+$ npx openapi-typescript openapi.yml --output src/types/schema.ts
 ```
 
 ## Icons
