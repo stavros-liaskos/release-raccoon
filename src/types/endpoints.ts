@@ -1,3 +1,4 @@
+// FE Endpoints to call Next.js API routes
 export const Paths: { [key: string]: string } = {
   Auth: '/api/auth/me',
   Search: `api/artist/search`,
@@ -8,4 +9,21 @@ export const Paths: { [key: string]: string } = {
   RaccoonUser: `api/raccoon-user`,
   ScrapeLastFM: `api/scrape-taste/lastfm`,
   ScrapeSpotify: `api/scrape-taste/spotify`,
+  EnableSrapeServices: `api/me/enable-services`, // TODO
+  Settings: `api/me/settings`, // TODO
+};
+
+// Route handlers' external API paths
+export const API_Paths: { [key: string]: string } = {
+  Auth: '/api/auth/me',
+  Search: `artist/search`,
+  Recommended: `artists/recommended`,
+  Follow: `me/follow`,
+  FollowedArtists: `me/followed-artists`,
+  UnfollowArtist: `me/unfollow`,
+  RaccoonUser: `raccoon-user`,
+  ScrapeLastFM: `scrape-taste/lastfm`,
+  ScrapeSpotify: `scrape-taste/spotify`,
+  EnableSrapeServices: `me/enable-services`, // TODO
+  Settings: `me/settings`, // TODO
 };

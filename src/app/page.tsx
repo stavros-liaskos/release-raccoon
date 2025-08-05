@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import React, { Suspense } from 'react';
 
 import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton/RecommendationsSkeleton';
+import Settings from '@/components/Settings/Settings';
 import { loginI18n, metaI18n, searchI18n } from '@/i18n';
 import { auth0 } from '@/lib/auth0';
 
@@ -36,6 +37,7 @@ export default async function Page() {
         <Suspense fallback={<RecommendationsSkeleton />}>
           <Recommendations />
         </Suspense>
+        <Settings />
       </div>
     </ArtistsListProvider>
   );

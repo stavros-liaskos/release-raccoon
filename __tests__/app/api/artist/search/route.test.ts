@@ -1,15 +1,17 @@
 /**
  * @jest-environment node
  */
-import { GET } from '@/app/api/artist/search/route';
+import { NextRequest } from 'next/server';
 
-import { readableStreamToString } from '../../../../testUtils/testUtils';
+import { GET } from '@/app/api/artist/search/route';
+import readableStreamToString from '@/utils/readableStreamToString';
 
 jest.mock('@/lib/auth0', () => ({}));
 
 describe('/artist/search API', () => {
   it('should return 500 when failing authorization', async () => {
-    const res = await GET();
+    const req = new NextRequest('https://localhost:3000/api/artist/search?pattern=JohnCage');
+    const res = await GET(req);
 
     const body = await readableStreamToString(res.body);
 

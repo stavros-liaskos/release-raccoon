@@ -19,7 +19,8 @@ const Scrapers = ({ userEmail }: { userEmail: string }) => {
         credentials: 'include',
       })
         .then(res => res.json())
-        .then((raccoonUser: components['schemas']['RaccoonUser'][]) => {
+        .then((raccoonUsers: components['schemas']['RaccoonUser'][]) => {
+          const raccoonUser = raccoonUsers.filter(user => user.email === userEmail);
           const isLastFmConnected = !!raccoonUser?.[0]?.lastfmUsername;
           const isSpotifyConnected = !!raccoonUser?.[0]?.spotifyEnabled;
           if (scrapers.spotify !== isSpotifyConnected || scrapers.lastfm !== isLastFmConnected) {

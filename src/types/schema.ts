@@ -11,6 +11,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Index */
     get: {
       parameters: {
         query?: never;
@@ -44,6 +45,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Search Artists */
     get: {
       parameters: {
         query?: {
@@ -96,6 +98,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Get All */
     get: {
       parameters: {
         query?: {
@@ -146,6 +149,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Get Followed */
     get: {
       parameters: {
         query?: {
@@ -198,9 +202,12 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Registration Callback */
     get: {
       parameters: {
-        query?: never;
+        query?: {
+          redirectUrl?: string;
+        };
         header?: never;
         path?: never;
         cookie?: never;
@@ -245,6 +252,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Enable Taste Sources */
     get: {
       parameters: {
         query?: {
@@ -297,6 +305,7 @@ export interface paths {
     };
     get?: never;
     put?: never;
+    /** Follow Artist */
     post: {
       parameters: {
         query?: never;
@@ -304,7 +313,7 @@ export interface paths {
         path?: never;
         cookie?: never;
       };
-      requestBody?: {
+      requestBody: {
         content: {
           'application/json': components['schemas']['SearchResultArtistDto'];
         };
@@ -312,6 +321,13 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+        /** @description Bad Request */
+        400: {
           headers: {
             [name: string]: unknown;
           };
@@ -346,6 +362,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Get Followed Artists */
     get: {
       parameters: {
         query?: never;
@@ -388,6 +405,71 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/me/settings': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get User Settings */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['UserSettingsDto'];
+          };
+        };
+      };
+    };
+    put?: never;
+    /** Set User Settings */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['UserSettings'];
+        };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/me/unfollow/{artistId}': {
     parameters: {
       query?: never;
@@ -398,12 +480,13 @@ export interface paths {
     get?: never;
     put?: never;
     post?: never;
+    /** Unfollow Artist */
     delete: {
       parameters: {
         query?: never;
         header?: never;
         path: {
-          artistId: number;
+          artistId: string;
         };
         cookie?: never;
       };
@@ -444,6 +527,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Notify Users */
     get: {
       parameters: {
         query?: never;
@@ -479,6 +563,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** List */
     get: {
       parameters: {
         query?: {
@@ -510,6 +595,7 @@ export interface paths {
       };
     };
     put?: never;
+    /** Add */
     post: {
       parameters: {
         query?: never;
@@ -517,7 +603,7 @@ export interface paths {
         path?: never;
         cookie?: never;
       };
-      requestBody?: {
+      requestBody: {
         content: {
           'application/json': components['schemas']['RaccoonUser'];
         };
@@ -530,6 +616,13 @@ export interface paths {
           content: {
             'application/json': components['schemas']['RaccoonUser'];
           };
+        };
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
         };
       };
     };
@@ -546,6 +639,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Count */
     get: {
       parameters: {
         query?: never;
@@ -581,6 +675,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Get */
     get: {
       parameters: {
         query?: never;
@@ -603,6 +698,7 @@ export interface paths {
         };
       };
     };
+    /** Update */
     put: {
       parameters: {
         query?: never;
@@ -612,7 +708,7 @@ export interface paths {
         };
         cookie?: never;
       };
-      requestBody?: {
+      requestBody: {
         content: {
           'application/json': components['schemas']['RaccoonUser'];
         };
@@ -626,9 +722,17 @@ export interface paths {
             'application/json': components['schemas']['RaccoonUser'];
           };
         };
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
       };
     };
     post?: never;
+    /** Delete */
     delete: {
       parameters: {
         query?: never;
@@ -660,6 +764,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** List */
     get: {
       parameters: {
         query?: {
@@ -691,6 +796,7 @@ export interface paths {
       };
     };
     put?: never;
+    /** Add */
     post: {
       parameters: {
         query?: never;
@@ -698,7 +804,7 @@ export interface paths {
         path?: never;
         cookie?: never;
       };
-      requestBody?: {
+      requestBody: {
         content: {
           'application/json': components['schemas']['Release'];
         };
@@ -711,6 +817,13 @@ export interface paths {
           content: {
             'application/json': components['schemas']['Release'];
           };
+        };
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
         };
       };
     };
@@ -728,6 +841,7 @@ export interface paths {
       cookie?: never;
     };
     get?: never;
+    /** Scrape Releases */
     put: {
       parameters: {
         query?: never;
@@ -762,6 +876,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Count */
     get: {
       parameters: {
         query?: never;
@@ -797,6 +912,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Get */
     get: {
       parameters: {
         query?: never;
@@ -819,6 +935,7 @@ export interface paths {
         };
       };
     };
+    /** Update */
     put: {
       parameters: {
         query?: never;
@@ -828,7 +945,7 @@ export interface paths {
         };
         cookie?: never;
       };
-      requestBody?: {
+      requestBody: {
         content: {
           'application/json': components['schemas']['Release'];
         };
@@ -842,9 +959,17 @@ export interface paths {
             'application/json': components['schemas']['Release'];
           };
         };
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
       };
     };
     post?: never;
+    /** Delete */
     delete: {
       parameters: {
         query?: never;
@@ -878,6 +1003,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Scrape Lastfm Taste */
     get: {
       parameters: {
         query?: {
@@ -931,6 +1057,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Scrape Spotify Taste */
     get: {
       parameters: {
         query?: {
@@ -980,6 +1107,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Complete Auth */
     get: {
       parameters: {
         query?: {
@@ -1003,6 +1131,7 @@ export interface paths {
       };
     };
     put?: never;
+    /** Authorize Spotify */
     post: {
       parameters: {
         query?: never;
@@ -1010,7 +1139,7 @@ export interface paths {
         path?: never;
         cookie?: never;
       };
-      requestBody?: {
+      requestBody: {
         content: {
           'application/json': components['schemas']['RegisterUserRequest'];
         };
@@ -1018,6 +1147,13 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+        /** @description Bad Request */
+        400: {
           headers: {
             [name: string]: unknown;
           };
@@ -1038,6 +1174,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Get User Top Artists */
     get: {
       parameters: {
         query?: {
@@ -1051,6 +1188,54 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/test-ui/test-ui': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get Recommended */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+        /** @description Not Authorized */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+        /** @description Not Allowed */
+        403: {
           headers: {
             [name: string]: unknown;
           };
@@ -1094,19 +1279,13 @@ export interface components {
       artists?: components['schemas']['SearchResultArtistDto'][];
     };
     FollowedArtistsResponse: {
-      /** Format: int32 */
+      /** Format: int64 */
       total?: number;
       rows?: components['schemas']['ArtistDto'][];
     };
-    /**
-     * Format: date
-     * @example 2022-03-10
-     */
+    /** Format: date */
     LocalDate: string;
-    /**
-     * Format: date-time
-     * @example 2022-03-10T12:15:50
-     */
+    /** Format: date-time */
     LocalDateTime: string;
     RaccoonUser: {
       /** Format: int64 */
@@ -1172,6 +1351,19 @@ export interface components {
       hasNewRelease?: boolean;
       user?: components['schemas']['RaccoonUser'];
       artist?: components['schemas']['Artist'];
+    };
+    UserSettings: {
+      /** Format: int64 */
+      id?: number;
+      user?: components['schemas']['RaccoonUser'];
+      /** Format: int32 */
+      notifyIntervalDays?: number;
+      unsubscribed?: boolean;
+    };
+    UserSettingsDto: {
+      /** Format: int32 */
+      notifyIntervalDays?: number;
+      unsubscribed?: boolean;
     };
   };
   responses: never;

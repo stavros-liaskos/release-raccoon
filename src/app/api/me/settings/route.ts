@@ -16,17 +16,47 @@ export async function POST(req: NextRequest): Promise<
     const body = await readableStreamToString(req.body);
 
     const accessToken = await auth0.getAccessToken();
-    console.warn(body);
 
-    const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.Follow}`, {
+    const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.Settings}`, {
       headers: {
         authorization: `Bearer ${accessToken.token}`,
         'content-type': 'application/json',
         'Referrer-Policy': 'strict-origin-when-cross-origin',
       },
       method: 'POST',
+      // body: JSON.stringify({
+      //   notifyIntervalDays: 3,
+      // }),
       body: JSON.stringify(body),
     });
+    return NextResponse.json({ status: response.status });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: 'Internal Server Error', error }, { status: 500 });
+  }
+}
+
+export async function GET(): Promise<
+  NextResponse<
+    | { status: number }
+    | {
+        error: unknown;
+      }
+  >
+> {
+  try {
+    const accessToken = await auth0.getAccessToken();
+
+    const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.Settings}`, {
+      headers: {
+        authorization: `Bearer ${accessToken.token}`,
+        'content-type': 'application/json',
+        'Referrer-Policy': 'strict-origin-when-cross-origin',
+      },
+      method: 'GET',
+    });
+    const data = await response.json();
+    console.warn(data);
     return NextResponse.json({ status: response.status });
   } catch (error) {
     console.error(error);
