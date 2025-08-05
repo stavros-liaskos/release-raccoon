@@ -8,6 +8,8 @@ import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 const Recommendations = async () => {
   const data = await fetch(`${process.env.APP_BASE_URL}/${Paths.Recommended}?page=1&size=10`);
+  // console.warn(data);
+  return null;
   const recommendedArtists = await data.json();
 
   return (

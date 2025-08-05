@@ -46,7 +46,6 @@ const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
       })
         .then(res => res.json())
         .then(result => {
-          console.log(result);
           return setResults(result.artists);
         })
         .catch(console.error));

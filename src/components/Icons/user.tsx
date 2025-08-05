@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Moon: React.FunctionComponent = () => (
+const User: React.FunctionComponent = () => (
   <svg
     fill="none"
     stroke="currentColor"
@@ -9,10 +9,10 @@ const Moon: React.FunctionComponent = () => (
     strokeWidth="1.5"
     className="h-8 w-8 icon-colour"
     viewBox="0 0 24 24"
-    role="img"
   >
-    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+    <circle cx="12" cy="7" r="4"></circle>
   </svg>
 );
 
-export default Moon;
+export default User;

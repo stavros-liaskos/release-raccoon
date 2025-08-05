@@ -70,7 +70,7 @@ exports[`Icons matches snapshot 1`] = `
     />
   </svg>
   <svg
-    class="h-8 w-8 text-gh-dark"
+    class="h-8 w-8 icon-colour"
     fill="none"
     role="img"
     stroke="currentColor"
@@ -128,7 +128,7 @@ exports[`Icons matches snapshot 1`] = `
     </g>
   </svg>
   <svg
-    class="h-8 w-8 text-slate-300"
+    class="h-8 w-8 icon-colour"
     fill="none"
     role="img"
     stroke="currentColor"

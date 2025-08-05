@@ -1,7 +1,9 @@
-import React from 'react';
 import { render } from '@testing-library/react';
+import React from 'react';
+
 import Header from '@/components/Header/Header';
 
+jest.mock('@/lib/auth0', () => ({})); // TODO remove this mock when proper auth0 mock is implemented
 describe('Header', () => {
   it('hides Logout btn when user is logged out', () => {
     const { findByText } = render(<Header />);

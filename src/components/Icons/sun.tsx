@@ -7,7 +7,7 @@ const Sun: React.FunctionComponent = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="1.5"
-    className="h-8 w-8 text-slate-300"
+    className="h-8 w-8 icon-colour"
     viewBox="0 0 24 24"
     role="img"
   >

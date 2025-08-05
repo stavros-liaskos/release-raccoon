@@ -1,16 +1,17 @@
 'use client';
 import React from 'react';
 
+import { settingsI18n } from '@/i18n';
 import { Paths } from '@/types/endpoints';
 
 const Settings: React.FunctionComponent = () => {
   return (
     <div className="relative flex lg:justify-center items-center flex-none h-16 md:h-20 md:border-b-2 rr-border w-full">
       <button className="btn btn-large" onClick={handleSetSettings}>
-        Set Settings
+        {settingsI18n.setSettings}
       </button>
       <button className="btn btn-large" onClick={handleGetSettings}>
-        Get Settings
+        {settingsI18n.getSettings}
       </button>
     </div>
   );
@@ -22,6 +23,7 @@ const Settings: React.FunctionComponent = () => {
       .then(res => res.json())
       .catch(console.error);
   }
+
   async function handleGetSettings() {
     fetch(`${Paths.Settings}`, {
       method: 'GET',
