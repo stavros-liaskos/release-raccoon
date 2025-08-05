@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
-import { Paths } from '@/types/endpoints';
+import { API_Paths, Paths } from '@/types/endpoints';
 import { components } from '@/types/schema';
 
 import followedArtists from './fixtures/responses/followed-artists.json';
@@ -18,7 +18,7 @@ export const mswFollowedArtists = {
 
 export const mswRecommendedArtists = {
   success: () =>
-    http.get(`${process.env.APP_BASE_URL}/${Paths.Recommended}`, () => {
+    http.get(`${process.env.APP_BASE_URL}/${API_Paths.Recommended}`, () => {
       return HttpResponse.json(followedArtists, { status: 200 });
     }),
 };

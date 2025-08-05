@@ -1,15 +1,13 @@
 import React from 'react';
 
 import { recommendationsI18n } from '@/i18n';
-import { Paths } from '@/types/endpoints';
+import { getRecommendations } from '@/lib/getRecommendations';
 
 import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 const Recommendations = async () => {
-  const data = await fetch(`${process.env.APP_BASE_URL}/${Paths.Recommended}?page=1&size=10`);
-  // console.warn(data);
-  return null;
+  const data = await getRecommendations();
   const recommendedArtists = await data.json();
 
   return (
