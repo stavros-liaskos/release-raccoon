@@ -9,18 +9,15 @@ import * as followArtist from '@/utils/followArtist';
 
 import { initServer, renderWithAct, resolvedComponent } from '../../testUtils/testUtils';
 
-jest.mock('@/utils/followArtist', () => {
-  return {
-    __esModule: true,
-    ...jest.requireActual('@/utils/followArtist'),
-  };
-});
+jest.mock('@/lib/getRecommendations', () => ({
+  getRecommendations: jest.fn(),
+}));
 
 xdescribe('Recommendations', () => {
   const server = initServer();
 
   it('renders title and artists', async () => {
-    server.use(mswRecommendedArtists.success());
+    // server.use(mswRecommendedArtists.success());
     const Rec = await resolvedComponent(Recommendations);
 
     const { getByText, findAllByText } = render(<Rec />);
