@@ -14,8 +14,14 @@ export const searchI18n: SearchI18n = {
   },
 };
 
+export const settingsI18n = {
+  setSettings: 'Set Settings',
+  getSettings: 'Get Settings',
+};
+
 export const headerI18n = {
   logoutBtn: 'Logout',
+  settings: 'Settings',
 };
 
 export const followedArtistListI18n = {
@@ -33,6 +39,7 @@ export const followedArtistListI18n = {
 export const loginI18n = {
   welcome: 'Welcome to Release Raccoon!',
   loginBtn: 'Log in',
+  goToProfile: 'Take me to my profile',
   registerBtn: 'Register',
   text: "Receive your favorite artists' music in your email every week!",
   artistsCount: 'Artists',

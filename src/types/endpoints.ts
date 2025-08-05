@@ -1,4 +1,17 @@
-// FE Endpoints to call Next.js API routes
+// Auth0 external endpoints
+export const Auth0Endpoints: { [key: string]: string } = {
+  Login: '/auth/login',
+  Logout: '/auth/logout',
+};
+
+// FE navigation paths
+export const NavigationPaths: { [key: string]: string } = {
+  Home: '/',
+  Profile: '/profile',
+  Settings: '/profile/settings',
+};
+
+// FE Endpoints that call Next.js' Router Handler (aka Next.js API routes)
 export const Paths: { [key: string]: string } = {
   Auth: '/api/auth/me',
   Search: `api/artist/search`,

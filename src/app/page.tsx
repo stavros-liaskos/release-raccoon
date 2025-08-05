@@ -1,17 +1,8 @@
 import type { Metadata, Viewport } from 'next';
-import React, { Suspense } from 'react';
+import React from 'react';
 
-import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton/RecommendationsSkeleton';
-import Settings from '@/components/Settings/Settings';
-import { loginI18n, metaI18n, searchI18n } from '@/i18n';
-import { auth0 } from '@/lib/auth0';
-
-import FollowedArtistList from '../components/FollowedArtistList/FollowedArtistList';
-import Login from '../components/Login/Login';
-import Recommendations from '../components/Recommendations/Recommendations';
-import Scrapers from '../components/Scrape/Scrapers';
-import Search from '../components/Search/Search';
-import ArtistsListProvider from '../contexts/ArtistsList/ArtistsListProvider';
+import Hero from '@/components/Hero/Hero';
+import { metaI18n } from '@/i18n';
 
 // migrate metadata to app router
 export const metadata: Metadata = {
@@ -23,22 +14,5 @@ export const viewport: Viewport = {
 };
 
 export default async function Page() {
-  const session = await auth0.getSession();
-
-  if (!session) {
-    return <Login i18n={loginI18n} />;
-  }
-  return (
-    <ArtistsListProvider>
-      <Search i18n={searchI18n} />
-      {session?.user?.email && <Scrapers userEmail={session.user.email} />}
-      <div className="flex flex-auto flex-col h24">
-        <FollowedArtistList />
-        <Suspense fallback={<RecommendationsSkeleton />}>
-          <Recommendations />
-        </Suspense>
-        <Settings />
-      </div>
-    </ArtistsListProvider>
-  );
+  return <Hero />;
 }

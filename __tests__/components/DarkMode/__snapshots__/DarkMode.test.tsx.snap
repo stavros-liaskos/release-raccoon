@@ -7,7 +7,7 @@ exports[`DarkMode shows Moon icon on light mode 1`] = `
     data-testid="moon"
   >
     <svg
-      class="h-8 w-8 text-gh-dark"
+      class="h-8 w-8 icon-colour"
       fill="none"
       role="img"
       stroke="currentColor"
@@ -31,7 +31,7 @@ exports[`DarkMode shows Sun icon on dark mode 1`] = `
     data-testid="sun"
   >
     <svg
-      class="h-8 w-8 text-slate-300"
+      class="h-8 w-8 icon-colour"
       fill="none"
       role="img"
       stroke="currentColor"
