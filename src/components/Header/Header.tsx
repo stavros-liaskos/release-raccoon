@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import UserMenu from '@/components/Header/UserMenu/UserMenu';
+import UserWrapper from '@/components/Header/UserWrapper/UserWrapper';
 import { auth0 } from '@/lib/auth0';
 
 import DarkMode from '../DarkMode/DarkMode';
@@ -20,7 +20,7 @@ const Header: React.FunctionComponent = async () => {
         <div className="flex justify-end gap-5 w-full lg:w-9/12">
           <DarkMode />
 
-          {session && <UserMenu />}
+          {session && <UserWrapper />}
         </div>
       </div>
     </header>
