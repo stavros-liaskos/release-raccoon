@@ -1,5 +1,6 @@
 'use client';
-import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 import ArtistsList from '@/components/ArtistsList/ArtistsList';
 import Button from '@/components/Button/Button';
@@ -12,10 +13,28 @@ import type { components } from '@/types/schema';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 import type { SearchProps } from './Search.types';
 
-// close search when artists is followed
 const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
-  // use custom hooke e.g. const { results, search, clear } = useSearchArtists();
   const [results, setResults] = useState<components['schemas']['SearchResultArtistDto'][] | null>(null);
+  const pathname = usePathname();
+
+  // Close search results when navigating to a different page
+  useEffect(() => {
+    setResults(null);
+  }, [pathname]);
+
+  // Close search results on any click
+  useEffect(() => {
+    if (!results) return;
+
+    function handleAnyClick() {
+      setResults(null);
+    }
+
+    document.addEventListener('click', handleAnyClick);
+    return () => {
+      document.removeEventListener('click', handleAnyClick);
+    };
+  }, [results]);
 
   return (
     <div className="relative flex lg:justify-center items-center flex-none h-16 md:h-20 md:border-b-2 rr-border w-full">
