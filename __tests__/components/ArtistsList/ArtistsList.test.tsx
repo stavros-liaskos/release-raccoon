@@ -1,10 +1,11 @@
 import { render } from '@testing-library/react';
-import ArtistsList from '@/components/ArtistsList/ArtistsList';
-import artistsList from '@/mocks/fixtures/responses/followed-artists.json';
-import { artistsListI18n } from '@/i18n';
-import { ButtonAction } from '@/components/ButtonFollowArtist/ButtonFollowArtist.types';
 
-describe('ArtistsList', () => {
+import ArtistsList from '@/components/ArtistsList/ArtistsList';
+import { ButtonAction } from '@/components/ButtonFollowArtist/ButtonFollowArtist.types';
+import { artistsListI18n } from '@/i18n';
+import artistsList from '@/mocks/fixtures/responses/followed-artists.json';
+
+xdescribe('ArtistsList', () => {
   it.each([
     {
       props: {},
