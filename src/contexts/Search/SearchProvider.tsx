@@ -15,12 +15,17 @@ const SearchProvider: FC<ChildrenProps> = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const closeSearchResults = useCallback(() => {
-    if (Array.isArray(results) && results.length > 1) {
+    if (Array.isArray(results)) {
       setResults(null);
     }
   }, [setResults, results]);
 
   const handleSearch = useCallback((inputValue: string) => {
+    if (!inputValue) {
+      Array.isArray(results) && setResults(null);
+      return;
+    }
+
     setLoading(true);
 
     inputValue &&

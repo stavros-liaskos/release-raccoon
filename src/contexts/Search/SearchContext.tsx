@@ -13,7 +13,7 @@ interface SearchContextType {
 export const SearchContext: React.Context<SearchContextType> = createContext<SearchContextType>(
   undefined as unknown as SearchContextType,
 );
-SearchContext.displayName = 'ArtistsListContext';
+SearchContext.displayName = 'SearchContext';
 
 export function useSearchContext() {
   return useContext(SearchContext);

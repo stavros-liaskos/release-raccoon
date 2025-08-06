@@ -39,12 +39,8 @@ describe('Search', () => {
   });
 
   it('renders without data without crashing', async () => {
-    await renderWithAct(
-      <SearchProvider>
-        {/* @ts-ignore*/}
-        <Search />
-      </SearchProvider>,
-    );
+    //  @ts-ignore
+    await renderWithAct(<Search />);
   });
 
   it('should have the query that the user types in the input', async () => {
