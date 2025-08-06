@@ -22,6 +22,7 @@ export const settingsI18n = {
 export const headerI18n = {
   logoutBtn: 'Logout',
   settings: 'Settings',
+  profile: 'Profile',
 };
 
 export const followedArtistListI18n = {

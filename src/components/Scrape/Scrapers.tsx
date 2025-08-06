@@ -20,6 +20,9 @@ const Scrapers = ({ userEmail }: { userEmail: string }) => {
       })
         .then(res => res.json())
         .then((raccoonUsers: components['schemas']['RaccoonUser'][]) => {
+          if (!Array.isArray(raccoonUsers)) {
+            return;
+          }
           const raccoonUser = raccoonUsers.filter(user => user.email === userEmail);
           const isLastFmConnected = !!raccoonUser?.[0]?.lastfmUsername;
           const isSpotifyConnected = !!raccoonUser?.[0]?.spotifyEnabled;
