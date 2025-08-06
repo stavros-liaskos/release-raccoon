@@ -5,14 +5,16 @@ import { ButtonAction } from '@/components/ButtonFollowArtist/ButtonFollowArtist
 import { artistsListI18n } from '@/i18n';
 import artistsList from '@/mocks/fixtures/responses/followed-artists.json';
 
-xdescribe('List', () => {
+import { renderWithAct } from '../../../../testUtils/testUtils';
+
+describe('List', () => {
   it('renders without data without crashing', () => {
     // @ts-ignore
     render(<List />);
   });
 
-  it('renders all elements', () => {
-    const { queryAllByRole } = render(
+  it('renders all elements', async () => {
+    const { queryAllByRole } = await renderWithAct(
       <List
         i18n={artistsListI18n}
         artistsList={artistsList.rows}
@@ -27,8 +29,8 @@ xdescribe('List', () => {
     expect(queryAllByRole('img')).toHaveLength(3);
   });
 
-  it('renders btn in disabled state', () => {
-    const { queryAllByRole } = render(
+  it('renders btn in disabled state', async () => {
+    const { queryAllByRole } = await renderWithAct(
       <List
         i18n={artistsListI18n}
         artistsList={artistsList.rows}
@@ -41,8 +43,8 @@ xdescribe('List', () => {
     expect(btn).toHaveAttribute('disabled');
   });
 
-  it('matches snapshot', () => {
-    const { container } = render(
+  it('matches snapshot', async () => {
+    const { container } = await renderWithAct(
       <List
         i18n={artistsListI18n}
         artistsList={artistsList.rows}

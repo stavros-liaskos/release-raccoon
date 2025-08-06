@@ -2,6 +2,7 @@
 import React, { useCallback } from 'react';
 
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
+import { useSearchContext } from '@/contexts/Search/SearchContext';
 import { buttonFollowI18n } from '@/i18n';
 import { components } from '@/types/schema';
 import followArtist from '@/utils/followArtist';
@@ -18,16 +19,24 @@ const ButtonFollowArtist: React.FunctionComponent<ButtonFollowArtistType> = ({
   className,
 }) => {
   const { memoryArtistListUpdate } = useArtistsListContext();
+  const { closeSearchResults } = useSearchContext();
+
   const handleClickCallback = useCallback(async () => {
     if (disabled) return;
 
     try {
-      buttonAction === ButtonAction.Follow ? await followArtist(artist) : await unfollowArtist(artist);
+      if (buttonAction === ButtonAction.Follow) {
+        await followArtist(artist);
+        closeSearchResults();
+      } else {
+        await unfollowArtist(artist);
+      }
+
       memoryArtistListUpdate(artist as components['schemas']['ArtistDto'], buttonAction);
     } catch (error) {
       console.error(error);
     }
-  }, [artist, buttonAction, disabled, memoryArtistListUpdate]);
+  }, [artist, buttonAction, disabled, memoryArtistListUpdate, closeSearchResults]);
 
   return (
     <Button
