@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
 import { buttonFollowI18n } from '@/i18n';
+import { components } from '@/types/schema';
 import followArtist from '@/utils/followArtist';
 import unfollowArtist from '@/utils/unfollowArtists';
 
@@ -22,7 +23,7 @@ const ButtonFollowArtist: React.FunctionComponent<ButtonFollowArtistType> = ({
 
     try {
       buttonAction === ButtonAction.Follow ? await followArtist(artist) : await unfollowArtist(artist);
-      memoryArtistListUpdate(artist, buttonAction);
+      memoryArtistListUpdate(artist as components['schemas']['ArtistDto'], buttonAction);
     } catch (error) {
       console.error(error);
     }

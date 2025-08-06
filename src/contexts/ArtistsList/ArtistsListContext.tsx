@@ -7,7 +7,7 @@ interface ArtistsListContextType {
   followedArtistList: components['schemas']['ArtistDto'][];
   loading: boolean;
   getFollowedArtists: () => void;
-  memoryArtistListUpdate: (artist: components['schemas']['SearchResultArtistDto'], action: ButtonAction) => void;
+  memoryArtistListUpdate: (artist: components['schemas']['ArtistDto'], action: ButtonAction) => void;
 }
 
 export const ArtistsListContext: React.Context<ArtistsListContextType> = createContext<ArtistsListContextType>(

@@ -20,7 +20,11 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   const memoryArtistListUpdate = useCallback(
     (artist: components['schemas']['ArtistDto'], action: ButtonAction) => {
       if (action === ButtonAction.Unfollow) {
-        setFollowedArtistList(followedArtistList.filter(followedArtist => followedArtist.id !== artist.id));
+        setFollowedArtistList(
+          followedArtistList.filter(followedArtist => {
+            return artist?.id ? followedArtist.id !== artist.id : followedArtist.name !== artist.name; // search dto does not have an id
+          }),
+        );
       } else {
         setFollowedArtistList([artist, ...followedArtistList]);
       }
