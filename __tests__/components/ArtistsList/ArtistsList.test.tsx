@@ -5,7 +5,9 @@ import { ButtonAction } from '@/components/ButtonFollowArtist/ButtonFollowArtist
 import { artistsListI18n } from '@/i18n';
 import artistsList from '@/mocks/fixtures/responses/followed-artists.json';
 
-xdescribe('ArtistsList', () => {
+import { renderWithAct } from '../../testUtils/testUtils';
+
+describe('ArtistsList', () => {
   it.each([
     {
       props: {},
@@ -52,8 +54,8 @@ xdescribe('ArtistsList', () => {
     },
   );
 
-  it('renders all elements', () => {
-    const { queryAllByRole } = render(
+  it('renders all elements', async () => {
+    const { queryAllByRole } = await renderWithAct(
       <ArtistsList
         i18n={artistsListI18n}
         buttonAction={ButtonAction.Follow}
