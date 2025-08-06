@@ -1,35 +1,17 @@
 'use client';
-import { usePathname } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import UserMenu from '@/components/Header/UserMenu/UserMenu';
 import User from '@/components/Icons/user';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
+import useOnNavigation from '@/hooks/useOnNavigation';
 
 const UserWrapper: React.FunctionComponent = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const pathname = usePathname();
-  const menuRef = React.useRef<HTMLDivElement>(null);
-
-  // Close menu when navigating to a different page
-  useEffect(() => {
+  const menuRef = useOnClickOutside(() => setIsMenuOpen(false)); // Close menu when clicking outside of it
+  useOnNavigation(() => {
     setIsMenuOpen(false);
-  }, [pathname]);
-
-  // Close menu on outside click
-  useEffect(() => {
-    if (!isMenuOpen) return;
-
-    function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsMenuOpen(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isMenuOpen]);
+  }); // Close menu when navigating to a different page
 
   // Close menu on focus loss (blur)
   function handleBlur(event: React.FocusEvent<HTMLDivElement>) {

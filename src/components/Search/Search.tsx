@@ -1,12 +1,13 @@
 'use client';
-import { usePathname } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import ArtistsList from '@/components/ArtistsList/ArtistsList';
 import Button from '@/components/Button/Button';
 import FormInput from '@/components/FormInput/FormInput';
 import Close from '@/components/Icons/close';
 import HandGlass from '@/components/Icons/handGlass';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
+import useOnNavigation from '@/hooks/useOnNavigation';
 import { Paths } from '@/types/endpoints';
 import type { components } from '@/types/schema';
 
@@ -15,29 +16,16 @@ import type { SearchProps } from './Search.types';
 
 const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
   const [results, setResults] = useState<components['schemas']['SearchResultArtistDto'][] | null>(null);
-  const pathname = usePathname();
-
-  // Close search results when navigating to a different page
-  useEffect(() => {
+  const searchRef = useOnClickOutside(() => setResults(null)); // Close search results when clicking outside
+  useOnNavigation(() => {
     setResults(null);
-  }, [pathname]);
-
-  // Close search results on any click
-  useEffect(() => {
-    if (!results) return;
-
-    function handleAnyClick() {
-      setResults(null);
-    }
-
-    document.addEventListener('click', handleAnyClick);
-    return () => {
-      document.removeEventListener('click', handleAnyClick);
-    };
-  }, [results]);
+  }); // Close menu when navigating to a different page
 
   return (
-    <div className="relative flex lg:justify-center items-center flex-none h-16 md:h-20 md:border-b-2 rr-border w-full">
+    <div
+      ref={searchRef}
+      className="relative flex lg:justify-center items-center flex-none h-16 md:h-20 md:border-b-2 rr-border w-full"
+    >
       <FormInput handleAction={handleSearch} i18n={i18n} actionEventTrigger={'onSubmit'}>
         {results && (
           <button onClick={() => setResults(null)}>
