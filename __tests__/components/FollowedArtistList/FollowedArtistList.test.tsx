@@ -28,7 +28,7 @@ describe('FollowedArtistList', () => {
   it('renders artists with "unfollow" btn', async () => {
     server.use(mswFollowedArtists.success());
     const fetchSpy = jest.spyOn(window, 'fetch');
-    const component = render(<FollowedArtistList />);
+    const component = await renderWithAct(<FollowedArtistList />);
     const buttons = await component.findAllByText(followedArtistListI18n.artistList.btnTxt);
 
     expect(buttons).toHaveLength(2);

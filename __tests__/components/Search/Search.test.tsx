@@ -1,17 +1,24 @@
+import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
-import { fireEvent, act } from '@testing-library/react';
+
 import Search from '@/components/Search/Search';
-import { resetMocks, renderWithAct, initServer } from '../../testUtils/testUtils';
+import SearchProvider from '@/contexts/Search/SearchProvider';
+import { searchI18n } from '@/i18n';
 import artistSearch from '@/mocks/fixtures/responses/artist-search.json';
 import { mswFollowedArtists, mswSearch } from '@/mocks/mockApi';
 import { components } from '@/types/schema';
-import { searchI18n } from '@/i18n';
+
+import { initServer, renderWithAct, resetMocks } from '../../testUtils/testUtils';
 
 describe('Search', () => {
   const server = initServer();
 
   const setup = async () => {
-    const { container, getByRole } = await renderWithAct(<Search i18n={searchI18n} />);
+    const { container, getByRole } = await renderWithAct(
+      <SearchProvider>
+        <Search i18n={searchI18n} />
+      </SearchProvider>,
+    );
     const searchBtn = getByRole('button');
     const input = getByRole('textbox');
 
@@ -32,8 +39,12 @@ describe('Search', () => {
   });
 
   it('renders without data without crashing', async () => {
-    // @ts-ignore
-    await renderWithAct(<Search />);
+    await renderWithAct(
+      <SearchProvider>
+        {/* @ts-ignore*/}
+        <Search />
+      </SearchProvider>,
+    );
   });
 
   it('should have the query that the user types in the input', async () => {
