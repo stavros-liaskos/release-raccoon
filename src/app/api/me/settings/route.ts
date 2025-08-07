@@ -56,8 +56,7 @@ export async function GET(): Promise<
       method: 'GET',
     });
     const data = await response.json();
-    console.warn(data);
-    return NextResponse.json({ status: response.status });
+    return NextResponse.json({ status: response.status, data });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: 'Internal Server Error', error }, { status: 500 });
