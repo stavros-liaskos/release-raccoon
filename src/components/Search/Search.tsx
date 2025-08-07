@@ -3,7 +3,7 @@ import React from 'react';
 
 import ArtistsList from '@/components/ArtistsList/ArtistsList';
 import Button from '@/components/Button/Button';
-import FormInput from '@/components/FormInput/FormInput';
+import FormInput from '@/components/FollowedArtistList/components/FormInput/FormInput';
 import Close from '@/components/Icons/close';
 import HandGlass from '@/components/Icons/handGlass';
 import { useSearchContext } from '@/contexts/Search/SearchContext';
@@ -31,7 +31,6 @@ const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
             <Close />
           </button>
         )}
-        {/*<Button className="btn-large md:ml-52" type="submit" disabled={disabled} loading={disabled} aria-label="search">*/}
         <Button className="btn-large md:ml-52" type="submit" disabled={loading} loading={loading} aria-label="search">
           <HandGlass />
         </Button>

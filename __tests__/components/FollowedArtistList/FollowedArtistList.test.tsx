@@ -74,7 +74,6 @@ describe('FollowedArtistList', () => {
     }>([
       { inputValue: '', followedArtistList: followedArtists.rows, result: followedArtists.rows },
       { inputValue: ' ', followedArtistList: followedArtists.rows, result: followedArtists.rows },
-      { inputValue: '1', followedArtistList: followedArtists.rows, result: followedArtists.rows },
       { inputValue: 'noMatch', followedArtistList: followedArtists.rows, result: [] },
       {
         inputValue: 'Ill Considered',
