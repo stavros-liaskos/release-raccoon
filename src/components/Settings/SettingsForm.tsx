@@ -21,6 +21,9 @@ const SettingsForm: React.FunctionComponent = () => {
     setLoading(true);
     e.preventDefault();
     fetch(`/${Paths.Settings}`, {
+      headers: {
+        'content-type': 'application/json',
+      },
       method: 'POST',
       body: JSON.stringify(settings),
     })
@@ -31,6 +34,9 @@ const SettingsForm: React.FunctionComponent = () => {
 
   async function handleGetSettings() {
     fetch(`/${Paths.Settings}`, {
+      headers: {
+        'content-type': 'application/json',
+      },
       method: 'GET',
     })
       .then(res => res.json())
@@ -48,7 +54,7 @@ const SettingsForm: React.FunctionComponent = () => {
       noValidate
     >
       <div className="flex justify-start gap-5 items-center mb-4">
-        <label htmlFor="notifyInDaysInput" className="block">
+        <label htmlFor="notifyInDaysInput" className="block rr-text">
           {settingsI18n.notifyInNumberOfDays}
         </label>
         <input
@@ -62,7 +68,7 @@ const SettingsForm: React.FunctionComponent = () => {
         />
       </div>
 
-      <label className="flex items-center space-x-2 mb-4" htmlFor="subscriptionCheckbox">
+      <label className="flex items-center space-x-2 mb-4 rr-text" htmlFor="subscriptionCheckbox">
         <input
           id="subscriptionCheckbox"
           type="checkbox"
