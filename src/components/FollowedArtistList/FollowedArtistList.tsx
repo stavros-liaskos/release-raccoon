@@ -1,13 +1,13 @@
 'use client';
 import React, { useState } from 'react';
 
+import FormInput from '@/components/FollowedArtistList/components/FormInput/FormInput';
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
 import { followedArtistListI18n } from '@/i18n';
 import { components } from '@/types/schema';
 
 import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
-import FormInput from '../FormInput/FormInput';
 import Loading from '../Loading/Loading';
 
 const FollowedArtistList: React.FunctionComponent = () => {
@@ -43,11 +43,11 @@ export function filterArtists(
   followedArtistList: components['schemas']['ArtistDto'][],
   inputValue: string = '',
 ): components['schemas']['ArtistDto'][] {
-  return followedArtistList.filter(followedArtistList => {
-    if (inputValue === ' ' || inputValue.length === 1) {
-      return true;
-    } else {
-      return followedArtistList.name.includes(inputValue);
-    }
-  });
+  if (!inputValue || inputValue.trim() === '') {
+    return followedArtistList;
+  }
+
+  return followedArtistList.filter(followedArtistList =>
+    followedArtistList.name.toLowerCase().includes(inputValue.toLowerCase()),
+  );
 }

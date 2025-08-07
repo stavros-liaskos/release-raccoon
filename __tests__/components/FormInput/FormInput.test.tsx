@@ -1,5 +1,6 @@
 import { act, fireEvent, render } from '@testing-library/react';
-import FormInput from '@/components/FormInput/FormInput';
+
+import FormInput from '@/components/FollowedArtistList/components/FormInput/FormInput';
 import { formInputI18n } from '@/i18n';
 
 describe('FormInput', () => {
