@@ -17,6 +17,9 @@ export const searchI18n: SearchI18n = {
 export const settingsI18n = {
   setSettings: 'Set Settings',
   getSettings: 'Get Settings',
+  notifyInNumberOfDays: 'Notify me in number of days',
+  subscribe: 'Subscribe to email notifications',
+  saveBtn: 'Save',
 };
 
 export const headerI18n = {
