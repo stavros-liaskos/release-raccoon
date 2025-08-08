@@ -29,11 +29,14 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
   const [loadingSettings, setLoadingSettings] = useState(false);
 
   useEffect(() => {
+    if (pathname.includes(NavigationPaths.Profile)) {
+      return;
+    }
     const rrUserSessionStore = sessionStorage.getItem(RR_USER);
     if (rrUserSessionStore) {
       setRrUser(JSON.parse(rrUserSessionStore));
     }
-  }, []);
+  }, [pathname, user?.email]);
 
   // scrapers
   useEffect(() => {
@@ -96,7 +99,7 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
       .finally(() => setLoadingSettings(false));
   }, [rrUser, user?.email, setRrUser, pathname]);
 
-  async function updateSettings(settings: components['schemas']['UserSettings']) {
+  function updateSettings(settings: components['schemas']['UserSettings']) {
     setLoadingSettings(true);
 
     fetch(`/${Paths.Settings}`, {
