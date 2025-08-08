@@ -2,54 +2,27 @@
 import React, { useEffect, useState } from 'react';
 
 import Spin from '@/components/Icons/spin';
+import { useUserContext } from '@/contexts/User/UserContext';
 import { settingsI18n } from '@/i18n';
-import { Paths } from '@/types/endpoints';
 import { components } from '@/types/schema';
 
 const SettingsForm: React.FunctionComponent = () => {
+  const { rrUser, loadingSettings, updateSettings } = useUserContext();
   const [settings, setSettings] = useState<components['schemas']['UserSettings']>({
     unsubscribed: false,
     notifyIntervalDays: 0,
   });
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    handleGetSettings();
-  }, []);
-
-  async function handleSave(e: React.FormEvent) {
-    setLoading(true);
-    e.preventDefault();
-    fetch(`/${Paths.Settings}`, {
-      headers: {
-        'content-type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify(settings),
-    })
-      .then(res => res.json())
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }
-
-  async function handleGetSettings() {
-    fetch(`/${Paths.Settings}`, {
-      headers: {
-        'content-type': 'application/json',
-      },
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(result => {
-        setSettings(result.data);
-      })
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }
+    setSettings({ unsubscribed: rrUser.unsubscribed, notifyIntervalDays: rrUser.notifyIntervalDays });
+  }, [rrUser.notifyIntervalDays, rrUser.unsubscribed]);
 
   return (
     <form
-      onSubmit={handleSave}
+      onSubmit={e => {
+        e.preventDefault();
+        updateSettings(settings);
+      }}
       className="flex flex-col justify-between md:justify-between items-stretch h-10 w-full my-3"
       noValidate
     >
@@ -78,8 +51,8 @@ const SettingsForm: React.FunctionComponent = () => {
         <span>{settingsI18n.subscribe}</span>
       </label>
 
-      <button disabled={loading} className="btn btn-large">
-        {loading && (
+      <button disabled={loadingSettings} className="btn btn-large">
+        {loadingSettings && (
           <span className="flex justify-center items-center -ml-1 mr-3 h-5 w-5">
             <Spin width={20} />
           </span>
