@@ -1,4 +1,6 @@
 'use client';
+import { useUser } from '@auth0/nextjs-auth0';
+import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
@@ -20,9 +22,16 @@ const ButtonFollowArtist: React.FunctionComponent<ButtonFollowArtistType> = ({
 }) => {
   const { memoryArtistListUpdate } = useArtistsListContext();
   const { closeSearchResults } = useSearchContext();
+  const router = useRouter();
+  const { user } = useUser();
 
   const handleClickCallback = useCallback(async () => {
     if (disabled) return;
+
+    // user session expired, redirect to login page
+    if (!user?.email) {
+      router.push('/');
+    }
 
     try {
       if (buttonAction === ButtonAction.Follow) {
@@ -36,7 +45,7 @@ const ButtonFollowArtist: React.FunctionComponent<ButtonFollowArtistType> = ({
     } catch (error) {
       console.error(error);
     }
-  }, [artist, buttonAction, disabled, memoryArtistListUpdate, closeSearchResults]);
+  }, [disabled, user?.email, router, buttonAction, memoryArtistListUpdate, artist, closeSearchResults]);
 
   return (
     <Button

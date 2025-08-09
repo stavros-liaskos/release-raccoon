@@ -16,4 +16,5 @@ async function followArtist(artist: components['schemas']['SearchResultArtistDto
       typeof cb === 'function' && cb();
     });
 }
+
 export default followArtist;
