@@ -46,7 +46,7 @@ const SearchProvider: FC<ChildrenProps> = ({ children }) => {
           .then(result => {
             return setResults(result.artists);
           })
-          .catch(error => console.error(JSON.stringify(error)))
+          .catch(error => console.error(error))
           .finally(() => setLoading(false));
     },
     [results, router, user?.email],
