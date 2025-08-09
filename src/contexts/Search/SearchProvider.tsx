@@ -34,6 +34,7 @@ const SearchProvider: FC<ChildrenProps> = ({ children }) => {
       // user session expired, redirect to login page
       if (!user?.email) {
         router.push('/');
+        return;
       }
 
       setLoading(true);
@@ -46,7 +47,7 @@ const SearchProvider: FC<ChildrenProps> = ({ children }) => {
           .then(result => {
             return setResults(result.artists);
           })
-          .catch(error => console.error(error))
+          .catch(console.error)
           .finally(() => setLoading(false));
     },
     [results, router, user?.email],
