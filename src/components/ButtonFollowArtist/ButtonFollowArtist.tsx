@@ -31,6 +31,7 @@ const ButtonFollowArtist: React.FunctionComponent<ButtonFollowArtistType> = ({
     // user session expired, redirect to login page
     if (!user?.email) {
       router.push('/');
+      return;
     }
 
     try {
