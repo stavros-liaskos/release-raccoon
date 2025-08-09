@@ -1,6 +1,6 @@
 'use client';
 import { useUser } from '@auth0/nextjs-auth0';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 
 import { NavigationPaths, Paths } from '@/types/endpoints';
@@ -18,6 +18,7 @@ const RR_USER = 'rr'; // session storage key for Raccoon Raccoon user data
 const UserProvider: FC<ChildrenProps> = ({ children }) => {
   const pathname = usePathname();
   const { user } = useUser();
+  const router = useRouter();
   const [rrUser, setRrUser] = useState<TRrUser>({
     spotify: false,
     lastfm: false,
@@ -69,7 +70,7 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
         }
       })
       .catch(console.error);
-  }, [rrUser, user?.email, setRrUser]);
+  }, [rrUser, user?.email, setRrUser, pathname]);
 
   // settings
   useEffect(() => {
@@ -100,6 +101,12 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
   }, [rrUser, user?.email, setRrUser, pathname]);
 
   function updateSettings(settings: components['schemas']['UserSettings']) {
+    // user session expired, redirect to login page
+    if (!user?.email) {
+      router.push('/');
+      return;
+    }
+
     setLoadingSettings(true);
 
     fetch(`/${Paths.Settings}`, {
