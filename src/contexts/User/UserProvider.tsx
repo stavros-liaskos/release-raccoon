@@ -104,6 +104,7 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
     // user session expired, redirect to login page
     if (!user?.email) {
       router.push('/');
+      return;
     }
 
     setLoadingSettings(true);
