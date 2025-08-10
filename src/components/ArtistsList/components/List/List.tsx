@@ -21,7 +21,10 @@ const List = ({ artistsList, artistLoading, buttonAction }: ArtistsListProp) => 
       {artistsList.map((artist, index: number) => {
         const followerCount = artist?.followerCount;
         return (
-          <div className="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100" key={artist.id}>
+          <div
+            className="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100"
+            key={artist.id ?? index}
+          >
             <p className="grow text-clip rr-text">{artist.name}</p>
 
             <div className="flex items-center">
