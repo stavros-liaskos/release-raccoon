@@ -63,8 +63,16 @@ export const buttonFollowI18n = {
 };
 
 export const scrapersI18n = {
+  title: 'Connect to other services',
   connect: 'Connect',
   connected: 'Connected',
+};
+
+export const lastFmFormI18n = {
+  label: 'Last fm username',
+  submitBtn: 'Sync with LastFm',
+  placeholder: 'Enter LastFm username',
+  syncedMsg: 'Last synced to',
 };
 
 export const formInputI18n = {

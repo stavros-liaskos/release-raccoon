@@ -10,6 +10,7 @@ export async function middleware(request: NextRequest) {
   }
 
   const session = await auth0.getSession(request);
+  console.warn(session);
 
   if (!session && request.nextUrl.pathname !== '/') {
     // user is not authenticated, redirect to login page

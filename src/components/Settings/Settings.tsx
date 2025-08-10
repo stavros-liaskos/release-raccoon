@@ -1,12 +1,12 @@
 import React from 'react';
 
-import LastFmConnect from '@/components/Settings/LastFmConnect';
+import Scrapers from '@/components/Scrapers/Scrapers';
 import SettingsForm from '@/components/Settings/SettingsForm';
 
 const Settings: React.FunctionComponent = () => {
   return (
-    <div className="flex flex-col gap-5 lg:justify-center items-center flex-none h-16 md:h-20 w-full">
-      <LastFmConnect />
+    <div className="flex flex-col justify-between md:justify-between items-stretch h-10 w-full my-3">
+      <Scrapers />
       <SettingsForm />
     </div>
   );

@@ -4,40 +4,39 @@ import React from 'react';
 import IconTypes from '@/components/Icons/iconTypes';
 import LastFm from '@/components/Icons/lastfm';
 import Spotify from '@/components/Icons/spotify';
-import ScrapeButton, {
+import SpotifyStatus, {
   getMusicServiceIcon,
   getMusicServiceUrl,
   handleScrape,
   MusicServiceType,
-} from '@/components/Scrape/components/ScrapeButton';
+} from '@/components/SpotifyStatus/SpotifyStatus';
 import { mswScrape } from '@/mocks/mockApi';
 import { Paths } from '@/types/endpoints';
 
-import { initServer } from '../../../testUtils/testUtils';
+import { initServer } from '../../testUtils/testUtils';
 
-describe('Scrape', () => {
+describe('SpotifyStatus', () => {
   const server = initServer();
 
   describe('component', () => {
     it('renders without data without crashing', () => {
       // @ts-ignore
-      render(<ScrapeButton />);
+      render(<SpotifyStatus />);
     });
 
     it('scrape button exists', async () => {
       const btnName = 'Scrape Spotify';
-      const { findByRole } = render(
-        <ScrapeButton iconName={'Spotify'} buttonText={btnName} musicService={'Spotify'} connected={true} />,
+      const { findByText } = render(
+        <SpotifyStatus iconName={'Spotify'} buttonText={btnName} musicService={'Spotify'} connected={true} />,
       );
-      const scrapeBtn = await findByRole('button');
+      const scrapeBtn = await findByText('Scrape Spotify');
 
-      expect(scrapeBtn).toHaveAttribute('disabled');
       expect(scrapeBtn).toHaveTextContent(btnName);
     });
 
     it('matches snapshot', () => {
       const { container } = render(
-        <ScrapeButton iconName={'Spotify'} buttonText={'Scrape Spotify'} musicService={'Spotify'} connected={true} />,
+        <SpotifyStatus iconName={'Spotify'} buttonText={'Scrape Spotify'} musicService={'Spotify'} connected={true} />,
       );
       expect(container).toMatchSnapshot();
     });
