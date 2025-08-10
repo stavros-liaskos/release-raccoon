@@ -1337,7 +1337,7 @@ export interface components {
       releases?: components['schemas']['Release'][];
     };
     SearchResultArtistDto: {
-      followerCount: number;
+      followerCount?: number;
       /** Format: int64 */
       id?: number;
       name: string;
