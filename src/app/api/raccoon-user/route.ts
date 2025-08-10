@@ -1,15 +1,14 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-import { auth0 } from '@/lib/auth0';
 import { API_Paths } from '@/types/endpoints';
 
-export async function GET(): Promise<NextResponse<{ status: number; message: string } | { error: unknown }>> {
+export async function GET(req: NextRequest) {
   try {
-    const accessToken = await auth0.getAccessToken();
+    const authorization = req.headers.get('Authorization');
 
     const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.RaccoonUser}`, {
       headers: {
-        authorization: `Bearer ${accessToken.token}`,
+        ...(authorization && { authorization }),
         'content-type': 'application/json',
       },
       method: 'GET',
