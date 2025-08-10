@@ -10,12 +10,14 @@ export async function middleware(request: NextRequest) {
   }
 
   const session = await auth0.getSession(request);
-  console.warn(session);
 
   if (!session && request.nextUrl.pathname !== '/') {
     // user is not authenticated, redirect to login page
     return NextResponse.redirect(new URL('/', request.nextUrl.origin));
   }
+  const accessToken = await auth0.getAccessToken(request, authRes);
+
+  authRes.headers.set('Authorization', `Bearer ${accessToken.token}`);
 
   // the headers from the auth middleware should always be returned
   return authRes;

@@ -1,19 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { auth0 } from '@/lib/auth0';
 import { API_Paths } from '@/types/endpoints';
 
 export async function DELETE(
-  _: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ artistId: string }> },
 ): Promise<NextResponse> {
   try {
     const { artistId } = await params;
-    const accessToken = await auth0.getAccessToken();
+    const authorization = req.headers.get('Authorization');
 
     const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.UnfollowArtist}/${artistId}`, {
       headers: {
-        authorization: `Bearer ${accessToken.token}`,
+        ...(authorization && { authorization }),
         'content-type': 'application/json',
         'Referrer-Policy': 'strict-origin-when-cross-origin',
       },
