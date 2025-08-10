@@ -25,7 +25,7 @@ const List = ({ artistsList, artistLoading, buttonAction }: ArtistsListProp) => 
             <p className="grow text-clip rr-text">{artist.name}</p>
 
             <div className="flex items-center">
-              {followerCount && (
+              {!!followerCount && (
                 <Badge>{`${followerCount}${followerCount > 1 ? listI18n.followers : listI18n.follower}`}</Badge>
               )}
               <div className="flex gap-2 mx-4 md:mx-8 w-20">
