@@ -20,8 +20,8 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
   const { user } = useUser();
   const router = useRouter();
   const [rrUser, setRrUser] = useState<TRrUser>({
-    spotify: false,
-    lastfm: false,
+    spotifyEnabled: false,
+    lastfmUsername: '',
     fetchedScrapers: false,
     unsubscribed: false,
     notifyIntervalDays: 0,
@@ -30,18 +30,19 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
   const [loadingSettings, setLoadingSettings] = useState(false);
 
   useEffect(() => {
-    if (pathname.includes(NavigationPaths.Profile)) {
+    if (rrUser?.fetchedSettings || rrUser?.fetchedScrapers) {
       return;
     }
     const rrUserSessionStore = sessionStorage.getItem(RR_USER);
     if (rrUserSessionStore) {
-      setRrUser(JSON.parse(rrUserSessionStore));
+      setRrUser({ ...rrUser, ...JSON.parse(rrUserSessionStore) });
     }
-  }, [pathname, user?.email]);
+  }, [pathname, rrUser, rrUser?.fetchedScrapers, rrUser?.fetchedSettings, user?.email]);
 
   // scrapers
   useEffect(() => {
-    if (pathname !== NavigationPaths.Profile || rrUser.fetchedScrapers || !user?.email) {
+    const rrUserSessionStore = JSON.parse(sessionStorage.getItem(RR_USER) || '{}');
+    if (rrUser?.fetchedScrapers || rrUserSessionStore?.fetchedScrapers || !user?.email) {
       return;
     }
 
@@ -58,11 +59,12 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
         )?.[0];
         const isLastFmConnected = !!raccoonUser?.lastfmUsername;
         const isSpotifyConnected = !!raccoonUser?.spotifyEnabled;
-        if (rrUser?.spotify !== isSpotifyConnected || rrUser?.lastfm !== isLastFmConnected) {
+        if (rrUser?.spotifyEnabled !== isSpotifyConnected || rrUser?.spotifyEnabled !== isLastFmConnected) {
           const updatedRrUser = {
             ...rrUser,
-            spotify: isSpotifyConnected,
-            lastfm: isLastFmConnected,
+            ...rrUserSessionStore,
+            spotifyEnabled: isSpotifyConnected,
+            lastfmUsername: raccoonUser.lastfmUsername,
             fetchedScrapers: true,
           };
           sessionStorage.setItem(RR_USER, JSON.stringify(updatedRrUser));
@@ -74,7 +76,13 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
 
   // settings
   useEffect(() => {
-    if (pathname !== NavigationPaths.Settings || rrUser.fetchedSettings || !user?.email) {
+    const rrUserSessionStore = JSON.parse(sessionStorage.getItem(RR_USER) || '{}');
+    if (
+      pathname !== NavigationPaths.Settings ||
+      rrUserSessionStore?.fetchedSettings ||
+      rrUser?.fetchedSettings ||
+      !user?.email
+    ) {
       return;
     }
 
@@ -89,6 +97,7 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
       .then(result => {
         const updatedRrUser = {
           ...rrUser,
+          ...rrUserSessionStore,
           notifyIntervalDays: result?.data?.notifyIntervalDays,
           unsubscribed: result?.data?.unsubscribed,
           fetchedSettings: true,

@@ -9,18 +9,14 @@ export async function GET(
   try {
     const accessToken = await auth0.getAccessToken();
 
-    // TODO use your LASTFM username, not the email. So it needs a form
-    const response = await fetch(
-      `${process.env.API_BASE_URL}/${API_Paths.EnableSrapeServices}?${req.nextUrl.searchParams}`,
-      {
-        headers: {
-          authorization: `Bearer ${accessToken.token}`,
-          'content-type': 'text/plain',
-        },
-        method: 'GET',
+    const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.ScrapeLastFM}?${req.nextUrl.searchParams}`, {
+      headers: {
+        authorization: `Bearer ${accessToken.token}`,
+        'content-type': 'text/plain',
       },
-    );
-    const message = await response.text(); // TODO parse others streams like that
+      method: 'GET',
+    });
+    const message = await response.text();
     console.warn(message);
     return NextResponse.json({ status: response.status, message: 'Scraping LastFM data' });
   } catch (error) {

@@ -5,7 +5,7 @@ import { API_Paths } from '@/types/endpoints';
 
 export async function GET(): Promise<NextResponse> {
   try {
-    const accessToken = await auth0.getAccessToken();
+    const accessToken = await auth0.getAccessToken({ refresh: true });
 
     const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.FollowedArtists}`, {
       headers: {

@@ -1,4 +1,4 @@
-import Scrapers from '@/components/Scrape/Scrapers';
+import Scrapers from '@/components/Scrapers/Scrapers';
 import { mswFollowedArtists, mswRaccoonUser } from '@/mocks/mockApi';
 
 import { initServer, renderWithAct, resetMocks } from '../../testUtils/testUtils';

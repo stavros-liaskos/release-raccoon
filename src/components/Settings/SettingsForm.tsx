@@ -23,7 +23,7 @@ const SettingsForm: React.FunctionComponent = () => {
         e.preventDefault();
         updateSettings(settings);
       }}
-      className="flex flex-col justify-between md:justify-between items-stretch h-10 w-full my-3"
+      className="flex flex-col justify-between md:justify-between items-stretch h-10 w-full my-3 py-6"
       noValidate
     >
       <div className="flex justify-start gap-5 items-center mb-4">

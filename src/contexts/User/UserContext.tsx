@@ -3,8 +3,8 @@ import React, { createContext, useContext } from 'react';
 import { components } from '@/types/schema';
 
 export type TRrUser = {
-  spotify: boolean;
-  lastfm: boolean;
+  spotifyEnabled: boolean;
+  lastfmUsername: string;
   fetchedScrapers: boolean;
   unsubscribed: boolean;
   notifyIntervalDays: number;
