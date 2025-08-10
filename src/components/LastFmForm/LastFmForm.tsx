@@ -42,7 +42,11 @@ export default function LastFmForm() {
             />
             <Button type="submit">{lastFmFormI18n.submitBtn}</Button>
           </form>
-          <p className="rr-text">{lastFmFormI18n.syncedMsg + ' ' + rrUser?.lastfmUsername}</p>
+          {rrUser?.lastfmUsername && (
+            <p className="rr-text">
+              {lastFmFormI18n.syncedMsg + ' ' + rrUser.lastfmUsername}
+            </p>
+          )}
         </div>
       </div>
     </div>
