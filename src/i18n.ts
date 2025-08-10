@@ -85,3 +85,8 @@ export const footerI18n = {
 export const artistsListI18n = {
   noArtists: 'You don not track any artists yet',
 };
+
+export const listI18n = {
+  followers: ' followers',
+  follower: ' follower',
+};
