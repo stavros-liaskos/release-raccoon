@@ -29,7 +29,9 @@ const List = ({ artistsList, artistLoading, buttonAction }: ArtistsListProp) => 
 
             <div className="flex items-center">
               {!!followerCount && (
-                <Badge>{`${followerCount}${followerCount > 1 ? listI18n.followers : listI18n.follower}`}</Badge>
+                <Badge
+                  className={clsx(index % 2 ? 'dark:bg-gh-dark bg-white' : 'bg-gray-100 dark:bg-gh-darkly')}
+                >{`${followerCount}${followerCount > 1 ? listI18n.followers : listI18n.follower}`}</Badge>
               )}
               <div className="flex gap-2 mx-4 md:mx-8 w-20">
                 {artist.lastfmUri && (
