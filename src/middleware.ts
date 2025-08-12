@@ -11,13 +11,16 @@ export async function middleware(request: NextRequest) {
 
   const session = await auth0.getSession(request);
 
+  // user is not authenticated in protected pages, redirect to login page
   if (!session && request.nextUrl.pathname !== '/') {
-    // user is not authenticated, redirect to login page
     return NextResponse.redirect(new URL('/', request.nextUrl.origin));
   }
-  const accessToken = await auth0.getAccessToken(request, authRes);
 
-  authRes.headers.set('Authorization', `Bearer ${accessToken.token}`);
+  // forward access token to API routes
+  if (session && request.nextUrl.pathname.includes('api')) {
+    const accessToken = await auth0.getAccessToken(request, authRes);
+    authRes.headers.set('Authorization', `Bearer ${accessToken.token}`);
+  }
 
   // the headers from the auth middleware should always be returned
   return authRes;
