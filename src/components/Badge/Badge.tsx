@@ -1,6 +1,8 @@
-export default function Badge({ children }: Readonly<{ children: React.ReactNode }>) {
+import clsx from 'clsx/lite';
+
+export default function Badge({ children, className }: Readonly<{ children: React.ReactNode; className?: string }>) {
   return (
-    <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 text-xs rr-text dark:bg-gray-800 h-8">
+    <span className={clsx('inline-flex items-center rounded-full px-2.5 text-xs rr-text h-8', className)}>
       {children}
     </span>
   );
