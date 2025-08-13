@@ -11,7 +11,7 @@ import { ArtistsListProp } from '../../ArtistsList';
 
 const ICON_SIZE = 30;
 
-const List = ({ artistsList, artistLoading, buttonAction }: ArtistsListProp) => {
+const List = ({ artistsList, buttonAction }: ArtistsListProp) => {
   if (!artistsList?.length || !buttonAction) {
     return null;
   }
@@ -48,8 +48,6 @@ const List = ({ artistsList, artistLoading, buttonAction }: ArtistsListProp) => 
               <ButtonFollowArtist
                 artist={artist}
                 className={clsx('btn-small lg:ml-8 my-2', index % 2 && 'border-gh-dark!')}
-                disabled={!!artistLoading && artist.id === artistLoading}
-                loading={!!artistLoading && artist.id === artistLoading}
                 buttonAction={buttonAction}
               />
             </div>

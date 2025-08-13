@@ -11,12 +11,11 @@ export type ArtistsListI18n = {
 
 export type ArtistsListProp = {
   artistsList: components['schemas']['SearchResultArtistDto'][];
-  artistLoading?: number;
   buttonAction: ButtonAction;
   i18n?: ArtistsListI18n;
 };
 
-const ArtistsList = ({ i18n, artistsList, artistLoading, buttonAction }: ArtistsListProp) => {
+const ArtistsList = ({ i18n, artistsList, buttonAction }: ArtistsListProp) => {
   if (!i18n?.noArtists || !buttonAction) {
     return null;
   }
@@ -25,7 +24,7 @@ const ArtistsList = ({ i18n, artistsList, artistLoading, buttonAction }: Artists
       {!artistsList?.length ? (
         <p className="rr-text flex justify-center">{i18n.noArtists}</p>
       ) : (
-        <List artistsList={artistsList} artistLoading={artistLoading} buttonAction={buttonAction} />
+        <List artistsList={artistsList} buttonAction={buttonAction} />
       )}
     </div>
   );
