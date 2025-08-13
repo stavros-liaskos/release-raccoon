@@ -15,12 +15,7 @@ describe('List', () => {
 
   it('renders all elements', async () => {
     const { queryAllByRole } = await renderWithAct(
-      <List
-        i18n={artistsListI18n}
-        artistsList={artistsList.rows}
-        artistLoading={0}
-        buttonAction={ButtonAction.Follow}
-      />,
+      <List i18n={artistsListI18n} artistsList={artistsList.rows} buttonAction={ButtonAction.Follow} />,
     );
     const btn = queryAllByRole('button')[0];
     fireEvent.click(btn);
@@ -29,28 +24,9 @@ describe('List', () => {
     expect(queryAllByRole('img')).toHaveLength(3);
   });
 
-  it('renders btn in disabled state', async () => {
-    const { queryAllByRole } = await renderWithAct(
-      <List
-        i18n={artistsListI18n}
-        artistsList={artistsList.rows}
-        buttonAction={ButtonAction.Follow}
-        artistLoading={1700}
-      />,
-    );
-    const btn = queryAllByRole('button')[0];
-
-    expect(btn).toHaveAttribute('disabled');
-  });
-
   it('matches snapshot', async () => {
     const { container } = await renderWithAct(
-      <List
-        i18n={artistsListI18n}
-        artistsList={artistsList.rows}
-        buttonAction={ButtonAction.Follow}
-        artistLoading={0}
-      />,
+      <List i18n={artistsListI18n} artistsList={artistsList.rows} buttonAction={ButtonAction.Follow} />,
     );
     expect(container).toMatchSnapshot();
   });

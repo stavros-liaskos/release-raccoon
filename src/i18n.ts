@@ -1,9 +1,10 @@
+import manifest from './app/manifest.json';
 import { SearchI18n } from './components/Search/Search.types';
 
 export const metaI18n = {
-  title: 'Release Raccoon',
-  short_name: 'RR',
-  description: 'A music release newsletter',
+  title: manifest.name,
+  short_name: manifest.short_name,
+  description: manifest.description,
 };
 
 export const searchI18n: SearchI18n = {
