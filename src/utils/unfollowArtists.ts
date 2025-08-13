@@ -3,7 +3,7 @@ import { components } from '@/types/schema';
 
 async function unfollowArtist(artist: components['schemas']['SearchResultArtistDto']) {
   if (!artist?.id) {
-    // if artist was added via search, it does not have an id. Unfollow will fail silently
+    // if artist was added via search, it does not have an id. Unfollow will fail silently. Evtl. remove it from state only
     console.error('Artist ID is required to unfollow an artist.');
     return;
   }
