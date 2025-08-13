@@ -1,12 +1,23 @@
 import '@/styles/globals.css';
 
+import type { Metadata, Viewport } from 'next';
 import React from 'react';
 
+import { metaI18n } from '@/i18n';
 import { interFonts } from '@/styles/fonts';
 
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import ThemeProvider from '../contexts/Theme/ThemeProvider';
+
+// migrate metadata to app router
+export const metadata: Metadata = {
+  title: metaI18n.title,
+  description: metaI18n.description,
+};
+export const viewport: Viewport = {
+  themeColor: '#000000',
+};
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
