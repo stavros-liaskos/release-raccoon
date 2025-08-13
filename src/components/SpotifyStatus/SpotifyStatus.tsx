@@ -1,4 +1,6 @@
+'use client';
 import clsx from 'clsx/lite';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import { Paths } from '@/types/endpoints';
@@ -20,15 +22,34 @@ const SpotifyStatus = ({
   iconName: MusicServiceType;
   connected: boolean;
 }) => {
+  const router = useRouter();
   if (!musicService || !buttonText || !iconName) {
     return null;
+  }
+
+  async function handleScrape(musicService: MusicServiceType) {
+    await fetch(`/api/spotify`, {
+      // TODO mv to endpoint
+      method: 'GET',
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        console.warn('data.url: ', data.url);
+        router.push(data.url);
+      })
+      .catch(() => {
+        console.log('Scrape failed. Show notification');
+      });
   }
 
   const MusicServiceIcon = getMusicServiceIcon(iconName);
 
   return (
     <div className="flex justify-center items-center w-full">
-      <div
+      <button
+        onClick={() => handleScrape('Spotify')}
         className={clsx(
           'btn flex justify-between py-2 px-3 w-full md:w-48',
           connected && 'rr-text-confirm! cursor-default!',
@@ -36,7 +57,7 @@ const SpotifyStatus = ({
       >
         <MusicServiceIcon width={30} />
         {buttonText}
-      </div>
+      </button>
     </div>
   );
 };
@@ -47,19 +68,6 @@ export function getMusicServiceIcon(iconName: MusicServiceType): React.FunctionC
     LastFm,
   };
   return components[iconName];
-}
-
-export async function handleScrape(musicService: MusicServiceType) {
-  await fetch(`${getMusicServiceUrl(musicService)}`, {
-    method: 'GET',
-  })
-    .then(res => res.json())
-    .then(() => {
-      console.log('Scraped successfully. Show notification');
-    })
-    .catch(() => {
-      console.log('Scrape failed. Show notification');
-    });
 }
 
 export function getMusicServiceUrl(musicService: MusicServiceType): string {

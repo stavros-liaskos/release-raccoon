@@ -1,22 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { auth0 } from '@/lib/auth0';
 import { API_Paths } from '@/types/endpoints';
 
-// TODO: spotify has a different flow. Needs to redirect and login in spotify.
-// https://developer.spotify.com/documentation/web-api/tutorials/code-flow
-// API KEY available in env vars
-
+// Authorize Spotify flow
 export async function GET(req: NextRequest) {
+  console.warn(req);
   try {
+    const session = await auth0.getSession();
+    const email = session?.user?.email;
+
+    if (!email) {
+      return NextResponse.json({ message: 'User needs to login first' }, { status: 401 });
+    }
+
     const authorization = req.headers.get('Authorization');
 
-    const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.ScrapeSpotify}`, {
-      headers: {
-        ...(authorization && { authorization }),
-        'content-type': 'text/plain',
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/${API_Paths.ScrapeSpotify}?email=${encodeURIComponent(email)}`,
+      {
+        headers: {
+          ...(authorization && { authorization }),
+          'content-type': 'text/plain',
+        },
+        method: 'GET',
       },
-      method: 'GET',
-    });
+    );
     const message = await response.text();
     console.warn(message);
     return NextResponse.json({ status: response.status, message });
