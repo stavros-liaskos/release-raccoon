@@ -5,7 +5,7 @@ import { headerI18n } from '@/i18n';
 import { Auth0Endpoints, NavigationPaths } from '@/types/endpoints';
 
 const UserWrapper: React.FunctionComponent = () => (
-  <div className="absolute px-3 bg-slate-100 dark:bg-gh-darkly border-2 rr-border top-10 mt-[6px] md:top-10 z-10">
+  <div className="absolute px-3 bg-slate-100 dark:bg-gh-darkly border-2 rr-border top-10 right-0 mt-[6px] md:top-10 z-10">
     <ul className="flex flex-col">
       <li className="py-2 rr-text">
         <Link href={NavigationPaths.Profile}>{headerI18n.profile}</Link>

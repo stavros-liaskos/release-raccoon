@@ -14,7 +14,7 @@ export type TRrUser = {
 interface UserContextType {
   rrUser: TRrUser;
   loadingSettings: boolean;
-  updateSettings: (settings: components['schemas']['UserSettings']) => void;
+  updateSettings: (settings: components['schemas']['UserSettings']) => Promise<void>;
 }
 
 export const UserContext: React.Context<UserContextType> = createContext<UserContextType>(

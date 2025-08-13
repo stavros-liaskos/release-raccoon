@@ -1,13 +1,14 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 
-import Spin from '@/components/Icons/spin';
+import Button from '@/components/Button/Button';
 import { useUserContext } from '@/contexts/User/UserContext';
 import { settingsI18n } from '@/i18n';
 import { components } from '@/types/schema';
 
 const SettingsForm: React.FunctionComponent = () => {
   const { rrUser, loadingSettings, updateSettings } = useUserContext();
+  const [loading, setLoading] = useState(false);
   const [settings, setSettings] = useState<components['schemas']['UserSettings']>({
     unsubscribed: false,
     notifyIntervalDays: 0,
@@ -19,9 +20,11 @@ const SettingsForm: React.FunctionComponent = () => {
 
   return (
     <form
-      onSubmit={e => {
+      onSubmit={async e => {
         e.preventDefault();
-        updateSettings(settings);
+        setLoading(true);
+        await updateSettings(settings);
+        setLoading(false);
       }}
       className="flex flex-col justify-between md:justify-between items-stretch h-10 w-full my-3 py-6"
       noValidate
@@ -51,14 +54,9 @@ const SettingsForm: React.FunctionComponent = () => {
         <span>{settingsI18n.subscribe}</span>
       </label>
 
-      <button disabled={loadingSettings} className="btn btn-large">
-        {loadingSettings && (
-          <span className="flex justify-center items-center -ml-1 mr-3 h-5 w-5">
-            <Spin width={20} />
-          </span>
-        )}
+      <Button disabled={loading || loadingSettings} loading={loading} className="btn btn-large" type="submit">
         {settingsI18n.saveBtn}
-      </button>
+      </Button>
     </form>
   );
 };

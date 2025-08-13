@@ -109,7 +109,7 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
       .finally(() => setLoadingSettings(false));
   }, [rrUser, user?.email, setRrUser, pathname]);
 
-  function updateSettings(settings: components['schemas']['UserSettings']) {
+  async function updateSettings(settings: components['schemas']['UserSettings']) {
     // user session expired, redirect to login page
     if (!user?.email) {
       router.push('/');

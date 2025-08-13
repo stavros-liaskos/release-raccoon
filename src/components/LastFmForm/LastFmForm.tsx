@@ -1,6 +1,6 @@
 'use client';
 
-import type React from 'react';
+import React from 'react';
 
 import Button from '@/components/Button/Button';
 import { useUserContext } from '@/contexts/User/UserContext';
@@ -9,21 +9,27 @@ import { Paths } from '@/types/endpoints';
 
 export default function LastFmForm() {
   const { rrUser } = useUserContext();
+  const [loading, setLoading] = React.useState(false);
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const username = e?.currentTarget?.username?.value;
 
-    username &&
-      (await fetch(`/${Paths.ScrapeLastFM}?email=${username}`, {
-        method: 'GET',
+    if (!username) {
+      console.error('Username is required');
+      return;
+    }
+
+    setLoading(true);
+    await fetch(`/${Paths.ScrapeLastFM}?email=${username}`, {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(() => {
+        console.log('Connected to LastFm');
       })
-        .then(res => res.json())
-        .then(() => {
-          console.log('Connected to LastFm');
-        })
-        .catch(console.error)
-        .finally(() => {}));
+      .catch(console.error)
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -40,7 +46,9 @@ export default function LastFmForm() {
               placeholder={lastFmFormI18n.placeholder}
               required
             />
-            <Button type="submit">{lastFmFormI18n.submitBtn}</Button>
+            <Button loading={loading} type="submit">
+              {lastFmFormI18n.submitBtn}
+            </Button>
           </form>
           {rrUser?.lastfmUsername && (
             <p className="rr-text">{lastFmFormI18n.syncedMsg + ' ' + rrUser.lastfmUsername}</p>
