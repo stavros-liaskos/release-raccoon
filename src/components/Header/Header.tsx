@@ -7,6 +7,8 @@ import { auth0 } from '@/lib/auth0';
 
 import DarkMode from '../DarkMode/DarkMode';
 
+const LOGO_SIZE = 40;
+
 const Header: React.FunctionComponent = async () => {
   const session = await auth0.getSession();
 
@@ -14,7 +16,7 @@ const Header: React.FunctionComponent = async () => {
     <header className="rr-column justify-center flex-none h-14 rr-border border-b-2">
       <div className="flex justify-between items-center w-full lg:w-9/12">
         <Link href="/">
-          <Image src="/raccoon_main.jpg" width={30} height={30} alt="Release Raccoon logo" />
+          <Image src="/favicon.svg" width={LOGO_SIZE} height={LOGO_SIZE} alt="Release Raccoon logo" />
         </Link>
 
         <div className="flex justify-end gap-5 w-full lg:w-9/12">
