@@ -2,8 +2,8 @@ import { SearchI18n } from './components/Search/Search.types';
 
 export const metaI18n = {
   title: 'Release Raccoon',
+  short_name: 'RR',
   description: 'A music release newsletter',
-  url: 'https://www.releaseraccoon.online',
 };
 
 export const searchI18n: SearchI18n = {

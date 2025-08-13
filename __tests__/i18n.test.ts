@@ -1,22 +1,21 @@
 import {
-  metaI18n,
-  searchI18n,
-  headerI18n,
-  followedArtistListI18n,
-  loginI18n,
-  recommendationsI18n,
-  buttonFollowI18n,
-  scrapersI18n,
-  formInputI18n,
-  footerI18n,
   artistsListI18n,
+  buttonFollowI18n,
+  followedArtistListI18n,
+  footerI18n,
+  formInputI18n,
+  headerI18n,
+  loginI18n,
+  metaI18n,
+  recommendationsI18n,
+  scrapersI18n,
+  searchI18n,
 } from '@/i18n';
 
 describe('metaI18n', () => {
   it('should have correct title, description, and url', () => {
     expect(metaI18n.title).toBe('Release Raccoon');
     expect(metaI18n.description).toBe('A music release newsletter');
-    expect(metaI18n.url).toBe('https://www.releaseraccoon.online');
   });
 });
 

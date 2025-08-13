@@ -16,7 +16,6 @@ LICENSE
 .sonarcloud.properties
 .yarnrc
 .yarn/*
-raccoon_main.jpg
 .depcheckrc
 *.ico
 *.png
