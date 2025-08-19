@@ -50,7 +50,7 @@ describe('ArtistsList', () => {
         />,
       );
 
-      expect(getByText('You don not track any artists yet')).toBeInTheDocument();
+      expect(getByText('You do not track any artists yet')).toBeInTheDocument();
     },
   );
 

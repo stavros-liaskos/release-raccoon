@@ -42,7 +42,7 @@ describe('followedArtistListI18n', () => {
   });
   it('should have correct artistList properties', () => {
     expect(followedArtistListI18n.artistList.btnTxt).toBe('Unfollow');
-    expect(followedArtistListI18n.artistList.noArtists).toBe('You don not track any artists yet');
+    expect(followedArtistListI18n.artistList.noArtists).toBe('You do not track any artists yet');
   });
   it('should have correct formInput.label', () => {
     expect(followedArtistListI18n.formInput.label).toBe('Filter Followed artists');
@@ -97,6 +97,6 @@ describe('footerI18n', () => {
 
 describe('artistsListI18n', () => {
   it('should have correct noArtists', () => {
-    expect(artistsListI18n.noArtists).toBe('You don not track any artists yet');
+    expect(artistsListI18n.noArtists).toBe('You do not track any artists yet');
   });
 });

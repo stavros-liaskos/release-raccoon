@@ -19,7 +19,7 @@ export const settingsI18n = {
   setSettings: 'Set Settings',
   getSettings: 'Get Settings',
   notifyInNumberOfDays: 'Notify me in number of days',
-  subscribe: 'Subscribe to email notifications',
+  subscribe: 'Subscribe to email notifications for new releases',
   saveBtn: 'Save',
 };
 
@@ -34,7 +34,7 @@ export const followedArtistListI18n = {
   filter: 'filter followed artists',
   artistList: {
     btnTxt: 'Unfollow',
-    noArtists: 'You don not track any artists yet',
+    noArtists: 'You do not track any artists yet',
   },
   formInput: {
     label: 'Filter Followed artists',
@@ -84,7 +84,7 @@ export const footerI18n = {
   powered: 'Powered by',
 };
 export const artistsListI18n = {
-  noArtists: 'You don not track any artists yet',
+  noArtists: 'You do not track any artists yet',
 };
 
 export const listI18n = {
