@@ -8,7 +8,8 @@ export async function GET() {
       response_type: 'code',
       client_id: process.env.SPOTIFY_CLIENT_ID!,
       scope: process.env.SPOTIFY_AUTH_SCOPES!,
-      redirect_uri: `${process.env.APP_BASE_URL}/${API_Paths.ScrapeSpotify}`,
+      // redirect_uri: `${process.env.APP_BASE_URL}/${API_Paths.ScrapeSpotify}`,
+      redirect_uri: `${process.env.APP_BASE_URL}`,
       // state: state // TODO: implement state for CSRF protection
     });
 
