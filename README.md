@@ -88,9 +88,9 @@ Each commit to `master` triggers a production deployment.
 > Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Spotify
+
 The user can connect their Spotify account to the app and follow the same artists by "scraping" their Spotify profile.  
 Spotify session is needed to generate access token and access their API, best described [here](https://developer.spotify.com/documentation/web-api/tutorials/code-flow).
-
 
 ## Dark mode
 

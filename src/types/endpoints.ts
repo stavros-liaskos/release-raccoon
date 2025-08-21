@@ -9,6 +9,13 @@ export const NavigationPaths: { [key: string]: string } = {
   Home: '/',
   Profile: '/profile',
   Settings: '/profile/settings',
+  Spotify: '/profile/spotify',
+};
+
+// Spotify endpoints
+export const SpotifyPaths: { [key: string]: string } = {
+  Authorize: '/authorize',
+  Token: '/api/token',
 };
 
 // FE Endpoints that call Next.js' Router Handler (aka Next.js API routes)

@@ -27,7 +27,7 @@ const SpotifyStatus = ({
     return null;
   }
 
-  async function handleScrape(musicService: MusicServiceType) {
+  async function handleScrape() {
     await fetch(`/api/spotify`, {
       // TODO mv to endpoint
       method: 'GET',
@@ -49,7 +49,7 @@ const SpotifyStatus = ({
   return (
     <div className="flex justify-center items-center w-full">
       <button
-        onClick={() => handleScrape('Spotify')}
+        onClick={() => handleScrape()}
         className={clsx(
           'btn flex justify-between py-2 px-3 w-full md:w-48',
           connected && 'rr-text-confirm! cursor-default!',

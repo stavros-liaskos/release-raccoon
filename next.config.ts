@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
     API_SCOPE: process.env.API_SCOPE,
     SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
     SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
-    SPOTIFY_AUTH_URL: process.env.SPOTIFY_AUTH_URL,
+    SPOTIFY_API_URL: process.env.SPOTIFY_API_URL,
     SPOTIFY_AUTH_SCOPES: process.env.SPOTIFY_AUTH_SCOPES,
   },
 };

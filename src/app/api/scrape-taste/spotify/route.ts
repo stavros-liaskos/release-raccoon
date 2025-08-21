@@ -3,15 +3,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth0 } from '@/lib/auth0';
 import { API_Paths } from '@/types/endpoints';
 
-// Authorize Spotify flow
 export async function GET(req: NextRequest) {
-  console.warn(req);
   try {
     const session = await auth0.getSession();
     const email = session?.user?.email;
 
     if (!email) {
       return NextResponse.json({ message: 'User needs to login first' }, { status: 401 });
+    }
+
+    const { accessToken } = await req.json();
+
+    if (!accessToken || !email) {
+      return NextResponse.json({ message: 'Spotify accessToken or user email address are missing' }, { status: 401 });
     }
 
     const authorization = req.headers.get('Authorization');

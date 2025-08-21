@@ -1,10 +1,13 @@
-'use client';
-import React from 'react';
+import { Suspense } from 'react';
+
+import SpotifyCallback from '@/components/SpotifyCallback/SpotifyCallback';
 
 export default function Page() {
   return (
     <div>
-      <p>spotify</p>
+      <Suspense fallback={<div>Loading...</div>}>
+        <SpotifyCallback />
+      </Suspense>
     </div>
   );
 }

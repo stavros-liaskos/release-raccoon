@@ -5,7 +5,7 @@ exports[`SpotifyStatus component matches snapshot 1`] = `
   <div
     class="flex justify-center items-center w-full"
   >
-    <div
+    <button
       class="btn flex justify-between py-2 px-3 w-full md:w-48 rr-text-confirm! cursor-default!"
     >
       <svg
@@ -30,7 +30,7 @@ exports[`SpotifyStatus component matches snapshot 1`] = `
         </g>
       </svg>
       Scrape Spotify
-    </div>
+    </button>
   </div>
 </div>
 `;
