@@ -27,6 +27,7 @@ const UserWrapper: React.FunctionComponent = () => {
         aria-haspopup="menu"
         aria-expanded={isMenuOpen}
         aria-label="User menu"
+        className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gh-dark transition-all duration-200 hover:scale-105"
       >
         <User />
       </button>
