@@ -34,6 +34,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    '/((?!_next/static|_next/image|sw.js|workbox|app_icons|favicon.ico|sitemap.xml|robots.txt|manifest.json|noflash.js).*)',
+    '/((?!_next/static|_next/image|sw.js|workbox|app_icons|favicon.*|sitemap.xml|robots.txt|manifest.json|noflash.js).*)',
   ],
 };

@@ -19,7 +19,7 @@ export const viewport: Viewport = {
   themeColor: '#000000',
 };
 
-export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={`${interFonts.className} antialiased bg-white dark:bg-gh-dark`}>
