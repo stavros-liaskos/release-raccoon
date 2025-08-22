@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 
-import FormInput from '@/components/FollowedArtistList/components/FormInput/FormInput';
+import FormInput from '@/components/FollowedArtistList/FormInput';
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
 import { followedArtistListI18n } from '@/i18n';
 import { components } from '@/types/schema';
@@ -18,11 +18,7 @@ const FollowedArtistList: React.FunctionComponent = () => {
     <div className="flex flex-col flex-1 items-center mb-2 border-b-2 rr-border w-full">
       <h3 className="h3">{followedArtistListI18n.title}</h3>
       <div className="flex justify-around items-center w-2/3">
-        <FormInput
-          handleAction={setFilterInput}
-          i18n={followedArtistListI18n.formInput}
-          actionEventTrigger={'onChange'}
-        />
+        <FormInput handleAction={setFilterInput} i18n={followedArtistListI18n.formInput} />
       </div>
       {loading ? (
         <Loading />

@@ -8,11 +8,10 @@ type FormInputProps = {
   i18n: {
     label: string;
   };
-  actionEventTrigger: 'onChange' | 'onSubmit';
   children?: React.ReactNode;
 };
 
-const FormInput = ({ handleAction, i18n, children, actionEventTrigger }: FormInputProps) => {
+const SearchForm = ({ handleAction, i18n, children }: FormInputProps) => {
   const [inputValue, setInputValue] = useState<string>('');
   const { results } = useSearchContext();
 
@@ -22,7 +21,7 @@ const FormInput = ({ handleAction, i18n, children, actionEventTrigger }: FormInp
     }
   }, [results, setInputValue]);
 
-  if (!i18n?.label || !handleAction || typeof handleAction !== 'function' || !actionEventTrigger) {
+  if (!i18n?.label || !handleAction || typeof handleAction !== 'function') {
     return null;
   }
 
@@ -30,12 +29,10 @@ const FormInput = ({ handleAction, i18n, children, actionEventTrigger }: FormInp
     <form
       className="flex justify-between md:justify-between items-stretch h-10 w-full my-3"
       noValidate
-      {...(actionEventTrigger === 'onSubmit' && {
-        onSubmit: e => {
-          e.preventDefault();
-          handleAction(inputValue);
-        },
-      })}
+      onSubmit={e => {
+        e.preventDefault();
+        handleAction(inputValue);
+      }}
     >
       <input
         className="mr-4 px-2 min-m-lg border-b-2 rr-border dark:bg-gh-darkly rr-text w-full"
@@ -45,9 +42,6 @@ const FormInput = ({ handleAction, i18n, children, actionEventTrigger }: FormInp
         placeholder={i18n.label}
         onChange={e => {
           setInputValue(e.target.value);
-          if (actionEventTrigger === 'onChange') {
-            handleAction(e.target.value);
-          }
         }}
       />
       {children}
@@ -55,4 +49,4 @@ const FormInput = ({ handleAction, i18n, children, actionEventTrigger }: FormInp
   );
 };
 
-export default FormInput;
+export default SearchForm;
