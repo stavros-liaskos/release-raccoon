@@ -1,5 +1,7 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { useSearchContext } from '@/contexts/Search/SearchContext';
 
 type FormInputProps = {
   handleAction: (input: string) => void;
@@ -12,6 +14,13 @@ type FormInputProps = {
 
 const FormInput = ({ handleAction, i18n, children, actionEventTrigger }: FormInputProps) => {
   const [inputValue, setInputValue] = useState<string>('');
+  const { results } = useSearchContext();
+
+  useEffect(() => {
+    if (results === null) {
+      setInputValue('');
+    }
+  }, [results, setInputValue]);
 
   if (!i18n?.label || !handleAction || typeof handleAction !== 'function' || !actionEventTrigger) {
     return null;
