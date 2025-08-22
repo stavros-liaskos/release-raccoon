@@ -16,7 +16,7 @@ const Header: React.FunctionComponent = async () => {
   return (
     <header className="rr-column justify-center flex-none h-14 rr-border border-b-2">
       <div className="flex justify-between items-center w-full lg:w-9/12">
-        <Link href={session ? NavigationPaths.Profile : NavigationPaths.Home}>
+        <Link href={NavigationPaths.Home}>
           <Image src="/favicon.svg" width={LOGO_SIZE} height={LOGO_SIZE} alt="Release Raccoon logo" />
         </Link>
 

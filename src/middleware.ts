@@ -1,3 +1,4 @@
+import { SessionData } from '@auth0/nextjs-auth0/types';
 import { NextRequest, NextResponse } from 'next/server';
 
 import { auth0 } from './lib/auth0';
@@ -16,6 +17,16 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.nextUrl.origin));
   }
 
+  if (!isTokenExpired(session)) {
+    await auth0.updateSession(request, authRes, {
+      ...session,
+      user: {
+        ...session!.user,
+        updatedAt: Date.now(),
+      },
+    } as SessionData);
+  }
+
   // forward access token to API routes
   if (session && request.nextUrl.pathname.includes('api')) {
     const accessToken = await auth0.getAccessToken(request, authRes);
@@ -26,6 +37,10 @@ export async function middleware(request: NextRequest) {
   return authRes;
 }
 
+function isTokenExpired(session: SessionData | null): boolean {
+  return !session || new Date(`${session.tokenSet.expiresAt * 1000}`) > new Date();
+}
+
 export const config = {
   matcher: [
     /*
@@ -34,6 +49,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    '/((?!_next/static|_next/image|sw.js|workbox|app_icons|favicon.*|sitemap.xml|robots.txt|manifest.json|noflash.js).*)',
+    '/((?!_next/static|_next/image|sw.js|workbox|app_icons|favicon.ico|favicon.svg|sitemap.xml|robots.txt|manifest.json|noflash.js).*)',
   ],
 };
