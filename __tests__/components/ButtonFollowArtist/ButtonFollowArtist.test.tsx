@@ -1,11 +1,13 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+
 import ButtonFollowArtist from '@/components/ButtonFollowArtist/ButtonFollowArtist';
 import { ButtonAction } from '@/components/ButtonFollowArtist/ButtonFollowArtist.types';
 
+import { renderWithAct } from '../../testUtils/testUtils';
+
 describe('ButtonFollowArtist', () => {
-  it('renders an enabled button by default and not a loading spinner', () => {
-    const { getByRole, queryByRole } = render(
+  it('renders an enabled button by default and not a loading spinner', async () => {
+    const { getByRole, queryByRole } = await renderWithAct(
       <ButtonFollowArtist artist={{ name: 'Cabin Crew' }} buttonAction={ButtonAction.Follow} />,
     );
     const btn = getByRole('button');
@@ -15,8 +17,8 @@ describe('ButtonFollowArtist', () => {
     expect(svg).not.toBeInTheDocument();
   });
 
-  it('matches snapshot', () => {
-    const { container } = render(
+  it('matches snapshot', async () => {
+    const { container } = await renderWithAct(
       <ButtonFollowArtist artist={{ name: 'Cabin Crew' }} buttonAction={ButtonAction.Follow} />,
     );
     expect(container).toMatchSnapshot();

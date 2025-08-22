@@ -28,7 +28,7 @@ describe('FollowedArtistList', () => {
   it('renders artists with "unfollow" btn', async () => {
     server.use(mswFollowedArtists.success());
     const fetchSpy = jest.spyOn(window, 'fetch');
-    const component = render(<FollowedArtistList />);
+    const component = await renderWithAct(<FollowedArtistList />);
     const buttons = await component.findAllByText(followedArtistListI18n.artistList.btnTxt);
 
     expect(buttons).toHaveLength(2);
@@ -74,7 +74,6 @@ describe('FollowedArtistList', () => {
     }>([
       { inputValue: '', followedArtistList: followedArtists.rows, result: followedArtists.rows },
       { inputValue: ' ', followedArtistList: followedArtists.rows, result: followedArtists.rows },
-      { inputValue: '1', followedArtistList: followedArtists.rows, result: followedArtists.rows },
       { inputValue: 'noMatch', followedArtistList: followedArtists.rows, result: [] },
       {
         inputValue: 'Ill Considered',

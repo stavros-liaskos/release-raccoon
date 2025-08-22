@@ -3,14 +3,13 @@ import React from 'react';
 
 import { Paths } from '@/types/endpoints';
 
-import Button from '../../Button/Button';
-import IconTypes from '../../Icons/iconTypes';
-import LastFm from '../../Icons/lastfm';
-import Spotify from '../../Icons/spotify';
+import IconTypes from '../Icons/iconTypes';
+import LastFm from '../Icons/lastfm';
+import Spotify from '../Icons/spotify';
 
 export type MusicServiceType = 'Spotify' | 'LastFm';
 
-const ScrapeButton = ({
+const SpotifyStatus = ({
   buttonText,
   musicService,
   iconName,
@@ -29,14 +28,15 @@ const ScrapeButton = ({
 
   return (
     <div className="flex justify-center items-center w-full">
-      <Button
-        className={clsx('flex justify-between py-2 px-3 w-full md:w-48', connected && 'rr-text-confirm!')}
-        i18n={buttonText}
-        handleClick={() => handleScrape(musicService)}
-        disabled={connected}
+      <div
+        className={clsx(
+          'btn flex justify-between py-2 px-3 w-full md:w-48',
+          connected && 'rr-text-confirm! cursor-default!',
+        )}
       >
         <MusicServiceIcon width={30} />
-      </Button>
+        {buttonText}
+      </div>
     </div>
   );
 };
@@ -73,4 +73,4 @@ export function getMusicServiceUrl(musicService: MusicServiceType): string {
   }
 }
 
-export default ScrapeButton;
+export default SpotifyStatus;

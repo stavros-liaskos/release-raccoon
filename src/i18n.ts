@@ -1,9 +1,10 @@
+import manifest from './app/manifest.json';
 import { SearchI18n } from './components/Search/Search.types';
 
 export const metaI18n = {
-  title: 'Release Raccoon',
-  description: 'A music release newsletter',
-  url: 'https://www.releaseraccoon.online',
+  title: manifest.name,
+  short_name: manifest.short_name,
+  description: manifest.description,
 };
 
 export const searchI18n: SearchI18n = {
@@ -17,6 +18,9 @@ export const searchI18n: SearchI18n = {
 export const settingsI18n = {
   setSettings: 'Set Settings',
   getSettings: 'Get Settings',
+  notifyInNumberOfDays: 'Notify me in number of days',
+  subscribe: 'Subscribe to email notifications for new releases',
+  saveBtn: 'Save',
 };
 
 export const headerI18n = {
@@ -30,7 +34,7 @@ export const followedArtistListI18n = {
   filter: 'filter followed artists',
   artistList: {
     btnTxt: 'Unfollow',
-    noArtists: 'You don not track any artists yet',
+    noArtists: 'You do not track any artists yet',
   },
   formInput: {
     label: 'Filter Followed artists',
@@ -60,8 +64,16 @@ export const buttonFollowI18n = {
 };
 
 export const scrapersI18n = {
+  title: 'Connect to other services',
   connect: 'Connect',
   connected: 'Connected',
+};
+
+export const lastFmFormI18n = {
+  label: 'Last fm username',
+  submitBtn: 'Sync with LastFm',
+  placeholder: 'Enter LastFm username',
+  syncedMsg: 'Last synced to',
 };
 
 export const formInputI18n = {
@@ -72,5 +84,10 @@ export const footerI18n = {
   powered: 'Powered by',
 };
 export const artistsListI18n = {
-  noArtists: 'You don not track any artists yet',
+  noArtists: 'You do not track any artists yet',
+};
+
+export const listI18n = {
+  followers: ' followers',
+  follower: ' follower',
 };

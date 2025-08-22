@@ -1,21 +1,20 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 
 import ArtistsList from '@/components/ArtistsList/ArtistsList';
 import Button from '@/components/Button/Button';
-import FormInput from '@/components/FormInput/FormInput';
+import FormInput from '@/components/FollowedArtistList/components/FormInput/FormInput';
 import Close from '@/components/Icons/close';
 import HandGlass from '@/components/Icons/handGlass';
+import { useSearchContext } from '@/contexts/Search/SearchContext';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 import useOnNavigation from '@/hooks/useOnNavigation';
-import { Paths } from '@/types/endpoints';
-import type { components } from '@/types/schema';
 
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 import type { SearchProps } from './Search.types';
 
 const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
-  const [results, setResults] = useState<components['schemas']['SearchResultArtistDto'][] | null>(null);
+  const { results, setResults, loading, handleSearch } = useSearchContext();
   const searchRef = useOnClickOutside(() => setResults(null)); // Close search results when clicking outside
   useOnNavigation(() => {
     setResults(null);
@@ -32,8 +31,7 @@ const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
             <Close />
           </button>
         )}
-        {/*<Button className="btn-large md:ml-52" type="submit" disabled={disabled} loading={disabled} aria-label="search">*/}
-        <Button className="btn-large md:ml-52" type="submit" disabled={false} loading={false} aria-label="search">
+        <Button className="btn-large md:ml-52" type="submit" disabled={loading} loading={loading} aria-label="search">
           <HandGlass />
         </Button>
       </FormInput>
@@ -45,17 +43,5 @@ const Search: React.FunctionComponent<SearchProps> = ({ i18n }) => {
       )}
     </div>
   );
-
-  async function handleSearch(inputValue: string) {
-    inputValue &&
-      (await fetch(`${Paths.Search}?${new URLSearchParams({ pattern: inputValue })}`, {
-        method: 'GET',
-      })
-        .then(res => res.json())
-        .then(result => {
-          return setResults(result.artists);
-        })
-        .catch(console.error));
-  }
 };
 export default Search;

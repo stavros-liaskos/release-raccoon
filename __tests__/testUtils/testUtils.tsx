@@ -3,12 +3,16 @@ import { setupServer } from 'msw/node';
 import React from 'react';
 
 import ArtistsListProvider from '@/contexts/ArtistsList/ArtistsListProvider';
+import SearchProvider from '@/contexts/Search/SearchProvider';
 import ThemeProvider from '@/contexts/Theme/ThemeProvider';
+import UserProvider from '@/contexts/User/UserProvider';
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeProvider>
-      <ArtistsListProvider>{children}</ArtistsListProvider>
+      <ArtistsListProvider>
+        <SearchProvider>{children}</SearchProvider>
+      </ArtistsListProvider>
     </ThemeProvider>
   );
 };

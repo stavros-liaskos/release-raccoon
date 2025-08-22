@@ -16,25 +16,6 @@ exports[`Search should handle the search action of the user 1`] = `
         type="text"
         value="Sam Gendel"
       />
-      <button>
-        <svg
-          class="h-8 w-8 icon-colour"
-          fill="none"
-          role="img"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M18 6L6 18"
-          />
-          <path
-            d="M6 6L18 18"
-          />
-        </svg>
-      </button>
       <button
         class="btn flex btn-large md:ml-52"
         type="submit"
@@ -55,96 +36,6 @@ exports[`Search should handle the search action of the user 1`] = `
         </svg>
       </button>
     </form>
-    <div
-      class="absolute px-3 bg-slate-100 dark:bg-gh-darkly border-2 rr-border top-14 md:top-16 w-full z-10"
-    >
-      <div
-        class="overflow-auto w-full flex-auto h-64"
-      >
-        <div
-          class="flex justify-between md:justify-center items-center dark:even:bg-gh-darkly even:bg-gray-100"
-        >
-          <p
-            class="grow text-clip rr-text"
-          >
-            Sam Gendel
-          </p>
-          <div
-            class="flex gap-2 basis-2 mx-4 md:mx-8"
-          >
-            <a
-              aria-label="Sam Gendel"
-              class="inline"
-              href="https://www.last.fm/music/Sam+Gendel"
-            >
-              <svg
-                height="30"
-                role="img"
-                viewBox="0 0 112.195 112.195"
-                width="30"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M112.195 56.097c0 30.983-25.114 56.099-56.097 56.099C25.115 112.195 0 87.08 0 56.097 0 25.117 25.115 0 56.099 0c30.982 0 56.096 25.117 56.096 56.097z"
-                  fill="#d31f27"
-                />
-                <path
-                  d="M80.487 52.141c-6.203-1.849-8.412-2.874-8.412-4.922 0-3.416 4.937-4.702 5.497-4.79 3.139-.465 7.072 1.173 8.34 4.99l8.44-2.553c-2.65-8.385-10.487-12.099-18.099-10.975-7.788 1.146-12.782 6.786-12.782 13.327 0 8.8 8.244 11.332 14.43 13.181 6.509 1.944 8.401 2.637 8.401 5.023 0 2.016-1.196 3.895-4.374 4.735-6.32 1.664-14.586-.672-16.887-4.523-1.351-2.261-2.733-5.203-4.001-8.53-3.766-9.866-8.926-23.371-23.764-23.371-7.731 0-21.851 3.743-21.851 24.868 0 8.744 7.481 19.613 21.578 19.613 11.829 0 13.888-4.32 14.358-5.085L47.5 65.574c-.098.138-3.692 4.936-10.497 4.936-11.107 0-12.735-11.776-12.735-11.909 0-10.967 4.687-16.238 13.008-16.238 8.094 0 11.382 7.04 15.48 17.759 1.397 3.683 2.922 6.966 4.65 9.865 3.657 6.116 11.55 8.091 19.473 8.091 2.418 0 5.2.137 7.351-.432 7.093-1.878 10.905-6.178 10.905-12.224.002-9.204-8.283-11.378-14.648-13.281z"
-                  fill="#fff"
-                />
-              </svg>
-            </a>
-          </div>
-          <button
-            class="btn flex btn-small lg:ml-8 my-2"
-            type="button"
-          >
-            Follow
-          </button>
-        </div>
-        <div
-          class="flex justify-between md:justify-center items-center dark:even:bg-gh-darkly even:bg-gray-100"
-        >
-          <p
-            class="grow text-clip rr-text"
-          >
-            Jaakko Eino Kalevi
-          </p>
-          <div
-            class="flex gap-2 basis-2 mx-4 md:mx-8"
-          >
-            <a
-              aria-label="Jaakko Eino Kalevi"
-              class="inline"
-              href="https://www.last.fm/music/Jaakko+Eino+Kalevi"
-            >
-              <svg
-                height="30"
-                role="img"
-                viewBox="0 0 112.195 112.195"
-                width="30"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M112.195 56.097c0 30.983-25.114 56.099-56.097 56.099C25.115 112.195 0 87.08 0 56.097 0 25.117 25.115 0 56.099 0c30.982 0 56.096 25.117 56.096 56.097z"
-                  fill="#d31f27"
-                />
-                <path
-                  d="M80.487 52.141c-6.203-1.849-8.412-2.874-8.412-4.922 0-3.416 4.937-4.702 5.497-4.79 3.139-.465 7.072 1.173 8.34 4.99l8.44-2.553c-2.65-8.385-10.487-12.099-18.099-10.975-7.788 1.146-12.782 6.786-12.782 13.327 0 8.8 8.244 11.332 14.43 13.181 6.509 1.944 8.401 2.637 8.401 5.023 0 2.016-1.196 3.895-4.374 4.735-6.32 1.664-14.586-.672-16.887-4.523-1.351-2.261-2.733-5.203-4.001-8.53-3.766-9.866-8.926-23.371-23.764-23.371-7.731 0-21.851 3.743-21.851 24.868 0 8.744 7.481 19.613 21.578 19.613 11.829 0 13.888-4.32 14.358-5.085L47.5 65.574c-.098.138-3.692 4.936-10.497 4.936-11.107 0-12.735-11.776-12.735-11.909 0-10.967 4.687-16.238 13.008-16.238 8.094 0 11.382 7.04 15.48 17.759 1.397 3.683 2.922 6.966 4.65 9.865 3.657 6.116 11.55 8.091 19.473 8.091 2.418 0 5.2.137 7.351-.432 7.093-1.878 10.905-6.178 10.905-12.224.002-9.204-8.283-11.378-14.648-13.281z"
-                  fill="#fff"
-                />
-              </svg>
-            </a>
-          </div>
-          <button
-            class="btn flex btn-small lg:ml-8 my-2 border-gh-dark!"
-            type="button"
-          >
-            Follow
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 `;

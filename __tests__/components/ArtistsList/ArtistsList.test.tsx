@@ -1,8 +1,11 @@
 import { render } from '@testing-library/react';
+
 import ArtistsList from '@/components/ArtistsList/ArtistsList';
-import artistsList from '@/mocks/fixtures/responses/followed-artists.json';
-import { artistsListI18n } from '@/i18n';
 import { ButtonAction } from '@/components/ButtonFollowArtist/ButtonFollowArtist.types';
+import { artistsListI18n } from '@/i18n';
+import artistsList from '@/mocks/fixtures/responses/followed-artists.json';
+
+import { renderWithAct } from '../../testUtils/testUtils';
 
 describe('ArtistsList', () => {
   it.each([
@@ -47,12 +50,12 @@ describe('ArtistsList', () => {
         />,
       );
 
-      expect(getByText('You don not track any artists yet')).toBeInTheDocument();
+      expect(getByText('You do not track any artists yet')).toBeInTheDocument();
     },
   );
 
-  it('renders all elements', () => {
-    const { queryAllByRole } = render(
+  it('renders all elements', async () => {
+    const { queryAllByRole } = await renderWithAct(
       <ArtistsList
         i18n={artistsListI18n}
         buttonAction={ButtonAction.Follow}
