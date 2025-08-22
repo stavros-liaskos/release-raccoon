@@ -14,27 +14,26 @@ export async function middleware(request: NextRequest) {
 
   // user is not authenticated in protected pages, redirect to login page
   if (!session && request.nextUrl.pathname !== '/') {
-    return NextResponse.redirect(new URL('/', request.nextUrl.origin));
-  }
-
-  if (!isTokenExpired(session)) {
-    await auth0.updateSession(request, authRes, {
-      ...session,
-      user: {
-        ...session!.user,
-        updatedAt: Date.now(),
-      },
-    } as SessionData);
+    const res = NextResponse.redirect(new URL('/', request.nextUrl.origin));
+    res.cookies.delete('__session');
+    return res;
   }
 
   // forward access token to API routes
   if (session && request.nextUrl.pathname.includes('api')) {
-    const accessToken = await auth0.getAccessToken(request, authRes);
+    const accessToken = await getValidAccessToken();
     authRes.headers.set('Authorization', `Bearer ${accessToken.token}`);
   }
 
   // the headers from the auth middleware should always be returned
   return authRes;
+
+  async function getValidAccessToken(): Promise<{ token: string; expiresAt: number; scope?: string }> {
+    if (isTokenExpired(session)) {
+      return await auth0.getAccessToken(request, authRes, { refresh: true });
+    }
+    return await auth0.getAccessToken(request, authRes);
+  }
 }
 
 function isTokenExpired(session: SessionData | null): boolean {
@@ -49,6 +48,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    '/((?!_next/static|_next/image|sw.js|workbox|app_icons|favicon.ico|favicon.svg|sitemap.xml|robots.txt|manifest.json|noflash.js).*)',
+    '/((?!_next/static|_next/image|sw.js|workbox|app_icons|favicon.ico|favicon.svg|apple-icon.png|sitemap.xml|robots.txt|manifest.json|noflash.js).*)',
   ],
 };

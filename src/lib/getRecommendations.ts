@@ -5,7 +5,7 @@ import { API_Paths } from '@/types/endpoints';
 
 export async function getRecommendations() {
   try {
-    const accessToken = await auth0.getAccessToken();
+    const accessToken = await auth0.getAccessToken({ refresh: true });
 
     // const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.Recommended}?${req.nextUrl.searchParams}`, {
     const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.Recommended}?page=1&size=10`, {
