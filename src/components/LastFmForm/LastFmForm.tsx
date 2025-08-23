@@ -41,7 +41,7 @@ export default function LastFmForm() {
               {lastFmFormI18n.label}
             </label>
             <input className="mr-4 rr-input  w-64" id="username" placeholder={lastFmFormI18n.placeholder} required />
-            <Button loading={loading} type="submit">
+            <Button className="btn-large" loading={loading} type="submit">
               {lastFmFormI18n.submitBtn}
             </Button>
           </form>
