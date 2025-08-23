@@ -35,7 +35,7 @@ const SettingsForm: React.FunctionComponent = () => {
         </label>
         <input
           id="notifyInDaysInput"
-          className="mr-4 px-2 min-m-lg border-b-2 rr-border dark:bg-gh-darkly rr-text"
+          className="mr-4 px-2 rr-input w-15"
           type="number"
           value={settings.notifyIntervalDays}
           onChange={e => setSettings({ ...settings, notifyIntervalDays: Number(e.target.value) })}

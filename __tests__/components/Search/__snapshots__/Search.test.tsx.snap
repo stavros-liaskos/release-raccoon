@@ -10,7 +10,7 @@ exports[`Search should handle the search action of the user 1`] = `
       novalidate=""
     >
       <input
-        class="mr-4 px-3 py-2 min-m-lg border-2 rounded-lg rr-border dark:bg-gh-darkly rr-text w-full transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+        class="mr-4 rr-input w-full"
         name="search"
         placeholder="Search for an artist"
         type="text"
