@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import UserWrapper from '@/components/Header/UserWrapper/UserWrapper';
+import UserWrapper from '@/components/Header/UserWrapper';
 import { auth0 } from '@/lib/auth0';
 import { NavigationPaths } from '@/types/endpoints';
 
