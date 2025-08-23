@@ -8,9 +8,11 @@ exports[`UserMenu matches snapshot 1`] = `
     <ul
       class="flex flex-col py-2"
     >
-      <li>
+      <li
+        class=""
+      >
         <a
-          class="flex items-center gap-3 px-4 py-3 rr-text hover:bg-gray-100 dark:hover:bg-gh-dark transition-colors"
+          class="flex items-center gap-3 px-4 py-3 rr-text transition-colors hover:bg-gray-100 dark:hover:bg-gh-dark"
           href="/profile"
         >
           <svg
@@ -27,9 +29,11 @@ exports[`UserMenu matches snapshot 1`] = `
           </span>
         </a>
       </li>
-      <li>
+      <li
+        class=""
+      >
         <a
-          class="flex items-center gap-3 px-4 py-3 rr-text hover:bg-gray-100 dark:hover:bg-gh-dark transition-colors"
+          class="flex items-center gap-3 px-4 py-3 rr-text transition-colors hover:bg-gray-100 dark:hover:bg-gh-dark"
           href="/profile/settings"
         >
           <svg
@@ -50,7 +54,7 @@ exports[`UserMenu matches snapshot 1`] = `
         class="border-t border-gray-200 dark:border-gh-border mt-2 pt-2"
       >
         <a
-          class="flex items-center gap-3 px-4 py-3 rr-text hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+          class="flex items-center gap-3 px-4 py-3 rr-text transition-colors hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400"
           href="/auth/logout"
         >
           <svg

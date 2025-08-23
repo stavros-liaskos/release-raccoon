@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import UserMenu from '@/components/Header/UserMenu/UserMenu';
+import UserMenu from '@/components/Header/UserMenu';
 import { headerI18n } from '@/i18n';
 
 describe('UserMenu', () => {
