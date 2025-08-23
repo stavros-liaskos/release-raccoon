@@ -23,6 +23,7 @@ export const Paths: { [key: string]: string } = {
   ScrapeSpotify: `api/scrape-taste/spotify`,
   EnableSrapeServices: `api/me/enable-services`, // TODO
   Settings: `api/me/settings`, // TODO
+  Stats: `api/stats`,
 };
 
 // Route handlers' external API paths
@@ -38,4 +39,6 @@ export const API_Paths: { [key: string]: string } = {
   ScrapeSpotify: `scrape-taste/spotify`,
   EnableSrapeServices: `me/enable-services`, // TODO
   Settings: `me/settings`, // TODO
+  Stats: `stats`,
+  ReleaseCount: `release/count`,
 };
