@@ -7,7 +7,7 @@ export async function GET() {
     // Fetch from the backend API using environment variable
     const apiUrl = `${process.env.API_BASE_URL}/${API_Paths.Stats}`;
     console.log('Fetching stats from:', apiUrl);
-    
+
     const response = await fetch(apiUrl, {
       headers: {
         'content-type': 'application/json',
@@ -21,23 +21,19 @@ export async function GET() {
 
     const data = await response.json();
     console.log('Stats API response:', data);
-    
+
     // Validate the response structure
     if (data && typeof data.artistCount === 'number' && typeof data.releaseCount === 'number') {
       return NextResponse.json(data);
-    } else {
-      console.warn('Invalid stats response structure, using defaults');
-      return NextResponse.json({
-        artistCount: 34705,
-        releaseCount: 46899
-      });
     }
+
+    throw new Error('Invalid stats response structure, using defaults');
   } catch (error) {
     console.error('Error fetching stats:', error);
     // Return default stats to keep the UI functional
     return NextResponse.json({
       artistCount: 34705,
-      releaseCount: 46899
+      releaseCount: 46899,
     });
   }
 }

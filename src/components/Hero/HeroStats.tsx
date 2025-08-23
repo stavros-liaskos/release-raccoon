@@ -9,7 +9,6 @@ const HeroStats: React.FunctionComponent = () => {
   const [artistCount, setArtistCount] = useState<number>(0);
   const [releaseCount, setReleaseCount] = useState<number>(0);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -33,13 +32,11 @@ const HeroStats: React.FunctionComponent = () => {
         if (data.message?.includes('Server Error')) {
           throw new Error(`API Error: ${data.message}`);
         }
-        
+
         setArtistCount(data?.artistCount || 34705);
         setReleaseCount(data?.releaseCount || 46899);
-        setError(null); // Clear any previous errors
       } catch (err) {
         console.error('Error fetching stats:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
         // Fallback to reasonable defaults
         setArtistCount(34705);
         setReleaseCount(46899);
@@ -48,8 +45,8 @@ const HeroStats: React.FunctionComponent = () => {
       }
     };
 
-    fetchStats();
-  }, []);
+    !artistCount && !releaseCount && fetchStats();
+  }, [artistCount, releaseCount]);
 
   return (
     <div className="grid grid-cols-2 gap-8 max-w-md mx-auto">
@@ -59,37 +56,28 @@ const HeroStats: React.FunctionComponent = () => {
             <div className="animate-pulse bg-blue-200 dark:bg-blue-800 rounded h-10 w-20"></div>
           </div>
         ) : (
-          <Counter 
-            end={artistCount} 
-            suffix="+" 
+          <Counter
+            end={artistCount}
+            suffix="+"
             className="text-3xl md:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2"
           />
         )}
-        <div className="text-sm md:text-base rr-text opacity-70 uppercase tracking-wide">
-          {loginI18n.artistsCount}
-        </div>
+        <div className="text-sm md:text-base rr-text opacity-70 uppercase tracking-wide">{loginI18n.artistsCount}</div>
       </div>
-      
+
       <div className="flex flex-col items-center p-6 bg-white/50 dark:bg-gh-darkly/50 rounded-lg border border-gray-200 dark:border-gh-border shadow-sm backdrop-blur-sm transition-all hover:shadow-lg">
         {loading ? (
           <div className="text-3xl md:text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">
             <div className="animate-pulse bg-purple-200 dark:bg-purple-800 rounded h-10 w-20"></div>
           </div>
         ) : (
-          <Counter 
-            end={releaseCount} 
-            suffix="+" 
+          <Counter
+            end={releaseCount}
+            suffix="+"
             className="text-3xl md:text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2"
           />
         )}
-        <div className="text-sm md:text-base rr-text opacity-70 uppercase tracking-wide">
-          {loginI18n.releasesCount}
-        </div>
-        {error && (
-          <div className="text-xs text-red-500 dark:text-red-400 mt-1 opacity-50">
-            Using fallback data
-          </div>
-        )}
+        <div className="text-sm md:text-base rr-text opacity-70 uppercase tracking-wide">{loginI18n.releasesCount}</div>
       </div>
     </div>
   );

@@ -8,12 +8,7 @@ interface CounterProps {
   className?: string;
 }
 
-const Counter: React.FunctionComponent<CounterProps> = ({
-  end,
-  duration = 2000,
-  suffix = '',
-  className = '',
-}) => {
+const Counter: React.FunctionComponent<CounterProps> = ({ end, duration = 2000, suffix = '', className = '' }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -29,7 +24,7 @@ const Counter: React.FunctionComponent<CounterProps> = ({
       if (startTime === null) startTime = currentTime;
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
+
       const currentCount = Math.floor(progress * end);
       setCount(currentCount);
 
@@ -49,7 +44,8 @@ const Counter: React.FunctionComponent<CounterProps> = ({
 
   return (
     <div className={className}>
-      {count.toLocaleString()}{suffix}
+      {count.toLocaleString()}
+      {suffix}
     </div>
   );
 };

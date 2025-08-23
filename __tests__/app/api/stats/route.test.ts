@@ -20,7 +20,7 @@ describe('/api/stats', () => {
   it('should return stats when API responds successfully', async () => {
     const mockStats = {
       artistCount: 34705,
-      releaseCount: 46899
+      releaseCount: 46899,
     };
 
     mockFetch.mockResolvedValueOnce({
@@ -31,15 +31,12 @@ describe('/api/stats', () => {
     const response = await GET();
     const data = await response.json();
 
-    expect(mockFetch).toHaveBeenCalledWith(
-      'https://test-api.com/stats',
-      {
-        headers: {
-          'content-type': 'application/json',
-        },
-        method: 'GET',
-      }
-    );
+    expect(mockFetch).toHaveBeenCalledWith('https://test-api.com/stats', {
+      headers: {
+        'content-type': 'application/json',
+      },
+      method: 'GET',
+    });
     expect(data).toEqual(mockStats);
   });
 
@@ -51,7 +48,7 @@ describe('/api/stats', () => {
 
     expect(data).toEqual({
       artistCount: 34705,
-      releaseCount: 46899
+      releaseCount: 46899,
     });
   });
 
@@ -66,7 +63,7 @@ describe('/api/stats', () => {
 
     expect(data).toEqual({
       artistCount: 34705,
-      releaseCount: 46899
+      releaseCount: 46899,
     });
   });
 
@@ -81,7 +78,7 @@ describe('/api/stats', () => {
 
     expect(data).toEqual({
       artistCount: 34705,
-      releaseCount: 46899
+      releaseCount: 46899,
     });
   });
 });

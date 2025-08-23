@@ -11,7 +11,12 @@ const mockFetch = fetch as jest.MockedFunction<typeof fetch>;
 // Mock Counter component since we're testing the stats logic, not the animation
 jest.mock('@/components/Counter/Counter', () => {
   return function MockCounter({ end, suffix, className }: { end: number; suffix: string; className: string }) {
-    return <div className={className} data-testid="counter">{end}{suffix}</div>;
+    return (
+      <div className={className} data-testid="counter">
+        {end}
+        {suffix}
+      </div>
+    );
   };
 });
 
@@ -22,9 +27,9 @@ describe('HeroStats', () => {
 
   it('renders loading state initially', () => {
     mockFetch.mockImplementation(() => new Promise(() => {})); // Never resolves
-    
+
     render(<HeroStats />);
-    
+
     const loadingElements = screen.getAllByRole('generic', { hidden: true });
     expect(loadingElements.some(el => el.className.includes('animate-pulse'))).toBe(true);
   });
@@ -32,7 +37,7 @@ describe('HeroStats', () => {
   it('renders stats when API call succeeds', async () => {
     const mockStats = {
       artistCount: 34705,
-      releaseCount: 46899
+      releaseCount: 46899,
     };
 
     mockFetch.mockResolvedValueOnce({
@@ -60,14 +65,12 @@ describe('HeroStats', () => {
       expect(screen.getByText('34705+')).toBeInTheDocument();
       expect(screen.getByText('46899+')).toBeInTheDocument();
     });
-
-    expect(screen.getByText('Using fallback data')).toBeInTheDocument();
   });
 
   it('calls the correct API endpoint', async () => {
     const mockStats = {
       artistCount: 1000,
-      releaseCount: 2000
+      releaseCount: 2000,
     };
 
     mockFetch.mockResolvedValueOnce({
@@ -90,7 +93,7 @@ describe('HeroStats', () => {
   it('renders with proper CSS classes for styling', async () => {
     const mockStats = {
       artistCount: 1000,
-      releaseCount: 2000
+      releaseCount: 2000,
     };
 
     mockFetch.mockResolvedValueOnce({
