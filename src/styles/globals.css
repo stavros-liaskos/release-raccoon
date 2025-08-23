@@ -77,6 +77,10 @@
   @apply font-semibold text-sm rounded-lg shadow-sm border-2 rr-border rr-text flex items-center justify-center cursor-pointer transition-all hover:shadow-md;
 }
 
+@utility rr-input {
+  @apply px-3 py-2 border-2 rounded-lg rr-border dark:bg-gh-darkly rr-text transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400;
+}
+
 @utility btn-large {
   @apply py-2 px-3;
 }

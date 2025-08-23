@@ -40,12 +40,7 @@ export default function LastFmForm() {
             <label htmlFor="username" className="sr-only">
               {lastFmFormI18n.label}
             </label>
-            <input
-              className="mr-4 px-3 py-2 min-m-lg border-2 rounded-lg rr-border dark:bg-gh-darkly rr-text w-64 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
-              id="username"
-              placeholder={lastFmFormI18n.placeholder}
-              required
-            />
+            <input className="mr-4 rr-input  w-64" id="username" placeholder={lastFmFormI18n.placeholder} required />
             <Button loading={loading} type="submit">
               {lastFmFormI18n.submitBtn}
             </Button>
