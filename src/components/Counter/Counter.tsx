@@ -21,7 +21,7 @@ const Counter: React.FunctionComponent<CounterProps> = ({ end, duration = 2000, 
     let animationFrame: number;
 
     const animate = (currentTime: number) => {
-      if (startTime === null) startTime = currentTime;
+      startTime ??= currentTime;
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
 
