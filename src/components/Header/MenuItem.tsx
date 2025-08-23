@@ -19,7 +19,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({ href, icon, children, danger
   const liDangerClassName = 'border-t border-gray-200 dark:border-gh-border mt-2 pt-2';
 
   return (
-    <li className={clsx(danger ? liDangerClassName : '')}>
+    <li className={clsx(danger && liDangerClassName)}>
       {danger ? (
         <a href={href} className={linkClassName}>
           {icon}
