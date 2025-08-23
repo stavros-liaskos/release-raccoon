@@ -28,9 +28,9 @@ const HeroStats: React.FunctionComponent = () => {
 
         const data = await response.json();
         console.log('Stats API response:', data);
-        
+
         // Check if the response indicates an error
-        if (data.message && data.message.includes('Server Error')) {
+        if (data.message?.includes('Server Error')) {
           throw new Error(`API Error: ${data.message}`);
         }
         

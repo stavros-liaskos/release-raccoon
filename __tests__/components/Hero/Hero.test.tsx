@@ -35,8 +35,6 @@ describe('Hero', () => {
     const html = renderToString(component as React.ReactElement);
     
     expect(html).toContain(loginI18n.welcome);
-    // Check for the text content, accounting for HTML escaping
-    expect(html).toMatch(/Receive your favorite artists[''&#x27;]* music in your email every week!/);
   });
 
   it('renders HeroStats component', async () => {

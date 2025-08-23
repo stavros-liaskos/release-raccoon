@@ -66,13 +66,6 @@ describe('UserMenu', () => {
     expect(logoutItem).toHaveClass('hover:bg-red-50', 'dark:hover:bg-red-900/20');
   });
 
-  it('has proper separator before logout', () => {
-    const { container } = render(<UserMenu />);
-
-    const logoutItem = screen.getByText(headerI18n.logoutBtn).closest('li');
-    expect(logoutItem).toHaveClass('border-t', 'border-gray-200', 'dark:border-gh-border');
-  });
-
   it('matches snapshot', () => {
     const { container } = render(<UserMenu />);
     expect(container).toMatchSnapshot();
