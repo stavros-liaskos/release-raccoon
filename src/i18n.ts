@@ -8,7 +8,7 @@ export const metaI18n = {
 };
 
 export const searchI18n: SearchI18n = {
-  label: 'Here goes the artist...',
+  label: 'Search for an artist',
   button: 'Search',
   searchList: {
     noArtists: 'No artists found',
@@ -77,7 +77,7 @@ export const lastFmFormI18n = {
 };
 
 export const formInputI18n = {
-  label: 'Here goes the artist..',
+  label: 'Search for an artist',
 };
 
 export const footerI18n = {

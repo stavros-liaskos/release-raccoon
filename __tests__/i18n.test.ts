@@ -21,7 +21,7 @@ describe('metaI18n', () => {
 
 describe('searchI18n', () => {
   it('should have correct label and button', () => {
-    expect(searchI18n.label).toBe('Here goes the artist...');
+    expect(searchI18n.label).toBe('Search for an artist');
     expect(searchI18n.button).toBe('Search');
   });
   it('should have correct searchList.noArtists', () => {
@@ -85,7 +85,7 @@ describe('scrapersI18n', () => {
 
 describe('formInputI18n', () => {
   it('should have correct label', () => {
-    expect(formInputI18n.label).toBe('Here goes the artist..');
+    expect(formInputI18n.label).toBe('Search for an artist');
   });
 });
 
