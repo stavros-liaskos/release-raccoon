@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import UserMenu from '@/components/Header/UserMenu/UserMenu';
+import UserMenu from '@/components/Header/UserMenu';
 import User from '@/components/Icons/user';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 import useOnNavigation from '@/hooks/useOnNavigation';
