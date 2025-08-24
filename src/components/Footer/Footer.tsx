@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 import { footerI18n } from '@/i18n';
@@ -10,7 +11,8 @@ const Footer: React.FunctionComponent = () => {
   }
 
   return (
-    <footer className="rr-column flex-none h-16 border-t-2 rr-border justify-center">
+    <footer className="flex items-center justify-between flex-none h-16 px-4 border-t-2 rr-border">
+      <div />
       <a
         className="flex items-center rr-text"
         href="https://github.com/jaivalis/release-raccoon"
@@ -22,6 +24,9 @@ const Footer: React.FunctionComponent = () => {
           <Github />
         </div>
       </a>
+      <Link href="/support" className="rr-text mr-4">
+        Support
+      </Link>
     </footer>
   );
 };
