@@ -91,3 +91,9 @@ export const listI18n = {
   followers: ' followers',
   follower: ' follower',
 };
+
+export const supportI18n = {
+  title: 'Support',
+  text: 'If you need help, please reach out to us at',
+  email: 'releaseraccoon at gmail.com',
+};
