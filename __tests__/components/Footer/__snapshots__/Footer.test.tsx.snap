@@ -1,10 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Footer renders with data 1`] = `
+exports[`Footer matches snapshot 1`] = `
 <div>
   <footer
-    class="rr-column flex-none h-16 border-t-2 rr-border justify-center"
+    class="flex items-center justify-between flex-none h-16 px-4 border-t-2 rr-border"
   >
+    <div />
     <a
       class="flex items-center rr-text"
       href="https://github.com/jaivalis/release-raccoon"
@@ -36,6 +37,12 @@ exports[`Footer renders with data 1`] = `
           />
         </svg>
       </div>
+    </a>
+    <a
+      class="rr-text mr-4"
+      href="/support"
+    >
+      Support
     </a>
   </footer>
 </div>

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SupportPage matches snapshot 1`] = `
+<div>
+  <div
+    class="flex flex-auto flex-col items-center justify-center w-full"
+  >
+    <h2
+      class="rr-text text-center text-4xl mb-3"
+    >
+      Support
+    </h2>
+    <p
+      class="rr-text text-center text-xl mb-6"
+    >
+      If you need help, please reach out to us at
+    </p>
+    <p
+      class="text-center text-xl text-blue-500"
+    >
+      releaseraccoon at gmail.com
+    </p>
+  </div>
+</div>
+`;

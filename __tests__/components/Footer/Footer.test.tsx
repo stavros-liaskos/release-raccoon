@@ -1,19 +1,28 @@
 import React from 'react';
-import { getByText, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import Footer from '@/components/Footer/Footer';
-import { footerI18n } from '@/i18n';
+
+jest.mock('@/i18n', () => ({
+  footerI18n: {
+    powered: 'Powered by',
+  },
+}));
 
 describe('Footer', () => {
-  it('renders without data without crashing', () => {
-    // @ts-ignore
-    render(<Footer />);
+  it('renders the footer with correct links', () => {
+    const { getByText } = render(<Footer />);
+
+    const supportLink = getByText('Support');
+    expect(supportLink).toBeInTheDocument();
+    expect(supportLink.closest('a')).toHaveAttribute('href', '/support');
+
+    const poweredByLink = getByText('Powered by');
+    expect(poweredByLink).toBeInTheDocument();
+    expect(poweredByLink.closest('a')).toHaveAttribute('href', 'https://github.com/jaivalis/release-raccoon');
   });
 
-  it('renders with data', () => {
+  it('matches snapshot', () => {
     const { container } = render(<Footer />);
-    const footerPowered = getByText(container, 'Powered by');
-
-    expect(footerPowered).toContainHTML(footerI18n.powered);
     expect(container).toMatchSnapshot();
   });
 });
