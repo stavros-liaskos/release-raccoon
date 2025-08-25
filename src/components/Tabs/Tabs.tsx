@@ -33,7 +33,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
           </button>
         ))}
       </div>
-      <div className="flex p-4 tab-content flex-grow">{tabs[activeTab].content}</div>
+      <div className="flex py-4 tab-content flex-grow">{tabs[activeTab].content}</div>
     </div>
   );
 };
