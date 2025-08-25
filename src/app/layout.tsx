@@ -24,12 +24,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body className={`${interFonts.className} antialiased bg-white dark:bg-gh-dark`}>
         <ThemeProvider>
-          <div className="container max-auto">
+          <div className="container">
             <div className="sm:border-x-2 rr-border flex flex-col h-screen">
               <Header />
 
               <main className="rr-column flex-auto">
-                <div className="flex flex-col flex-auto w-full lg:w-9/12">{children}</div>
+                <div className="flex flex-col w-full lg:w-9/12">{children}</div>
               </main>
 
               <Footer />
