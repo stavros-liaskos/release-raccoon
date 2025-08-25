@@ -1,8 +1,7 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
 import FollowedArtistList from '@/components/FollowedArtistList/FollowedArtistList';
 import Recommendations from '@/components/Recommendations/Recommendations';
-import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton/RecommendationsSkeleton';
 import Search from '@/components/Search/Search';
 import Tabs from '@/components/Tabs/Tabs';
 import ArtistsListProvider from '@/contexts/ArtistsList/ArtistsListProvider';
@@ -17,11 +16,7 @@ export default async function Page() {
     },
     {
       label: 'Recommendations',
-      content: (
-        <Suspense fallback={<RecommendationsSkeleton />}>
-          <Recommendations />
-        </Suspense>
-      ),
+      content: <Recommendations />,
     },
   ];
 
