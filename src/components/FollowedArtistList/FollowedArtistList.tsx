@@ -16,7 +16,6 @@ const FollowedArtistList: React.FunctionComponent = () => {
 
   return (
     <div className="flex flex-col flex-1 items-center mb-2 border-b-2 rr-border w-full h-full">
-      <h3 className="h3">{followedArtistListI18n.title}</h3>
       <div className="flex justify-around items-center w-2/3">
         <FormInput handleAction={setFilterInput} i18n={followedArtistListI18n.formInput} />
       </div>

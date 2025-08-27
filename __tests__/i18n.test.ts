@@ -37,7 +37,6 @@ describe('headerI18n', () => {
 
 describe('followedArtistListI18n', () => {
   it('should have correct title and filter', () => {
-    expect(followedArtistListI18n.title).toBe('Artists you follow');
     expect(followedArtistListI18n.filter).toBe('filter followed artists');
   });
   it('should have correct artistList properties', () => {
@@ -62,7 +61,7 @@ describe('loginI18n', () => {
 
 describe('recommendationsI18n', () => {
   it('should have correct title', () => {
-    expect(recommendationsI18n.title).toBe('Others follow');
+    expect(recommendationsI18n.title).toBe('Recommended for you');
   });
   it('should have correct artistList.noArtists', () => {
     expect(recommendationsI18n.artistList.noArtists).toBe('There are no recommended artists for you :(');
