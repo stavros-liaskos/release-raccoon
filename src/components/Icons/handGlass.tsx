@@ -1,7 +1,7 @@
 import React from 'react';
 
 const HandGlass: React.FunctionComponent = () => (
-  <svg fill="none" stroke="currentColor" className="h-8 w-8 icon-colour" viewBox="0 0 24 24" role="img">
+  <svg fill="none" stroke="currentColor" className="h-6 w-6 icon-colour" viewBox="0 0 24 24" role="img">
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
