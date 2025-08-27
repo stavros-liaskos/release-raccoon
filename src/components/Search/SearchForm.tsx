@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef,useState } from 'react';
 
 import { useSearchContext } from '@/contexts/Search/SearchContext';
 
@@ -42,8 +42,11 @@ const SearchForm = ({ handleAction, i18n, children }: FormInputProps) => {
   }
 
   // Detect if user is on Mac
-  const isMac = typeof window !== 'undefined' && 
-    (navigator.userAgent.indexOf('Mac') !== -1 || navigator.userAgent.indexOf('iPhone') !== -1 || navigator.userAgent.indexOf('iPad') !== -1);
+  const isMac =
+    typeof window !== 'undefined' &&
+    (navigator.userAgent.indexOf('Mac') !== -1 ||
+      navigator.userAgent.indexOf('iPhone') !== -1 ||
+      navigator.userAgent.indexOf('iPad') !== -1);
 
   return (
     <form
@@ -66,7 +69,10 @@ const SearchForm = ({ handleAction, i18n, children }: FormInputProps) => {
             setInputValue(e.target.value);
           }}
         />
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none" style={{ marginTop: '-3px' }}>
+        <div
+          className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none"
+          style={{ marginTop: '-3px' }}
+        >
           <div className="flex items-center gap-0.5">
             <kbd className="inline-flex items-center justify-center h-5 px-1.5 text-xs font-medium text-gray-400 bg-gray-50 border border-gray-200 rounded dark:bg-gray-800 dark:text-gray-500 dark:border-gray-600">
               {isMac ? '⌘' : 'Ctrl'}
