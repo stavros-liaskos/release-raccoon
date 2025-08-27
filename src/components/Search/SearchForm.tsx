@@ -42,7 +42,8 @@ const SearchForm = ({ handleAction, i18n, children }: FormInputProps) => {
   }
 
   // Detect if user is on Mac
-  const isMac = typeof window !== 'undefined' && navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+  const isMac = typeof window !== 'undefined' && 
+    (navigator.userAgent.indexOf('Mac') !== -1 || navigator.userAgent.indexOf('iPhone') !== -1 || navigator.userAgent.indexOf('iPad') !== -1);
 
   return (
     <form
