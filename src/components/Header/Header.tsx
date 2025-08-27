@@ -8,7 +8,7 @@ import { NavigationPaths } from '@/types/endpoints';
 
 import DarkMode from '../DarkMode/DarkMode';
 
-const LOGO_SIZE = 40;
+const LOGO_SIZE = 48;
 
 const Header: React.FunctionComponent = async () => {
   const session = await auth0.getSession();
