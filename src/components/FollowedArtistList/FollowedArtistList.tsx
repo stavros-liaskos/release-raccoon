@@ -15,7 +15,7 @@ const FollowedArtistList: React.FunctionComponent = () => {
   const [filterInput, setFilterInput] = useState('');
 
   return (
-    <div className="flex flex-col flex-1 items-center mb-2 rr-border w-full h-full">
+    <>
       <div className="flex justify-around items-center w-2/3">
         <FormInput handleAction={setFilterInput} i18n={followedArtistListI18n.formInput} />
       </div>
@@ -28,7 +28,7 @@ const FollowedArtistList: React.FunctionComponent = () => {
           buttonAction={ButtonAction.Unfollow}
         />
       )}
-    </div>
+    </>
   );
 };
 
