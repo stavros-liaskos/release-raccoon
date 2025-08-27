@@ -11,10 +11,10 @@ exports[`List matches snapshot 1`] = `
       Chris Clark
     </p>
     <div
-      class="flex items-center"
+      class="flex items-center gap-2"
     >
       <div
-        class="flex gap-2 mx-4 md:mx-8 w-20"
+        class="flex gap-2 md:mx-8 w-18"
       >
         <a
           aria-label="Chris Clark"
@@ -56,10 +56,10 @@ exports[`List matches snapshot 1`] = `
       Ill Considered, Oli Savill
     </p>
     <div
-      class="flex items-center"
+      class="flex items-center gap-2"
     >
       <div
-        class="flex gap-2 mx-4 md:mx-8 w-20"
+        class="flex gap-2 md:mx-8 w-18"
       >
         <a
           aria-label="Ill Considered, Oli Savill"
