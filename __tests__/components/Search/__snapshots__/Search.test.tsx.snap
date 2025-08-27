@@ -21,18 +21,17 @@ exports[`Search should handle the search action of the user 1`] = `
         />
         <div
           class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none"
-          style="margin-top: -3px;"
         >
           <div
             class="flex items-center gap-0.5"
           >
             <kbd
-              class="inline-flex items-center justify-center h-5 px-1.5 text-xs font-medium text-gray-400 bg-gray-50 border border-gray-200 rounded dark:bg-gray-800 dark:text-gray-500 dark:border-gray-600"
+              class="h-5 px-1.5 text-sm text-gray-400 bg-gray-50 border border-gray-200 rounded dark:bg-gray-800 dark:text-gray-500 dark:border-gray-600"
             >
               Ctrl
             </kbd>
             <kbd
-              class="inline-flex items-center justify-center h-5 px-1.5 text-xs font-medium text-gray-400 bg-gray-50 border border-gray-200 rounded dark:bg-gray-800 dark:text-gray-500 dark:border-gray-600"
+              class="h-5 px-1.5 text-sm text-gray-400 bg-gray-50 border border-gray-200 rounded dark:bg-gray-800 dark:text-gray-500 dark:border-gray-600"
             >
               K
             </kbd>
@@ -44,7 +43,7 @@ exports[`Search should handle the search action of the user 1`] = `
         type="submit"
       >
         <svg
-          class="h-8 w-8 icon-colour"
+          class="h-6 w-6 icon-colour"
           fill="none"
           role="img"
           stroke="currentColor"

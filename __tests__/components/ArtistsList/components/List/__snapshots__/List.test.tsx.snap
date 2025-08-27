@@ -6,15 +6,15 @@ exports[`List matches snapshot 1`] = `
     class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100"
   >
     <p
-      class="grow text-clip rr-text"
+      class="grow overflow-text-hide rr-text"
     >
       Chris Clark
     </p>
     <div
-      class="flex items-center"
+      class="flex items-center gap-2"
     >
       <div
-        class="flex gap-2 mx-4 md:mx-8 w-20"
+        class="flex gap-2 md:mx-8 w-18"
       >
         <a
           aria-label="Chris Clark"
@@ -51,15 +51,15 @@ exports[`List matches snapshot 1`] = `
     class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100"
   >
     <p
-      class="grow text-clip rr-text"
+      class="grow overflow-text-hide rr-text"
     >
       Ill Considered, Oli Savill
     </p>
     <div
-      class="flex items-center"
+      class="flex items-center gap-2"
     >
       <div
-        class="flex gap-2 mx-4 md:mx-8 w-20"
+        class="flex gap-2 md:mx-8 w-18"
       >
         <a
           aria-label="Ill Considered, Oli Savill"

@@ -30,7 +30,6 @@ export const headerI18n = {
 };
 
 export const followedArtistListI18n = {
-  title: 'Artists you follow',
   filter: 'filter followed artists',
   artistList: {
     btnTxt: 'Unfollow',
@@ -52,7 +51,7 @@ export const loginI18n = {
 };
 
 export const recommendationsI18n = {
-  title: 'Others follow',
+  title: 'Recommended for you',
   artistList: {
     noArtists: 'There are no recommended artists for you :(',
   },
@@ -71,7 +70,7 @@ export const scrapersI18n = {
 
 export const lastFmFormI18n = {
   label: 'Last fm username',
-  submitBtn: 'Sync with LastFm',
+  submitBtn: 'Sync LastFm',
   placeholder: 'Enter LastFm username',
   syncedMsg: 'Last synced to',
 };

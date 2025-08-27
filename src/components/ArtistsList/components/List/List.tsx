@@ -25,18 +25,16 @@ const List = ({ artistsList, buttonAction }: ArtistsListProp) => {
             className="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100"
             key={artist.id ?? index}
           >
-            <p className="grow text-clip rr-text">{artist.name}</p>
+            <p className="grow overflow-text-hide rr-text">{artist.name}</p>
 
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
               {!!followerCount && (
-                <Badge
-                  className={clsx(
-                    index % 2 ? 'dark:bg-gh-dark bg-white' : 'bg-gray-100 dark:bg-gh-darkly',
-                    'cursor-default',
-                  )}
-                >{`${followerCount}${followerCount > 1 ? listI18n.followers : listI18n.follower}`}</Badge>
+                <Badge className={clsx(index % 2 ? 'dark:bg-gh-dark bg-white' : 'bg-gray-100 dark:bg-gh-darkly')}>
+                  <span>{followerCount}</span>
+                  <span className="ml-2">{followerCount > 1 ? listI18n.followers : listI18n.follower}</span>
+                </Badge>
               )}
-              <div className="flex gap-2 mx-4 md:mx-8 w-20">
+              <div className="flex gap-2 md:mx-8 w-18">
                 {artist.lastfmUri && (
                   <a className="inline" href={artist.lastfmUri} aria-label={artist.name}>
                     <LastFm width={ICON_SIZE} />
