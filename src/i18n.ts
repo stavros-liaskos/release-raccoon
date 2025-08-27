@@ -71,7 +71,7 @@ export const scrapersI18n = {
 
 export const lastFmFormI18n = {
   label: 'Last fm username',
-  submitBtn: 'Sync with LastFm',
+  submitBtn: 'Sync LastFm',
   placeholder: 'Enter LastFm username',
   syncedMsg: 'Last synced to',
 };
