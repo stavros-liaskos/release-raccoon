@@ -25,7 +25,7 @@ const List = ({ artistsList, buttonAction }: ArtistsListProp) => {
             className="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100"
             key={artist.id ?? index}
           >
-            <p className="grow text-clip rr-text">{artist.name}</p>
+            <p className="grow overflow-text-hide rr-text">{artist.name}</p>
 
             <div className="flex items-center">
               {!!followerCount && (

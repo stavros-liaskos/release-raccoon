@@ -33,7 +33,7 @@ exports[`FollowedArtistList matches snapshot 1`] = `
         class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100"
       >
         <p
-          class="grow text-clip rr-text"
+          class="grow overflow-text-hide rr-text"
         >
           Chris Clark
         </p>
@@ -78,7 +78,7 @@ exports[`FollowedArtistList matches snapshot 1`] = `
         class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100"
       >
         <p
-          class="grow text-clip rr-text"
+          class="grow overflow-text-hide rr-text"
         >
           Ill Considered, Oli Savill
         </p>
