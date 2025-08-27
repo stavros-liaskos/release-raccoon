@@ -44,7 +44,7 @@ exports[`Search should handle the search action of the user 1`] = `
         type="submit"
       >
         <svg
-          class="h-8 w-8 icon-colour"
+          class="h-6 w-6 icon-colour"
           fill="none"
           role="img"
           stroke="currentColor"
