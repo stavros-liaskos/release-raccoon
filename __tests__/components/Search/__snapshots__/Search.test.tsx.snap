@@ -20,7 +20,7 @@ exports[`Search should handle the search action of the user 1`] = `
           value="Sam Gendel"
         />
         <div
-          class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none"
+          class="absolute right-3 top-1/2 -translate-y-1/2  items-center pointer-events-none hidden md:flex"
         >
           <div
             class="flex items-center gap-0.5"
