@@ -1,6 +1,7 @@
-import { mswFollow } from '@/mocks/mockApi';
 import artist from '@/mocks/fixtures/requests/artist.json';
+import { mswFollow } from '@/mocks/mockApi';
 import followArtist from '@/utils/followArtist';
+
 import { initServer } from '../testUtils/testUtils';
 
 describe('followArtist', () => {

@@ -3,15 +3,15 @@
 exports[`List matches snapshot 1`] = `
 <div>
   <div
-    class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100"
+    class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100 h-12"
   >
-    <p
-      class="grow overflow-text-hide rr-text"
+    <button
+      class="grow overflow-text-hide rr-text text-left cursor-pointer xs:cursor-default"
     >
       Chris Clark
-    </p>
+    </button>
     <div
-      class="flex items-center gap-2"
+      class="flex items-center gap-2 artist-details"
     >
       <div
         class="flex gap-2 md:mx-8 w-18"
@@ -48,15 +48,15 @@ exports[`List matches snapshot 1`] = `
     </div>
   </div>
   <div
-    class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100"
+    class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100 h-12"
   >
-    <p
-      class="grow overflow-text-hide rr-text"
+    <button
+      class="grow overflow-text-hide rr-text text-left cursor-pointer xs:cursor-default"
     >
       Ill Considered, Oli Savill
-    </p>
+    </button>
     <div
-      class="flex items-center gap-2"
+      class="flex items-center gap-2 artist-details"
     >
       <div
         class="flex gap-2 md:mx-8 w-18"

@@ -77,7 +77,7 @@ const SearchForm = ({ handleAction, i18n, children }: FormInputProps) => {
             setInputValue(e.target.value);
           }}
         />
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
+        <div className="absolute right-3 top-1/2 -translate-y-1/2  items-center pointer-events-none hidden md:flex">
           <div className="flex items-center gap-0.5">
             <kbd className="h-5 px-1.5 text-sm text-gray-400 bg-gray-50 border border-gray-200 rounded dark:bg-gray-800 dark:text-gray-500 dark:border-gray-600">
               {controlKey ? '⌘' : 'Ctrl'}

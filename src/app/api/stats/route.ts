@@ -20,7 +20,6 @@ export async function GET() {
     }
 
     const data = await response.json();
-    console.log('Stats API response:', data);
 
     // Validate the response structure
     if (data && typeof data.artistCount === 'number' && typeof data.releaseCount === 'number') {
