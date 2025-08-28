@@ -1,5 +1,9 @@
-import clsx from 'clsx/lite'; // Size (gzip): 140 bytes, CAUTION: Accepts ONLY string arguments!
-import React from 'react';
+'use client';
+
+import './List.css';
+
+import clsx from 'clsx/lite';
+import React, { useState } from 'react';
 
 import Badge from '@/components/Badge/Badge';
 import ButtonFollowArtist from '@/components/ButtonFollowArtist/ButtonFollowArtist';
@@ -12,22 +16,35 @@ import { ArtistsListProp } from '../../ArtistsList';
 const ICON_SIZE = 30;
 
 const List = ({ artistsList, buttonAction }: ArtistsListProp) => {
+  const [expandedRow, setExpandedRow] = useState<number | null>(null);
+
   if (!artistsList?.length || !buttonAction) {
     return null;
   }
+
+  const handleRowClick = (index: number) => {
+    setExpandedRow(expandedRow === index ? null : index);
+  };
 
   return (
     <>
       {artistsList.map((artist, index: number) => {
         const followerCount = artist?.followerCount;
+        const isExpanded = expandedRow === index;
+
         return (
           <div
-            className="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100"
+            className="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100 h-12"
             key={artist.id ?? index}
           >
-            <p className="grow overflow-text-hide rr-text">{artist.name}</p>
+            <button
+              className="grow overflow-text-hide rr-text text-left cursor-pointer xs:cursor-default"
+              onClick={() => handleRowClick(index)}
+            >
+              {artist.name}
+            </button>
 
-            <div className="flex items-center gap-2">
+            <div className={clsx('flex items-center gap-2 artist-details', isExpanded && 'expanded')}>
               {!!followerCount && (
                 <Badge className={clsx(index % 2 ? 'dark:bg-gh-dark bg-white' : 'bg-gray-100 dark:bg-gh-darkly')}>
                   <span>{followerCount}</span>

@@ -20,7 +20,7 @@ describe('List', () => {
     const btn = queryAllByRole('button')[0];
     fireEvent.click(btn);
 
-    expect(queryAllByRole('button')).toHaveLength(2);
+    expect(queryAllByRole('button')).toHaveLength(4);
     expect(queryAllByRole('img')).toHaveLength(3);
   });
 
