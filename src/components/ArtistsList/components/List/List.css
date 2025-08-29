@@ -1,12 +1,17 @@
-@media (max-width: 768px) {
-  .artist-details {
-    display: none;
-    transform: translateX(100%);
-    transition: transform 1s ease-in-out;
+@media (max-width: 40rem) {
+  .artist-details-wrapper {
+    max-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-width 0.5s ease-in-out,
+      opacity 0.5s ease-in-out;
+    white-space: nowrap;
   }
 
-  .artist-details.expanded {
-    display: flex;
-    transform: translateX(0);
+  .artist-details-wrapper.expanded {
+    visibility: visible;
+    max-width: 300px; /* A large enough value to show the content */
+    opacity: 1;
   }
 }
