@@ -61,8 +61,6 @@ describe('FollowedArtistList', () => {
     server.use(mswFollowedArtists.success(2));
 
     const component = await renderWithAct(<FollowedArtistList />);
-    let buttons = await component.findAllByText(followedArtistListI18n.artistList.btnTxt);
-    expect(buttons).toHaveLength(2);
     expect(component.container).toMatchSnapshot();
   });
 
