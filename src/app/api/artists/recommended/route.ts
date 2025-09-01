@@ -5,9 +5,11 @@ import { API_Paths } from '@/types/endpoints';
 export async function GET(req: NextRequest) {
   try {
     const authorization = req.headers.get('Authorization');
+    const searchParams = req.nextUrl.searchParams;
+    const page = searchParams.get('page');
+    const offset = searchParams.get('offset');
 
-    // const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.Recommended}?${req.nextUrl.searchParams}`, {
-    const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.Recommended}?page=1&size=10`, {
+    const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.Recommended}?page=${page}&offset=${offset}`, {
       headers: {
         ...(authorization && { authorization }),
         'content-type': 'application/json',

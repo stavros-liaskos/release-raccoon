@@ -59,6 +59,10 @@ export const recommendationsI18n = {
   artistList: {
     noArtists: 'There are no recommended artists for you :(',
   },
+  pagination: {
+    previous: 'Previous',
+    next: 'Next',
+  },
 };
 
 export const buttonFollowI18n = {

@@ -1,33 +1,26 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
+import Button from '@/components/Button/Button';
 import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton/RecommendationsSkeleton';
+import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
 import { recommendationsI18n } from '@/i18n';
-import { Paths } from '@/types/endpoints';
-import { components } from '@/types/schema';
 
 import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 const Recommendations = () => {
-  const [loading, setLoading] = React.useState(true);
-  const [recommendedArtists, setRecommendedArtists] = React.useState<components['schemas']['SearchResultArtistDto'][]>(
-    [],
-  );
+  const { recommendedArtistList, loadingRecommended, getRecommendedArtists } = useArtistsListContext();
+  const areRecommendedArtistsInitialised = useRef(false);
 
   useEffect(() => {
-    fetch(`${Paths.Recommended}`, {
-      headers: {
-        'content-type': 'application/json',
-      },
-      method: 'GET',
-    })
-      .then(data => data.json())
-      .then(setRecommendedArtists)
-      .finally(() => setLoading(false));
-  }, []);
+    if (!areRecommendedArtistsInitialised.current) {
+      getRecommendedArtists();
+      areRecommendedArtistsInitialised.current = true;
+    }
+  }, [getRecommendedArtists]);
 
-  if (loading) {
+  if (loadingRecommended) {
     return <RecommendationsSkeleton />;
   }
 
@@ -37,9 +30,17 @@ const Recommendations = () => {
 
       <ArtistsList
         i18n={recommendationsI18n.artistList}
-        artistsList={recommendedArtists}
+        artistsList={recommendedArtistList}
         buttonAction={ButtonAction.Follow}
       />
+      <div className="flex justify-center mt-4">
+        <Button handleClick={() => getRecommendedArtists('previous')} className="btn-large rounded-r-none">
+          {recommendationsI18n.pagination.previous}
+        </Button>
+        <Button handleClick={() => getRecommendedArtists('next')} className="btn-large rounded-l-none">
+          {recommendationsI18n.pagination.next}
+        </Button>
+      </div>
     </>
   );
 };

@@ -73,17 +73,59 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
     }
   }, [getFollowedArtists]);
 
+  // --- Recommended Artists ---
+  const [recommendedArtistList, setRecommendedArtistList] = useState<components['schemas']['SearchResultArtistDto'][]>(
+    [],
+  );
+  const [loadingRecommended, setLoadingRecommended] = useState(false);
+  const [recommendedPagination, setRecommendedPagination] = useState({
+    page: 1,
+    offset: 10,
+  });
+
+  const getRecommendedArtists = useCallback(
+    (direction?: 'next' | 'previous') => {
+      setLoadingRecommended(true);
+
+      let page = recommendedPagination.page;
+      if (direction === 'next') {
+        page++;
+      } else if (direction === 'previous' && page > 1) {
+        page--;
+      }
+
+      fetch(`${Paths.Recommended}?page=${page}&offset=${recommendedPagination.offset}`, {
+        method: 'GET',
+      })
+        .then(res => res.json())
+        .then((recommendedArtistsResponse: components['schemas']['SearchResultArtistDto'][]) => {
+          if (recommendedArtistsResponse) {
+            setRecommendedArtistList(recommendedArtistsResponse);
+            setRecommendedPagination(prev => ({ ...prev, page }));
+          }
+        })
+        .finally(() => {
+          setLoadingRecommended(false);
+        })
+        .catch(console.error);
+    },
+    [recommendedPagination],
+  );
+
   return (
-    <ArtistsListContext
+    <ArtistsListContext.Provider
       value={{
         followedArtistList,
         getFollowedArtists,
         loading,
         memoryArtistListUpdate,
+        recommendedArtistList,
+        loadingRecommended,
+        getRecommendedArtists,
       }}
     >
       {children}
-    </ArtistsListContext>
+    </ArtistsListContext.Provider>
   );
 };
 
