@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { auth0 } from '@/lib/auth0';
 import { API_Paths, NavigationPaths, SpotifyPaths } from '@/types/endpoints';
 
 const SPOTIFY_REDIRECT_URI = `https://release-raccoon.vercel.app${NavigationPaths.Spotify}`;
@@ -30,8 +31,13 @@ export async function GET() {
 
 // Exchange above code for an access token
 export async function POST(request: NextRequest) {
+  const session = await auth0.getSession();
+  const email = session?.user?.email;
   const authorization = request.headers.get('Authorization');
 
+  if (!email) {
+    return NextResponse.json({ message: 'User needs to login first' }, { status: 401 });
+  }
   if (!authorization) {
     return NextResponse.json({ message: 'User is not authorized' }, { status: 401 });
   }
@@ -39,20 +45,27 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request?.json();
     const code = body?.code;
-    const state = body?.state;
 
     if (!code) {
       return NextResponse.json({ message: 'Code is required' }, { status: 400 });
     }
 
-    console.warn(JSON.stringify({ code, state }));
-    const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.ScrapeSpotifyWithAuth}`, {
+    const urlencoded = new URLSearchParams();
+    urlencoded.append('grant_type', 'authorization_code');
+    urlencoded.append('code', code);
+    urlencoded.append('redirect_uri', SPOTIFY_REDIRECT_URI);
+
+    const base64Credentials = Buffer.from(
+      `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`,
+    ).toString('base64');
+
+    const response = await fetch(`${process.env.SPOTIFY_API_URL}${SpotifyPaths.Token}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        ...(authorization && { authorization }),
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Basic ${base64Credentials}`,
       },
-      body: JSON.stringify({ code, state }),
+      body: urlencoded,
     });
 
     if (!response.ok) {

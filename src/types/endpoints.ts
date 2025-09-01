@@ -18,7 +18,7 @@ export const SpotifyPaths: { [key: string]: string } = {
   Token: '/api/token',
 };
 
-// FE Endpoints that call Next.js' Router Handler (aka Next.js API routes)
+// Router Handler endpoints (aka Next.js API routes)
 export const Paths: { [key: string]: string } = {
   Auth: '/api/auth/me',
   Search: `api/artist/search`,
@@ -32,7 +32,7 @@ export const Paths: { [key: string]: string } = {
   Settings: `api/me/settings`, // TODO
 };
 
-// Route handlers' external API paths
+// External API paths
 export const API_Paths: { [key: string]: string } = {
   Auth: '/api/auth/me',
   Search: `artist/search`,
@@ -42,6 +42,7 @@ export const API_Paths: { [key: string]: string } = {
   UnfollowArtist: `me/unfollow`,
   RaccoonUser: `raccoon-user`, // TODO rm
   ScrapeLastFM: `scrape-taste/lastfm`,
+  ScrapeSpotifyWithAuth: `scrape-taste/spotify/client-auth`,
   ScrapeSpotify: `scrape-taste/spotify`,
   EnableSrapeServices: `me/enable-services`, // TODO
   Settings: `me/settings`, // TODO
