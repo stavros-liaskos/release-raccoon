@@ -1,7 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 
-import FormInput from '@/components/FollowedArtistList/components/FormInput/FormInput';
+import FormInput from '@/components/FollowedArtistList/FormInput';
+import Pagination, { TDirection } from '@/components/Pagination/Pagination';
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
 import { followedArtistListI18n } from '@/i18n';
 import { components } from '@/types/schema';
@@ -11,18 +12,13 @@ import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 import Loading from '../Loading/Loading';
 
 const FollowedArtistList: React.FunctionComponent = () => {
-  const { followedArtistList, loading } = useArtistsListContext();
+  const { followedArtistList, loading, getFollowedArtists, followedArtistsCurrentPage } = useArtistsListContext();
   const [filterInput, setFilterInput] = useState('');
 
   return (
-    <div className="flex flex-col flex-1 items-center mb-2 border-b-2 rr-border w-full">
-      <h3 className="h3">{followedArtistListI18n.title}</h3>
+    <>
       <div className="flex justify-around items-center w-2/3">
-        <FormInput
-          handleAction={setFilterInput}
-          i18n={followedArtistListI18n.formInput}
-          actionEventTrigger={'onChange'}
-        />
+        <FormInput handleAction={setFilterInput} i18n={followedArtistListI18n.formInput} />
       </div>
       {loading ? (
         <Loading />
@@ -33,7 +29,13 @@ const FollowedArtistList: React.FunctionComponent = () => {
           buttonAction={ButtonAction.Unfollow}
         />
       )}
-    </div>
+      <Pagination
+        handleClick={(page: TDirection) => getFollowedArtists(page)}
+        previousI18n={followedArtistListI18n.pagination.previous}
+        nextI18n={followedArtistListI18n.pagination.next}
+        disablePrevious={followedArtistsCurrentPage === 1}
+      />
+    </>
   );
 };
 

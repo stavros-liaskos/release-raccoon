@@ -6,22 +6,44 @@ exports[`Search should handle the search action of the user 1`] = `
     class="relative flex lg:justify-center items-center flex-none h-16 md:h-20 md:border-b-2 rr-border w-full"
   >
     <form
-      class="flex justify-between md:justify-between items-stretch h-10 w-full my-3"
+      class="flex justify-between md:justify-between items-stretch w-full my-3"
       novalidate=""
     >
-      <input
-        class="mr-4 px-2 min-m-lg border-b-2 rr-border dark:bg-gh-darkly rr-text w-full"
-        name="search"
-        placeholder="Here goes the artist..."
-        type="text"
-        value="Sam Gendel"
-      />
+      <div
+        class="relative flex-1 mr-4"
+      >
+        <input
+          class="rr-input w-full pr-20"
+          name="search"
+          placeholder="Search for an artist"
+          type="text"
+          value="Sam Gendel"
+        />
+        <div
+          class="absolute right-3 top-1/2 -translate-y-1/2  items-center pointer-events-none hidden md:flex"
+        >
+          <div
+            class="flex items-center gap-0.5"
+          >
+            <kbd
+              class="h-5 px-1.5 text-sm text-gray-400 bg-gray-50 border border-gray-200 rounded dark:bg-gray-800 dark:text-gray-500 dark:border-gray-600"
+            >
+              Ctrl
+            </kbd>
+            <kbd
+              class="h-5 px-1.5 text-sm text-gray-400 bg-gray-50 border border-gray-200 rounded dark:bg-gray-800 dark:text-gray-500 dark:border-gray-600"
+            >
+              K
+            </kbd>
+          </div>
+        </div>
+      </div>
       <button
         class="btn flex btn-large md:ml-52"
         type="submit"
       >
         <svg
-          class="h-8 w-8 icon-colour"
+          class="h-6 w-6 icon-colour"
           fill="none"
           role="img"
           stroke="currentColor"

@@ -34,26 +34,17 @@ export default function LastFmForm() {
 
   return (
     <div className="flex flex-col items-center justify-center p-4">
-      <div className="flex flex-col items-center gap-4">
-        <div className="overflow-hidden transition-all duration-500 ease-in-out max-h-40 opacity-100">
-          <form onSubmit={handleFormSubmit} className="flex gap-4 p-4 bg-card text-card-foreground">
-            <label htmlFor="username" className="sr-only">
-              {lastFmFormI18n.label}
-            </label>
-            <input
-              className="mr-4 px-2 min-m-lg border-b-2 rr-border dark:bg-gh-darkly rr-text w-64"
-              id="username"
-              placeholder={lastFmFormI18n.placeholder}
-              required
-            />
-            <Button loading={loading} type="submit">
-              {lastFmFormI18n.submitBtn}
-            </Button>
-          </form>
-          {rrUser?.lastfmUsername && (
-            <p className="rr-text">{lastFmFormI18n.syncedMsg + ' ' + rrUser.lastfmUsername}</p>
-          )}
-        </div>
+      <div className="flex flex-col gap-1 px-4">
+        <form onSubmit={handleFormSubmit} className="flex gap-2">
+          <label htmlFor="username" className="sr-only">
+            {lastFmFormI18n.label}
+          </label>
+          <input className="mr-4 rr-input" id="username" placeholder={lastFmFormI18n.placeholder} required />
+          <Button className="btn-large text-nowrap" loading={loading} type="submit">
+            {lastFmFormI18n.submitBtn}
+          </Button>
+        </form>
+        {rrUser?.lastfmUsername && <p className="rr-text">{lastFmFormI18n.syncedMsg + ' ' + rrUser.lastfmUsername}</p>}
       </div>
     </div>
   );

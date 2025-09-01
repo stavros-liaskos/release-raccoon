@@ -47,13 +47,10 @@ const SpotifyStatus = ({
   const MusicServiceIcon = getMusicServiceIcon(iconName);
 
   return (
-    <div className="flex justify-center items-center w-full">
+    <div className="flex justify-center items-center w-full  md:mb-6">
       <button
         onClick={() => handleScrape()}
-        className={clsx(
-          'btn flex justify-between py-2 px-3 w-full md:w-48',
-          connected && 'rr-text-confirm! cursor-default!',
-        )}
+        className={clsx('btn flex justify-between py-2 px-3 md:w-48', connected && 'rr-text-confirm! cursor-default!')}
       >
         <MusicServiceIcon width={30} />
         {buttonText}

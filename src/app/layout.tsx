@@ -19,7 +19,7 @@ export const viewport: Viewport = {
   themeColor: '#000000',
 };
 
-export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={`${interFonts.className} antialiased bg-white dark:bg-gh-dark`}>
@@ -28,7 +28,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             <div className="sm:border-x-2 rr-border flex flex-col h-screen">
               <Header />
 
-              <main className="rr-column flex-auto">
+              <main className="rr-column flex-auto max-h-full overflow-y-auto">
                 <div className="flex flex-col flex-auto w-full lg:w-9/12">{children}</div>
               </main>
 

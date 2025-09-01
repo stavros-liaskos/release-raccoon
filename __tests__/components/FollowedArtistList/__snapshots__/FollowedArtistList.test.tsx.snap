@@ -3,45 +3,41 @@
 exports[`FollowedArtistList matches snapshot 1`] = `
 <div>
   <div
-    class="flex flex-col flex-1 items-center mb-2 border-b-2 rr-border w-full"
+    class="flex justify-around items-center w-2/3"
   >
-    <h3
-      class="h3"
+    <form
+      class="flex justify-between md:justify-between items-stretch w-full my-3"
+      novalidate=""
     >
-      Artists you follow
-    </h3>
+      <input
+        class="mr-4 rr-input w-full"
+        name="search"
+        placeholder="Filter Followed artists"
+        type="text"
+        value=""
+      />
+    </form>
+  </div>
+  <div
+    class="overflow-x-hidden w-full"
+  >
     <div
-      class="flex justify-around items-center w-2/3"
+      class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100 h-12"
     >
-      <form
-        class="flex justify-between md:justify-between items-stretch h-10 w-full my-3"
-        novalidate=""
+      <button
+        aria-label="View details for Chris Clark"
+        class="grow overflow-text-hide rr-text text-left cursor-pointer sm:cursor-default h-full"
       >
-        <input
-          class="mr-4 px-2 min-m-lg border-b-2 rr-border dark:bg-gh-darkly rr-text w-full"
-          name="search"
-          placeholder="Filter Followed artists"
-          type="text"
-          value=""
-        />
-      </form>
-    </div>
-    <div
-      class="overflow-auto w-full flex-auto h-64"
-    >
+        Chris Clark
+      </button>
       <div
-        class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100"
+        class="artist-details-wrapper"
       >
-        <p
-          class="grow text-clip rr-text"
-        >
-          Chris Clark
-        </p>
         <div
-          class="flex items-center"
+          class="flex items-center gap-2"
         >
           <div
-            class="flex gap-2 mx-4 md:mx-8 w-20"
+            class="flex gap-2 sm:w-18"
           >
             <a
               aria-label="Chris Clark"
@@ -74,19 +70,24 @@ exports[`FollowedArtistList matches snapshot 1`] = `
           </button>
         </div>
       </div>
-      <div
-        class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100"
+    </div>
+    <div
+      class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100 h-12"
+    >
+      <button
+        aria-label="View details for Ill Considered, Oli Savill"
+        class="grow overflow-text-hide rr-text text-left cursor-pointer sm:cursor-default h-full"
       >
-        <p
-          class="grow text-clip rr-text"
-        >
-          Ill Considered, Oli Savill
-        </p>
+        Ill Considered, Oli Savill
+      </button>
+      <div
+        class="artist-details-wrapper"
+      >
         <div
-          class="flex items-center"
+          class="flex items-center gap-2"
         >
           <div
-            class="flex gap-2 mx-4 md:mx-8 w-20"
+            class="flex gap-2 sm:w-18"
           >
             <a
               aria-label="Ill Considered, Oli Savill"
@@ -147,6 +148,20 @@ exports[`FollowedArtistList matches snapshot 1`] = `
         </div>
       </div>
     </div>
+  </div>
+  <div
+    class="flex justify-center mt-4"
+  >
+    <button
+      class="btn btn-large flex rounded-r-none border-r-0 w-24"
+    >
+      Previous
+    </button>
+    <button
+      class="btn btn-large flex rounded-l-none w-24"
+    >
+      Next
+    </button>
   </div>
 </div>
 `;

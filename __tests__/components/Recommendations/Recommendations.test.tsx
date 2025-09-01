@@ -9,10 +9,6 @@ import * as followArtist from '@/utils/followArtist';
 
 import { initServer, renderWithAct, resolvedComponent } from '../../testUtils/testUtils';
 
-jest.mock('@/lib/getRecommendations', () => ({
-  getRecommendations: jest.fn(),
-}));
-
 xdescribe('Recommendations', () => {
   const server = initServer();
 

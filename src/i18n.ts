@@ -8,7 +8,7 @@ export const metaI18n = {
 };
 
 export const searchI18n: SearchI18n = {
-  label: 'Here goes the artist...',
+  label: 'Search for an artist',
   button: 'Search',
   searchList: {
     noArtists: 'No artists found',
@@ -30,7 +30,6 @@ export const headerI18n = {
 };
 
 export const followedArtistListI18n = {
-  title: 'Artists you follow',
   filter: 'filter followed artists',
   artistList: {
     btnTxt: 'Unfollow',
@@ -38,6 +37,10 @@ export const followedArtistListI18n = {
   },
   formInput: {
     label: 'Filter Followed artists',
+  },
+  pagination: {
+    previous: 'Previous',
+    next: 'Next',
   },
 };
 
@@ -52,9 +55,13 @@ export const loginI18n = {
 };
 
 export const recommendationsI18n = {
-  title: 'Others follow',
+  title: 'Recommended for you',
   artistList: {
     noArtists: 'There are no recommended artists for you :(',
+  },
+  pagination: {
+    previous: 'Previous',
+    next: 'Next',
   },
 };
 
@@ -71,13 +78,13 @@ export const scrapersI18n = {
 
 export const lastFmFormI18n = {
   label: 'Last fm username',
-  submitBtn: 'Sync with LastFm',
+  submitBtn: 'Sync LastFm',
   placeholder: 'Enter LastFm username',
   syncedMsg: 'Last synced to',
 };
 
 export const formInputI18n = {
-  label: 'Here goes the artist..',
+  label: 'Search for an artist',
 };
 
 export const footerI18n = {
@@ -90,4 +97,10 @@ export const artistsListI18n = {
 export const listI18n = {
   followers: ' followers',
   follower: ' follower',
+};
+
+export const supportI18n = {
+  title: 'Support',
+  text: 'If you need help, please reach out to us at',
+  email: 'releaseraccoon at gmail.com',
 };

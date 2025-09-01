@@ -1,13 +1,19 @@
 import React, { createContext, useContext } from 'react';
 
 import { ButtonAction } from '@/components/ButtonFollowArtist/ButtonFollowArtist.types';
+import { TDirection } from '@/components/Pagination/Pagination';
 import { components } from '@/types/schema';
 
 interface ArtistsListContextType {
   followedArtistList: components['schemas']['ArtistDto'][];
   loading: boolean;
-  getFollowedArtists: () => void;
+  getFollowedArtists: (direction: TDirection) => void;
   memoryArtistListUpdate: (artist: components['schemas']['ArtistDto'], action: ButtonAction) => void;
+  recommendedArtistList: components['schemas']['SearchResultArtistDto'][];
+  loadingRecommended: boolean;
+  getRecommendedArtists: (direction?: TDirection) => void;
+  followedArtistsCurrentPage: number;
+  recommendedArtistsCurrentPage: number;
 }
 
 export const ArtistsListContext: React.Context<ArtistsListContextType> = createContext<ArtistsListContextType>(

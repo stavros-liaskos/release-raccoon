@@ -1,25 +1,46 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useRef } from 'react';
 
+import Pagination, { TDirection } from '@/components/Pagination/Pagination';
+import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton/RecommendationsSkeleton';
+import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
 import { recommendationsI18n } from '@/i18n';
-import { getRecommendations } from '@/lib/getRecommendations';
 
 import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
-const Recommendations = async () => {
-  const data = await getRecommendations();
-  const recommendedArtists = await data.json();
+const Recommendations = () => {
+  const { recommendedArtistList, loadingRecommended, getRecommendedArtists, recommendedArtistsCurrentPage } =
+    useArtistsListContext();
+  const areRecommendedArtistsInitialised = useRef(false);
+
+  useEffect(() => {
+    if (!areRecommendedArtistsInitialised.current) {
+      getRecommendedArtists();
+      areRecommendedArtistsInitialised.current = true;
+    }
+  }, [getRecommendedArtists]);
+
+  if (loadingRecommended) {
+    return <RecommendationsSkeleton />;
+  }
 
   return (
-    <div className="flex flex-col lg:justify-center items-center mb-2 w-full">
+    <>
       <h3 className="h3">{recommendationsI18n.title}</h3>
 
       <ArtistsList
         i18n={recommendationsI18n.artistList}
-        artistsList={recommendedArtists?.rows ?? []}
+        artistsList={recommendedArtistList}
         buttonAction={ButtonAction.Follow}
       />
-    </div>
+      <Pagination
+        handleClick={(page: TDirection) => getRecommendedArtists(page)}
+        previousI18n={recommendationsI18n.pagination.previous}
+        nextI18n={recommendationsI18n.pagination.next}
+        disablePrevious={recommendedArtistsCurrentPage === 1}
+      />
+    </>
   );
 };
 

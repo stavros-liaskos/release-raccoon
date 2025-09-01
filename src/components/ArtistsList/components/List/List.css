@@ -1,0 +1,17 @@
+@media (max-width: 40rem) {
+  .artist-details-wrapper {
+    max-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-width 0.5s ease-in-out,
+      opacity 0.5s ease-in-out;
+    white-space: nowrap;
+  }
+
+  .artist-details-wrapper.expanded {
+    visibility: visible;
+    max-width: 300px; /* A large enough value to show the content */
+    opacity: 1;
+  }
+}

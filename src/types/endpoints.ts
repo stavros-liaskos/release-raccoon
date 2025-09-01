@@ -22,6 +22,7 @@ export const SpotifyPaths: { [key: string]: string } = {
 export const Paths: { [key: string]: string } = {
   Auth: '/api/auth/me',
   Search: `api/artist/search`,
+  Recommended: `api/artists/recommended`,
   Follow: `api/me/follow`,
   FollowedArtists: `api/me/followed-artists`,
   UnfollowArtist: `api/me/unfollow`,
@@ -30,6 +31,7 @@ export const Paths: { [key: string]: string } = {
   ScrapeSpotify: `api/scrape-taste/spotify`,
   EnableSrapeServices: `api/me/enable-services`, // TODO
   Settings: `api/me/settings`, // TODO
+  Stats: `api/stats`,
 };
 
 // External API paths
@@ -46,4 +48,6 @@ export const API_Paths: { [key: string]: string } = {
   ScrapeSpotify: `scrape-taste/spotify`,
   EnableSrapeServices: `me/enable-services`, // TODO
   Settings: `me/settings`, // TODO
+  Stats: `stats`,
+  ReleaseCount: `release/count`,
 };
