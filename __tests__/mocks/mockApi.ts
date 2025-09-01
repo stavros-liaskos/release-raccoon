@@ -8,9 +8,16 @@ import raccoonUser from './fixtures/responses/raccoon-user.json';
 
 export const mswFollowedArtists = {
   success: (artistQuantity: number = 2) => {
-    followedArtists.rows.splice(1, 2 - artistQuantity);
-    return http.get(`${Paths.FollowedArtists}`, () => {
-      return HttpResponse.json(followedArtists, { status: 200 });
+    return http.get(`${Paths.FollowedArtists}`, ({ request }) => {
+      const url = new URL(request.url);
+      const page = Number(url.searchParams.get('page')) || 1;
+      const offset = Number(url.searchParams.get('offset')) || 10;
+      const start = (page - 1) * offset;
+      const end = start + offset;
+
+      const paginatedArtists = followedArtists.rows.slice(start, end);
+
+      return HttpResponse.json({ ...followedArtists, rows: paginatedArtists }, { status: 200 });
     });
   },
   fail: () => http.get(Paths.FollowedArtists, () => HttpResponse.error()),

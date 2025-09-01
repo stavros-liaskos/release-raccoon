@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 
 import FormInput from '@/components/FollowedArtistList/FormInput';
+import Pagination, { TDirection } from '@/components/Pagination/Pagination';
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
 import { followedArtistListI18n } from '@/i18n';
 import { components } from '@/types/schema';
@@ -11,7 +12,7 @@ import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 import Loading from '../Loading/Loading';
 
 const FollowedArtistList: React.FunctionComponent = () => {
-  const { followedArtistList, loading } = useArtistsListContext();
+  const { followedArtistList, loading, getFollowedArtists, followedArtistsCurrentPage } = useArtistsListContext();
   const [filterInput, setFilterInput] = useState('');
 
   return (
@@ -28,6 +29,12 @@ const FollowedArtistList: React.FunctionComponent = () => {
           buttonAction={ButtonAction.Unfollow}
         />
       )}
+      <Pagination
+        handleClick={(page: TDirection) => getFollowedArtists(page)}
+        previousI18n={followedArtistListI18n.pagination.previous}
+        nextI18n={followedArtistListI18n.pagination.next}
+        disablePrevious={followedArtistsCurrentPage === 1}
+      />
     </>
   );
 };

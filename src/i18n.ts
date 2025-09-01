@@ -38,6 +38,10 @@ export const followedArtistListI18n = {
   formInput: {
     label: 'Filter Followed artists',
   },
+  pagination: {
+    previous: 'Previous',
+    next: 'Next',
+  },
 };
 
 export const loginI18n = {
@@ -54,6 +58,10 @@ export const recommendationsI18n = {
   title: 'Recommended for you',
   artistList: {
     noArtists: 'There are no recommended artists for you :(',
+  },
+  pagination: {
+    previous: 'Previous',
+    next: 'Next',
   },
 };
 

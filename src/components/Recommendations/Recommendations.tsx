@@ -1,33 +1,27 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
+import Pagination, { TDirection } from '@/components/Pagination/Pagination';
 import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton/RecommendationsSkeleton';
+import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
 import { recommendationsI18n } from '@/i18n';
-import { Paths } from '@/types/endpoints';
-import { components } from '@/types/schema';
 
 import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 const Recommendations = () => {
-  const [loading, setLoading] = React.useState(true);
-  const [recommendedArtists, setRecommendedArtists] = React.useState<components['schemas']['SearchResultArtistDto'][]>(
-    [],
-  );
+  const { recommendedArtistList, loadingRecommended, getRecommendedArtists, recommendedArtistsCurrentPage } =
+    useArtistsListContext();
+  const areRecommendedArtistsInitialised = useRef(false);
 
   useEffect(() => {
-    fetch(`${Paths.Recommended}`, {
-      headers: {
-        'content-type': 'application/json',
-      },
-      method: 'GET',
-    })
-      .then(data => data.json())
-      .then(setRecommendedArtists)
-      .finally(() => setLoading(false));
-  }, []);
+    if (!areRecommendedArtistsInitialised.current) {
+      getRecommendedArtists();
+      areRecommendedArtistsInitialised.current = true;
+    }
+  }, [getRecommendedArtists]);
 
-  if (loading) {
+  if (loadingRecommended) {
     return <RecommendationsSkeleton />;
   }
 
@@ -37,8 +31,14 @@ const Recommendations = () => {
 
       <ArtistsList
         i18n={recommendationsI18n.artistList}
-        artistsList={recommendedArtists}
+        artistsList={recommendedArtistList}
         buttonAction={ButtonAction.Follow}
+      />
+      <Pagination
+        handleClick={(page: TDirection) => getRecommendedArtists(page)}
+        previousI18n={recommendationsI18n.pagination.previous}
+        nextI18n={recommendationsI18n.pagination.next}
+        disablePrevious={recommendedArtistsCurrentPage === 1}
       />
     </>
   );
