@@ -6,7 +6,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     const authorization = req.headers.get('Authorization');
     const searchParams = req.nextUrl.searchParams;
-    const page = Number(searchParams.get('page')) || 1;
+    const page = Number(searchParams.get('page')) || 0;
     const offset = Number(searchParams.get('offset')) || 10;
 
     const response = await fetch(

@@ -2,7 +2,7 @@
 import { FC, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 import { ButtonAction } from '@/components/ButtonFollowArtist/ButtonFollowArtist.types';
-import { TDirection } from '@/components/Pagination/Pagination';
+import { usePaginatedFetch } from '@/hooks/usePaginatedFetch';
 import { Paths } from '@/types/endpoints';
 import { components } from '@/types/schema';
 
@@ -14,7 +14,6 @@ interface ChildrenProps {
 
 const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   const [followedArtistList, setFollowedArtistList] = useState<components['schemas']['ArtistDto'][]>([]);
-  const [loading, setLoading] = useState(false);
   const areFollowedArtistsInitialised = useRef(false);
 
   // Update artists list state without re-fetching again from the API
@@ -33,39 +32,20 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
     [followedArtistList],
   );
 
-  const [pagination, setPagination] = useState({
-    page: 1,
-    offset: 10,
+  const {
+    data: followedArtistsData,
+    loading: loadingFollowed,
+    pagination: followedPagination,
+    fetchData: getFollowedArtists,
+  } = usePaginatedFetch<components['schemas']['FollowedArtistsResponse']>({
+    endpoint: Paths.FollowedArtists,
   });
 
-  const getFollowedArtists = useCallback(
-    (direction?: TDirection) => {
-      setLoading(true);
-
-      let page = pagination.page;
-      if (direction === 'next') {
-        page++;
-      } else if (direction === 'previous' && page > 1) {
-        page--;
-      }
-
-      fetch(`${Paths.FollowedArtists}?page=${page}&offset=${pagination.offset}`, {
-        method: 'GET',
-      })
-        .then(res => res.json())
-        .then((followedArtistsResponse: components['schemas']['FollowedArtistsResponse']) => {
-          if (followedArtistsResponse?.rows) {
-            setFollowedArtistList(followedArtistsResponse.rows);
-            setPagination(prev => ({ ...prev, page }));
-          }
-        })
-        .finally(() => {
-          setLoading(false);
-        })
-        .catch(console.error);
-    },
-    [pagination],
-  );
+  useEffect(() => {
+    if (followedArtistsData?.rows) {
+      setFollowedArtistList(followedArtistsData.rows);
+    }
+  }, [followedArtistsData]);
 
   useEffect(() => {
     if (!areFollowedArtistsInitialised.current) {
@@ -78,52 +58,33 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   const [recommendedArtistList, setRecommendedArtistList] = useState<components['schemas']['SearchResultArtistDto'][]>(
     [],
   );
-  const [loadingRecommended, setLoadingRecommended] = useState(false);
-  const [recommendedPagination, setRecommendedPagination] = useState({
-    page: 1,
-    offset: 10,
+
+  const {
+    data: recommendedArtistsData,
+    loading: loadingRecommended,
+    pagination: recommendedPagination,
+    fetchData: getRecommendedArtists,
+  } = usePaginatedFetch<components['schemas']['SearchResultArtistDto'][]>({
+    endpoint: Paths.Recommended,
   });
 
-  const getRecommendedArtists = useCallback(
-    (direction: TDirection) => {
-      setLoadingRecommended(true);
-
-      let page = recommendedPagination.page;
-      if (direction === 'next') {
-        page++;
-      } else if (direction === 'previous' && page > 1) {
-        page--;
-      }
-
-      fetch(`${Paths.Recommended}?page=${page}&offset=${recommendedPagination.offset}`, {
-        method: 'GET',
-      })
-        .then(res => res.json())
-        .then((recommendedArtistsResponse: components['schemas']['SearchResultArtistDto'][]) => {
-          if (recommendedArtistsResponse) {
-            setRecommendedArtistList(recommendedArtistsResponse);
-            setRecommendedPagination(prev => ({ ...prev, page }));
-          }
-        })
-        .finally(() => {
-          setLoadingRecommended(false);
-        })
-        .catch(console.error);
-    },
-    [recommendedPagination],
-  );
+  useEffect(() => {
+    if (recommendedArtistsData) {
+      setRecommendedArtistList(recommendedArtistsData);
+    }
+  }, [recommendedArtistsData]);
 
   return (
     <ArtistsListContext.Provider
       value={{
         followedArtistList,
         getFollowedArtists,
-        loading,
+        loading: loadingFollowed,
         memoryArtistListUpdate,
         recommendedArtistList,
         loadingRecommended,
         getRecommendedArtists,
-        followedArtistsCurrentPage: pagination.page,
+        followedArtistsCurrentPage: followedPagination.page,
         recommendedArtistsCurrentPage: recommendedPagination.page,
       }}
     >
