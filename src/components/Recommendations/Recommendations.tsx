@@ -4,13 +4,14 @@ import React, { useEffect, useRef } from 'react';
 import Pagination, { TDirection } from '@/components/Pagination/Pagination';
 import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton/RecommendationsSkeleton';
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
-import { followedArtistListI18n, recommendationsI18n } from '@/i18n';
+import { recommendationsI18n } from '@/i18n';
 
 import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 const Recommendations = () => {
-  const { recommendedArtistList, loadingRecommended, getRecommendedArtists } = useArtistsListContext();
+  const { recommendedArtistList, loadingRecommended, getRecommendedArtists, recommendedArtistsCurrentPage } =
+    useArtistsListContext();
   const areRecommendedArtistsInitialised = useRef(false);
 
   useEffect(() => {
@@ -35,8 +36,9 @@ const Recommendations = () => {
       />
       <Pagination
         handleClick={(page: TDirection) => getRecommendedArtists(page)}
-        previousI18n={followedArtistListI18n.pagination.previous}
-        nextI18n={followedArtistListI18n.pagination.next}
+        previousI18n={recommendationsI18n.pagination.previous}
+        nextI18n={recommendationsI18n.pagination.next}
+        disablePrevious={recommendedArtistsCurrentPage === 1}
       />
     </>
   );

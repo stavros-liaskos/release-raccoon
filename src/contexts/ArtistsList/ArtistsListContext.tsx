@@ -11,7 +11,9 @@ interface ArtistsListContextType {
   memoryArtistListUpdate: (artist: components['schemas']['ArtistDto'], action: ButtonAction) => void;
   recommendedArtistList: components['schemas']['SearchResultArtistDto'][];
   loadingRecommended: boolean;
-  getRecommendedArtists: (direction: TDirection) => void;
+  getRecommendedArtists: (direction?: TDirection) => void;
+  followedArtistsCurrentPage: number;
+  recommendedArtistsCurrentPage: number;
 }
 
 export const ArtistsListContext: React.Context<ArtistsListContextType> = createContext<ArtistsListContextType>(

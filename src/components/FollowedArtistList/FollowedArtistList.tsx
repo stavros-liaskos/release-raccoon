@@ -12,7 +12,7 @@ import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 import Loading from '../Loading/Loading';
 
 const FollowedArtistList: React.FunctionComponent = () => {
-  const { followedArtistList, loading, getFollowedArtists } = useArtistsListContext();
+  const { followedArtistList, loading, getFollowedArtists, followedArtistsCurrentPage } = useArtistsListContext();
   const [filterInput, setFilterInput] = useState('');
 
   return (
@@ -33,6 +33,7 @@ const FollowedArtistList: React.FunctionComponent = () => {
         handleClick={(page: TDirection) => getFollowedArtists(page)}
         previousI18n={followedArtistListI18n.pagination.previous}
         nextI18n={followedArtistListI18n.pagination.next}
+        disablePrevious={followedArtistsCurrentPage === 1}
       />
     </>
   );

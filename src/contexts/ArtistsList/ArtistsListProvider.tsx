@@ -123,6 +123,8 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
         recommendedArtistList,
         loadingRecommended,
         getRecommendedArtists,
+        followedArtistsCurrentPage: pagination.page,
+        recommendedArtistsCurrentPage: recommendedPagination.page,
       }}
     >
       {children}
