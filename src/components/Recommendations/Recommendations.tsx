@@ -1,10 +1,10 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 
-import Button from '@/components/Button/Button';
+import Pagination, { TDirection } from '@/components/Pagination/Pagination';
 import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton/RecommendationsSkeleton';
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
-import { recommendationsI18n } from '@/i18n';
+import { followedArtistListI18n, recommendationsI18n } from '@/i18n';
 
 import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
@@ -33,14 +33,11 @@ const Recommendations = () => {
         artistsList={recommendedArtistList}
         buttonAction={ButtonAction.Follow}
       />
-      <div className="flex justify-center mt-4">
-        <Button handleClick={() => getRecommendedArtists('previous')} className="btn-large rounded-r-none">
-          {recommendationsI18n.pagination.previous}
-        </Button>
-        <Button handleClick={() => getRecommendedArtists('next')} className="btn-large rounded-l-none">
-          {recommendationsI18n.pagination.next}
-        </Button>
-      </div>
+      <Pagination
+        handleClick={(page: TDirection) => getRecommendedArtists(page)}
+        previousI18n={followedArtistListI18n.pagination.previous}
+        nextI18n={followedArtistListI18n.pagination.next}
+      />
     </>
   );
 };

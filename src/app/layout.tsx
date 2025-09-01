@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <div className="sm:border-x-2 rr-border flex flex-col h-screen">
               <Header />
 
-              <main className="rr-column flex-auto max-h-full">
+              <main className="rr-column flex-auto max-h-full overflow-y-auto">
                 <div className="flex flex-col flex-auto w-full lg:w-9/12">{children}</div>
               </main>
 

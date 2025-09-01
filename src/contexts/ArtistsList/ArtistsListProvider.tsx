@@ -2,6 +2,7 @@
 import { FC, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 import { ButtonAction } from '@/components/ButtonFollowArtist/ButtonFollowArtist.types';
+import { TDirection } from '@/components/Pagination/Pagination';
 import { Paths } from '@/types/endpoints';
 import { components } from '@/types/schema';
 
@@ -38,7 +39,7 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   });
 
   const getFollowedArtists = useCallback(
-    (direction?: 'next' | 'previous') => {
+    (direction?: TDirection) => {
       setLoading(true);
 
       let page = pagination.page;
@@ -84,7 +85,7 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   });
 
   const getRecommendedArtists = useCallback(
-    (direction?: 'next' | 'previous') => {
+    (direction: TDirection) => {
       setLoadingRecommended(true);
 
       let page = recommendedPagination.page;

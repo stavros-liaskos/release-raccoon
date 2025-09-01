@@ -1,9 +1,8 @@
 'use client';
-import { useState } from 'react';
-
-import Button from '@/components/Button/Button';
+import React, { useState } from 'react';
 
 import FormInput from '@/components/FollowedArtistList/FormInput';
+import Pagination, { TDirection } from '@/components/Pagination/Pagination';
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
 import { followedArtistListI18n } from '@/i18n';
 import { components } from '@/types/schema';
@@ -30,20 +29,11 @@ const FollowedArtistList: React.FunctionComponent = () => {
           buttonAction={ButtonAction.Unfollow}
         />
       )}
-      <div className="flex justify-center mt-4">
-        <Button
-          handleClick={() => getFollowedArtists('previous')}
-          className="btn-large rounded-r-none"
-        >
-          {followedArtistListI18n.pagination.previous}
-        </Button>
-        <Button
-          handleClick={() => getFollowedArtists('next')}
-          className="btn-large rounded-l-none"
-        >
-          {followedArtistListI18n.pagination.next}
-        </Button>
-      </div>
+      <Pagination
+        handleClick={(page: TDirection) => getFollowedArtists(page)}
+        previousI18n={followedArtistListI18n.pagination.previous}
+        nextI18n={followedArtistListI18n.pagination.next}
+      />
     </>
   );
 };

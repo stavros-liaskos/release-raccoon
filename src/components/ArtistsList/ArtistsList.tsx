@@ -20,7 +20,7 @@ const ArtistsList = ({ i18n, artistsList, buttonAction }: ArtistsListProp) => {
     return null;
   }
   return (
-    <div className="overflow-x-hidden w-full h-150">
+    <div className="overflow-x-hidden w-full">
       {!artistsList?.length ? (
         <p className="rr-text flex justify-center">{i18n.noArtists}</p>
       ) : (
