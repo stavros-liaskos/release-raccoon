@@ -32,23 +32,39 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
     [followedArtistList],
   );
 
-  const getFollowedArtists = useCallback(() => {
-    setLoading(true);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    offset: 10,
+  });
 
-    fetch(`${Paths.FollowedArtists}`, {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then((followedArtistsResponse: components['schemas']['FollowedArtistsResponse']) => {
-        followedArtistsResponse?.rows &&
-          JSON.stringify(followedArtistsResponse?.rows) !== JSON.stringify(followedArtistList) &&
-          setFollowedArtistList(followedArtistsResponse.rows);
+  const getFollowedArtists = useCallback(
+    (direction?: 'next' | 'previous') => {
+      setLoading(true);
+
+      let page = pagination.page;
+      if (direction === 'next') {
+        page++;
+      } else if (direction === 'previous' && page > 1) {
+        page--;
+      }
+
+      fetch(`${Paths.FollowedArtists}?page=${page}&offset=${pagination.offset}`, {
+        method: 'GET',
       })
-      .finally(() => {
-        setLoading(false);
-      })
-      .catch(console.error);
-  }, [followedArtistList]);
+        .then(res => res.json())
+        .then((followedArtistsResponse: components['schemas']['FollowedArtistsResponse']) => {
+          if (followedArtistsResponse?.rows) {
+            setFollowedArtistList(followedArtistsResponse.rows);
+            setPagination(prev => ({ ...prev, page }));
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+        })
+        .catch(console.error);
+    },
+    [pagination],
+  );
 
   useEffect(() => {
     if (!areFollowedArtistsInitialised.current) {

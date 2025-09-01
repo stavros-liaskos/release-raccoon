@@ -19,7 +19,7 @@ exports[`FollowedArtistList matches snapshot 1`] = `
     </form>
   </div>
   <div
-    class="overflow-auto w-full h-150"
+    class="overflow-x-hidden w-full h-150"
   >
     <div
       class="flex justify-between items-center dark:even:bg-gh-darkly even:bg-gray-100 h-12"
@@ -148,6 +148,22 @@ exports[`FollowedArtistList matches snapshot 1`] = `
         </div>
       </div>
     </div>
+  </div>
+  <div
+    class="flex justify-center mt-4"
+  >
+    <button
+      class="btn flex btn-large rounded-r-none"
+      type="button"
+    >
+      Previous
+    </button>
+    <button
+      class="btn flex btn-large rounded-l-none"
+      type="button"
+    >
+      Next
+    </button>
   </div>
 </div>
 `;

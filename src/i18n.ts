@@ -38,6 +38,10 @@ export const followedArtistListI18n = {
   formInput: {
     label: 'Filter Followed artists',
   },
+  pagination: {
+    previous: 'Previous',
+    next: 'Next',
+  },
 };
 
 export const loginI18n = {

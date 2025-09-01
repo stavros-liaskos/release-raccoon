@@ -1,5 +1,7 @@
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
+
+import Button from '@/components/Button/Button';
 
 import FormInput from '@/components/FollowedArtistList/FormInput';
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
@@ -11,7 +13,7 @@ import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 import Loading from '../Loading/Loading';
 
 const FollowedArtistList: React.FunctionComponent = () => {
-  const { followedArtistList, loading } = useArtistsListContext();
+  const { followedArtistList, loading, getFollowedArtists } = useArtistsListContext();
   const [filterInput, setFilterInput] = useState('');
 
   return (
@@ -28,6 +30,20 @@ const FollowedArtistList: React.FunctionComponent = () => {
           buttonAction={ButtonAction.Unfollow}
         />
       )}
+      <div className="flex justify-center mt-4">
+        <Button
+          handleClick={() => getFollowedArtists('previous')}
+          className="btn-large rounded-r-none"
+        >
+          {followedArtistListI18n.pagination.previous}
+        </Button>
+        <Button
+          handleClick={() => getFollowedArtists('next')}
+          className="btn-large rounded-l-none"
+        >
+          {followedArtistListI18n.pagination.next}
+        </Button>
+      </div>
     </>
   );
 };
