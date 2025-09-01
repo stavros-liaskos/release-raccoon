@@ -28,7 +28,7 @@ export async function GET() {
   }
 }
 
-// Exchange above code for an access token
+// Send above code/state to BE. BE will get Spotify token, scrape user's followers and followed them in RR
 export async function POST(request: NextRequest) {
   const authorization = request.headers.get('Authorization');
 
@@ -56,36 +56,14 @@ export async function POST(request: NextRequest) {
     });
 
     if (!response.ok) {
+      console.error(response.statusText);
       return NextResponse.json(
         {
           statusText: response.statusText,
-          message: 'Failed to get access token',
+          message: 'Failed to scrape Spotify data',
         },
         { status: response.status },
       );
-    }
-
-    const data = await response.json();
-    const accessToken = data?.access_token;
-
-    if (!accessToken) {
-      return NextResponse.json({ message: 'Failed to get access token', error: data }, { status: 500 });
-    }
-
-    // Scrape Spotify with the access token
-    const scrapeRes = await fetch(
-      `${process.env.API_BASE_URL}/${API_Paths.ScrapeSpotify}?email=${encodeURIComponent(email)}&spotifyAccessToken=${encodeURIComponent(accessToken)}`,
-      {
-        headers: {
-          ...(authorization && { authorization }),
-          'content-type': 'text/plain',
-        },
-        method: 'GET',
-      },
-    );
-
-    if (!scrapeRes.ok) {
-      return NextResponse.json({ message: scrapeRes.statusText, status: scrapeRes.status });
     }
 
     return NextResponse.json({
@@ -93,6 +71,6 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: 'Failed to exchange code for token', error }, { status: 500 });
+    return NextResponse.json({ message: 'Failed to scrape spotify data', error }, { status: 500 });
   }
 }
