@@ -6,8 +6,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     const authorization = req.headers.get('Authorization');
     const searchParams = req.nextUrl.searchParams;
-    const page = searchParams.get('page');
-    const offset = searchParams.get('offset');
+    const page = Number(searchParams.get('page')) || 1;
+    const offset = Number(searchParams.get('offset')) || 10;
 
     const response = await fetch(
       `${process.env.API_BASE_URL}/${API_Paths.FollowedArtists}?page=${page}&offset=${offset}`,
