@@ -365,7 +365,10 @@ export interface paths {
     /** Get Followed Artists */
     get: {
       parameters: {
-        query?: never;
+        query?: {
+          page?: number;
+          size?: number;
+        };
         header?: never;
         path?: never;
         cookie?: never;
@@ -1057,7 +1060,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** Scrape Spotify Taste */
+    /** Scrape Spotify Taste Web App */
     get: {
       parameters: {
         query?: {
@@ -1094,6 +1097,71 @@ export interface paths {
     };
     put?: never;
     post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/scrape-taste/spotify/client-auth': {
+    parameters: {
+      query?: {
+        email?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Scrape Spotify Taste Client Auth */
+    post: {
+      parameters: {
+        query?: {
+          email?: string;
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['SpotifyAuth'];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['UserArtist'][];
+          };
+        };
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+        /** @description Not Authorized */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+        /** @description Not Allowed */
+        403: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
     delete?: never;
     options?: never;
     head?: never;
@@ -1203,6 +1271,108 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/stats': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get All Stats */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/stats/artists/count': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get Artist Count */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/stats/releases/count': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get Release Count */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/test-ui/test-ui': {
     parameters: {
       query?: never;
@@ -1272,6 +1442,8 @@ export interface components {
       lastfmUri?: string;
       spotifyUri?: string;
       musicbrainzId?: string;
+      /** Format: int32 */
+      followerCount?: number;
     };
     ArtistSearchResponse: {
       /** Format: int32 */
@@ -1283,9 +1455,15 @@ export interface components {
       total?: number;
       rows?: components['schemas']['ArtistDto'][];
     };
-    /** Format: date */
+    /**
+     * Format: date
+     * @example 2022-03-10
+     */
     LocalDate: string;
-    /** Format: date-time */
+    /**
+     * Format: date-time
+     * @example 2022-03-10T12:15:50
+     */
     LocalDateTime: string;
     RaccoonUser: {
       /** Format: int64 */
@@ -1337,7 +1515,6 @@ export interface components {
       releases?: components['schemas']['Release'][];
     };
     SearchResultArtistDto: {
-      followerCount?: number;
       /** Format: int64 */
       id?: number;
       name: string;
@@ -1345,6 +1522,12 @@ export interface components {
       spotifyUri?: string;
       musicbrainzId?: string;
       followedByUser?: boolean;
+      /** Format: int32 */
+      followerCount?: number;
+    };
+    SpotifyAuth: {
+      code?: string;
+      state?: string;
     };
     UserArtist: {
       /** Format: float */

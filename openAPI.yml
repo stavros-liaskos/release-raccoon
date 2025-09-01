@@ -40,6 +40,9 @@ components:
           type: string
         musicbrainzId:
           type: string
+        followerCount:
+          type: integer
+          format: int32
     ArtistSearchResponse:
       type: object
       properties:
@@ -179,6 +182,16 @@ components:
           type: string
         followedByUser:
           type: boolean
+        followerCount:
+          type: integer
+          format: int32
+    SpotifyAuth:
+      type: object
+      properties:
+        code:
+          type: string
+        state:
+          type: string
     UserArtist:
       type: object
       properties:
@@ -391,6 +404,19 @@ paths:
         - SecurityScheme: []
   /me/followed-artists:
     get:
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            format: int32
+          required: false
+        - name: size
+          in: query
+          schema:
+            type: integer
+            format: int32
+          required: false
       responses:
         '200':
           description: OK
@@ -809,7 +835,40 @@ paths:
           description: Not Authorized
         '403':
           description: Not Allowed
-      summary: Scrape Spotify Taste
+      summary: Scrape Spotify Taste Web App
+      tags:
+        - Taste Scraping Resource
+      security:
+        - SecurityScheme: []
+  /scrape-taste/spotify/client-auth:
+    parameters:
+      - name: email
+        in: query
+        schema:
+          type: string
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpotifyAuth'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserArtist'
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
+        '400':
+          description: Bad Request
+      summary: Scrape Spotify Taste Client Auth
       tags:
         - Taste Scraping Resource
       security:
@@ -863,6 +922,30 @@ paths:
       summary: Get User Top Artists
       tags:
         - Spotify Auth Resource
+  /stats:
+    get:
+      responses:
+        '200':
+          description: OK
+      summary: Get All Stats
+      tags:
+        - Stats Resource
+  /stats/artists/count:
+    get:
+      responses:
+        '200':
+          description: OK
+      summary: Get Artist Count
+      tags:
+        - Stats Resource
+  /stats/releases/count:
+    get:
+      responses:
+        '200':
+          description: OK
+      summary: Get Release Count
+      tags:
+        - Stats Resource
   /test-ui/test-ui:
     get:
       responses:
