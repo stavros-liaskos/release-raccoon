@@ -89,8 +89,8 @@ describe('formInputI18n', () => {
 });
 
 describe('footerI18n', () => {
-  it('should have correct powered', () => {
-    expect(footerI18n.powered).toBe('Powered by');
+  it('should have correct copyright', () => {
+    expect(footerI18n.copyright).toBe('© Release Raccoon');
   });
 });
 
