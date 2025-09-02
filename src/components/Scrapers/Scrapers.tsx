@@ -16,8 +16,6 @@ const Scrapers = () => {
       <div className="flex flex-col lg:justify-center md:flex-row flex-none gap-2 my-2 md:my-5 w-full">
         <SpotifyStatus
           buttonText={rrUser.spotifyEnabled ? scrapersI18n.connected : scrapersI18n.connect}
-          musicService={'Spotify'}
-          iconName={'Spotify'}
           connected={rrUser.spotifyEnabled}
         />
         <LastFmForm />

@@ -4,7 +4,7 @@ import { API_Paths, NavigationPaths, SpotifyPaths } from '@/types/endpoints';
 
 const SPOTIFY_REDIRECT_URI = `https://release-raccoon.vercel.app${NavigationPaths.Spotify}`;
 
-// Login to spotify and get code
+// Return spotify url for login
 export async function GET() {
   try {
     const searchParams = new URLSearchParams({
@@ -12,7 +12,6 @@ export async function GET() {
       client_id: process.env.SPOTIFY_CLIENT_ID!,
       scope: process.env.SPOTIFY_AUTH_SCOPES!,
       redirect_uri: SPOTIFY_REDIRECT_URI,
-      // state: state // TODO: implement state for CSRF protection
     });
 
     const response = await fetch(`${process.env.SPOTIFY_API_URL}${SpotifyPaths.Authorize}?${searchParams}`, {
@@ -45,7 +44,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'Code is required' }, { status: 400 });
     }
 
-    console.warn(JSON.stringify({ code, state }));
     const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.ScrapeSpotifyWithAuth}`, {
       method: 'POST',
       headers: {
@@ -54,9 +52,6 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify({ code, state }),
     });
-
-    console.log('Fetch response');
-    console.log(response);
 
     if (!response.ok) {
       console.error(response.statusText);
@@ -69,11 +64,10 @@ export async function POST(request: NextRequest) {
       );
     }
     const data = await response.json();
-    console.log('Scrape response');
-    console.log(data);
 
     return NextResponse.json({
       status: response.status,
+      data,
     });
   } catch (error) {
     console.error(error);
