@@ -55,6 +55,9 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({ code, state }),
     });
 
+    console.log('Fetch response');
+    console.log(response);
+
     if (!response.ok) {
       console.error(response.statusText);
       return NextResponse.json(
@@ -65,6 +68,9 @@ export async function POST(request: NextRequest) {
         { status: response.status },
       );
     }
+    const data = await response.json();
+    console.log('Scrape response');
+    console.log(data);
 
     return NextResponse.json({
       status: response.status,
