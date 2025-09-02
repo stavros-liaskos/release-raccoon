@@ -10,7 +10,7 @@ export async function GET() {
     const searchParams = new URLSearchParams({
       response_type: 'code',
       client_id: process.env.SPOTIFY_CLIENT_ID!,
-      scope: process.env.SPOTIFY_AUTH_SCOPES!,
+      // scope: process.env.SPOTIFY_AUTH_SCOPES!, // TODO is it needed?
       redirect_uri: SPOTIFY_REDIRECT_URI,
       // state: state // TODO: implement state for CSRF protection
     });

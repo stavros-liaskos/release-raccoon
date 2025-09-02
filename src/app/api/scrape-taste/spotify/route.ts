@@ -9,13 +9,7 @@ export async function GET(req: NextRequest) {
     const email = session?.user?.email;
 
     if (!email) {
-      return NextResponse.json({ message: 'User needs to login first' }, { status: 401 });
-    }
-
-    const { accessToken } = await req.json();
-
-    if (!accessToken || !email) {
-      return NextResponse.json({ message: 'Spotify accessToken or user email address are missing' }, { status: 401 });
+      return NextResponse.json({ message: 'User email is missing' }, { status: 400 });
     }
 
     const authorization = req.headers.get('Authorization');

@@ -2,13 +2,15 @@
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react';
 
+import { Paths } from '@/types/endpoints';
+
 export default function SpotifyCallback() {
   const [loading, setLoading] = React.useState(true);
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
 
   useEffect(() => {
-    fetch('/api/spotify', {
+    fetch(`/${Paths.SpotifyCode}`, {
       method: 'POST',
       body: JSON.stringify({
         code,

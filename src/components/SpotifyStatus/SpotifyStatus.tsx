@@ -28,7 +28,7 @@ const SpotifyStatus = ({
   }
 
   async function handleScrape() {
-    await fetch(`/api/spotify`, {
+    await fetch(`/${Paths.SpotifyCode}`, {
       // TODO mv to endpoint
       method: 'GET',
     })
@@ -47,7 +47,7 @@ const SpotifyStatus = ({
   const MusicServiceIcon = getMusicServiceIcon(iconName);
 
   return (
-    <div className="flex justify-center items-center w-full  md:mb-6">
+    <div className="flex justify-center items-center w-full md:mb-6">
       <button
         onClick={() => handleScrape()}
         className={clsx('btn flex justify-between py-2 px-3 md:w-48', connected && 'rr-text-confirm! cursor-default!')}
