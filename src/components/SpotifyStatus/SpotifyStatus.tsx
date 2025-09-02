@@ -34,6 +34,7 @@ const SpotifyStatus = ({ buttonText, connected }: { buttonText: string; connecte
       <button
         onClick={() => handleScrape()}
         className={clsx('btn flex justify-between py-2 px-3 md:w-48', connected && 'rr-text-confirm! cursor-default!')}
+        disabled={connected}
       >
         <Spotify width={30} />
         {buttonText}

@@ -90,7 +90,8 @@ Each commit to `master` triggers a production deployment.
 ## Spotify
 
 The user can connect their Spotify account to the app and follow the same artists by "scraping" their Spotify profile.  
-Spotify session is needed to generate access token and access their API, best described [here](https://developer.spotify.com/documentation/web-api/tutorials/code-flow).
+Spotify session is needed to generate access token and access their API, best described [here](https://developer.spotify.com/documentation/web-api/tutorials/code-flow).  
+In a nutshell, FE handles the Spotify login and then sends the `code` to BE. BE uses this code to generate token, scrape user's followed artists and merge them to RR DB.
 
 ## Dark mode
 
