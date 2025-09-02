@@ -88,7 +88,7 @@ export const formInputI18n = {
 };
 
 export const footerI18n = {
-  powered: 'Powered by',
+  copyright: '© Release Raccoon',
 };
 export const artistsListI18n = {
   noArtists: 'You do not track any artists yet',

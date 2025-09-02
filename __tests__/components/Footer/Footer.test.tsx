@@ -4,7 +4,7 @@ import Footer from '@/components/Footer/Footer';
 
 jest.mock('@/i18n', () => ({
   footerI18n: {
-    powered: 'Powered by',
+    copyright: '© Release Raccoon',
   },
 }));
 
@@ -16,9 +16,8 @@ describe('Footer', () => {
     expect(supportLink).toBeInTheDocument();
     expect(supportLink.closest('a')).toHaveAttribute('href', '/support');
 
-    const poweredByLink = getByText('Powered by');
-    expect(poweredByLink).toBeInTheDocument();
-    expect(poweredByLink.closest('a')).toHaveAttribute('href', 'https://github.com/jaivalis/release-raccoon');
+    const copyrightText = getByText(`© Release Raccoon ${new Date().getFullYear()}`);
+    expect(copyrightText).toBeInTheDocument();
   });
 
   it('matches snapshot', () => {
