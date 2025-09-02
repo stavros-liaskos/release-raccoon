@@ -9,9 +9,16 @@ export const NavigationPaths: { [key: string]: string } = {
   Home: '/',
   Profile: '/profile',
   Settings: '/profile/settings',
+  Spotify: '/profile/spotify',
 };
 
-// FE Endpoints that call Next.js' Router Handler (aka Next.js API routes)
+// Spotify endpoints
+export const SpotifyPaths: { [key: string]: string } = {
+  Authorize: '/authorize',
+  Token: '/api/token',
+};
+
+// Router Handler endpoints (aka Next.js API routes)
 export const Paths: { [key: string]: string } = {
   Auth: '/api/auth/me',
   Search: `api/artist/search`,
@@ -21,13 +28,13 @@ export const Paths: { [key: string]: string } = {
   UnfollowArtist: `api/me/unfollow`,
   RaccoonUser: `api/raccoon-user`, // TODO rm
   ScrapeLastFM: `api/scrape-taste/lastfm`,
-  ScrapeSpotify: `api/scrape-taste/spotify`,
+  SpotifyCode: `api/spotify`,
   EnableSrapeServices: `api/me/enable-services`, // TODO
   Settings: `api/me/settings`, // TODO
   Stats: `api/stats`,
 };
 
-// Route handlers' external API paths
+// External API paths
 export const API_Paths: { [key: string]: string } = {
   Auth: '/api/auth/me',
   Search: `artist/search`,
@@ -37,7 +44,7 @@ export const API_Paths: { [key: string]: string } = {
   UnfollowArtist: `me/unfollow`,
   RaccoonUser: `raccoon-user`, // TODO rm
   ScrapeLastFM: `scrape-taste/lastfm`,
-  ScrapeSpotify: `scrape-taste/spotify`,
+  ScrapeSpotifyWithAuth: `scrape-taste/spotify/client-auth`,
   EnableSrapeServices: `me/enable-services`, // TODO
   Settings: `me/settings`, // TODO
   Stats: `stats`,
