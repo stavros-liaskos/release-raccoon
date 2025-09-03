@@ -21,16 +21,16 @@ export const SpotifyPaths: { [key: string]: string } = {
 // Router Handler endpoints (aka Next.js API routes)
 export const Paths: { [key: string]: string } = {
   Auth: '/api/auth/me',
-  Search: `api/artist/search`,
-  Recommended: `api/artists/recommended`,
-  Follow: `api/me/follow`,
-  FollowedArtists: `api/me/followed-artists`,
-  UnfollowArtist: `api/me/unfollow`,
-  RaccoonUser: `api/me/profile`,
-  ScrapeLastFM: `api/scrape-taste/lastfm`,
-  SpotifyCode: `api/spotify`,
-  EnableSrapeServices: `api/me/enable-services`, // TODO
-  Settings: `api/me/settings`, // TODO
+  Search: `api/protected/artist/search`,
+  Recommended: `api/protected/artists/recommended`,
+  Follow: `api/protected/follow`,
+  FollowedArtists: `api/protected/followed-artists`,
+  UnfollowArtist: `api/protected/unfollow`,
+  RaccoonUser: `api/protected/profile`,
+  ScrapeLastFM: `api/protected/scrape-taste/lastfm`,
+  SpotifyCode: `api/protected/spotify`,
+  EnableSrapeServices: `api/protected/enable-services`, // TODO
+  Settings: `api/protected/settings`, // TODO
   Stats: `api/stats`,
 };
 
