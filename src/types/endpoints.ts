@@ -26,7 +26,7 @@ export const Paths: { [key: string]: string } = {
   Follow: `api/me/follow`,
   FollowedArtists: `api/me/followed-artists`,
   UnfollowArtist: `api/me/unfollow`,
-  RaccoonUser: `api/raccoon-user`, // TODO rm
+  RaccoonUser: `api/me/profile`,
   ScrapeLastFM: `api/scrape-taste/lastfm`,
   SpotifyCode: `api/spotify`,
   EnableSrapeServices: `api/me/enable-services`, // TODO
@@ -42,7 +42,7 @@ export const API_Paths: { [key: string]: string } = {
   Follow: `me/follow`,
   FollowedArtists: `me/followed-artists`,
   UnfollowArtist: `me/unfollow`,
-  RaccoonUser: `raccoon-user`, // TODO rm
+  RaccoonUser: `me/profile`,
   ScrapeLastFM: `scrape-taste/lastfm`,
   ScrapeSpotifyWithAuth: `scrape-taste/spotify/client-auth`,
   EnableSrapeServices: `me/enable-services`, // TODO

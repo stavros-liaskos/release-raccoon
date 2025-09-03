@@ -5,10 +5,9 @@ import { components } from '@/types/schema';
 export type TRrUser = {
   spotifyEnabled: boolean;
   lastfmUsername: string;
-  fetchedScrapers: boolean;
+  isUserFetched: boolean;
   unsubscribed: boolean;
   notifyIntervalDays: number;
-  fetchedSettings: boolean;
 };
 
 interface UserContextType {

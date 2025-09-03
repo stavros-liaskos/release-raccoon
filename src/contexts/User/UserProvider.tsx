@@ -22,41 +22,33 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
   const [rrUser, setRrUser] = useState<TRrUser>({
     spotifyEnabled: false,
     lastfmUsername: '',
-    fetchedScrapers: false,
+    isUserFetched: false,
     unsubscribed: false,
     notifyIntervalDays: 0,
-    fetchedSettings: false,
   });
   const [loadingSettings, setLoadingSettings] = useState(false);
 
   useEffect(() => {
-    if (rrUser?.fetchedSettings || rrUser?.fetchedScrapers) {
+    if (rrUser?.isUserFetched) {
       return;
     }
     const rrUserSessionStore = sessionStorage.getItem(RR_USER);
     if (rrUserSessionStore) {
       setRrUser({ ...rrUser, ...JSON.parse(rrUserSessionStore) });
     }
-  }, [pathname, rrUser, rrUser?.fetchedScrapers, rrUser?.fetchedSettings, user?.email]);
+  }, [pathname, rrUser, rrUser?.isUserFetched]);
 
-  // scrapers
   useEffect(() => {
     const rrUserSessionStore = JSON.parse(sessionStorage.getItem(RR_USER) || '{}');
-    if (rrUser?.fetchedScrapers || rrUserSessionStore?.fetchedScrapers || !user?.email) {
+    if (pathname !== NavigationPaths.Settings || !user?.email || rrUser?.isUserFetched) {
       return;
     }
 
-    fetch(`/${Paths.RaccoonUser}?email=${user.email}`, {
+    fetch(`/${Paths.RaccoonUser}`, {
       method: 'GET',
     })
       .then(res => res.json())
-      .then((raccoonUsers: components['schemas']['RaccoonUser'][]) => {
-        if (!Array.isArray(raccoonUsers)) {
-          return;
-        }
-        const raccoonUser = raccoonUsers.filter(
-          raccoonUser => raccoonUser?.email && raccoonUser.email === user.email,
-        )?.[0];
+      .then((raccoonUser: TRrUser) => {
         const isLastFmConnected = !!raccoonUser?.lastfmUsername;
         const isSpotifyConnected = !!raccoonUser?.spotifyEnabled;
         if (rrUser?.spotifyEnabled !== isSpotifyConnected || rrUser?.spotifyEnabled !== isLastFmConnected) {
@@ -65,49 +57,16 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
             ...rrUserSessionStore,
             spotifyEnabled: isSpotifyConnected,
             lastfmUsername: raccoonUser.lastfmUsername,
-            fetchedScrapers: true,
+            isUserFetched: true,
+            notifyIntervalDays: raccoonUser?.notifyIntervalDays,
+            unsubscribed: raccoonUser?.unsubscribed,
           };
           sessionStorage.setItem(RR_USER, JSON.stringify(updatedRrUser));
           setRrUser(updatedRrUser);
         }
       })
       .catch(console.error);
-  }, [rrUser, user?.email, setRrUser, pathname]);
-
-  // settings
-  useEffect(() => {
-    const rrUserSessionStore = JSON.parse(sessionStorage.getItem(RR_USER) || '{}');
-    if (
-      pathname !== NavigationPaths.Settings ||
-      rrUserSessionStore?.fetchedSettings ||
-      rrUser?.fetchedSettings ||
-      !user?.email
-    ) {
-      return;
-    }
-
-    setLoadingSettings(true);
-    fetch(`/${Paths.Settings}`, {
-      headers: {
-        'content-type': 'application/json',
-      },
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(result => {
-        const updatedRrUser = {
-          ...rrUser,
-          ...rrUserSessionStore,
-          notifyIntervalDays: result?.data?.notifyIntervalDays,
-          unsubscribed: result?.data?.unsubscribed,
-          fetchedSettings: true,
-        };
-        sessionStorage.setItem(RR_USER, JSON.stringify(updatedRrUser));
-        setRrUser(updatedRrUser);
-      })
-      .catch(console.error)
-      .finally(() => setLoadingSettings(false));
-  }, [rrUser, user?.email, setRrUser, pathname]);
+  }, [pathname, rrUser, user?.email]);
 
   async function updateSettings(settings: components['schemas']['UserSettings']) {
     // user session expired, redirect to login page
@@ -126,12 +85,13 @@ const UserProvider: FC<ChildrenProps> = ({ children }) => {
       body: JSON.stringify(settings),
     })
       .then(() => {
-        const updatedRrUser = {
-          ...rrUser,
-          ...settings,
-          fetchedSettings: true,
-        };
-        sessionStorage.setItem(RR_USER, JSON.stringify(updatedRrUser));
+        sessionStorage.setItem(
+          RR_USER,
+          JSON.stringify({
+            ...rrUser,
+            ...settings,
+          }),
+        );
       })
       .catch(console.error)
       .finally(() => setLoadingSettings(false));
