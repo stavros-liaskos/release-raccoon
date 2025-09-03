@@ -1,7 +1,7 @@
 /**
  * @jest-environment node
  */
-import { GET } from '@/app/api/raccoon-user/route';
+import { GET } from '@/app/api/me/profile/route';
 import readableStreamToString from '@/utils/readableStreamToString';
 
 jest.mock('@/lib/auth0', () => ({})); // TODO remove this mock when proper auth0 mock is implemented
