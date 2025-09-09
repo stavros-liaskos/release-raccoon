@@ -1,8 +1,5 @@
 ---
 openapi: 3.1.0
-tags:
-  - name: RaccoonUserResource
-  - name: ReleaseResource
 components:
   schemas:
     Artist:
@@ -208,6 +205,20 @@ components:
           $ref: '#/components/schemas/Artist'
           type: object
           writeOnly: true
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        spotifyEnabled:
+          type: boolean
+        lastfmUsername:
+          type: string
+        unsubscribed:
+          type: boolean
+        notifyIntervalDays:
+          type: integer
+          format: int32
     UserSettings:
       type: object
       properties:
@@ -433,6 +444,24 @@ paths:
         - User Profile Resource
       security:
         - SecurityScheme: []
+  /me/profile:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
+      summary: Get User Profile
+      tags:
+        - User Profile Resource
+      security:
+        - SecurityScheme: []
   /me/settings:
     post:
       requestBody:
@@ -492,228 +521,6 @@ paths:
       summary: Notify Users
       tags:
         - Notifying Resource
-  /raccoon-user:
-    get:
-      tags:
-        - RaccoonUserResource
-      parameters:
-        - name: email
-          in: query
-          schema:
-            type: string
-        - name: id
-          in: query
-          schema:
-            type: integer
-            format: int64
-        - name: lastfmUsername
-          in: query
-          schema:
-            type: string
-        - name: namedQuery
-          in: query
-          schema:
-            type: string
-        - name: page
-          in: query
-          schema:
-            type: integer
-            format: int32
-            default: 0
-        - name: size
-          in: query
-          schema:
-            type: integer
-            format: int32
-            default: 20
-        - name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
-        - name: spotifyEnabled
-          in: query
-          schema:
-            type: boolean
-        - name: username
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RaccoonUser'
-      summary: List
-    post:
-      tags:
-        - RaccoonUserResource
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RaccoonUser'
-        required: true
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RaccoonUser'
-        '400':
-          description: Bad Request
-      summary: Add
-  /raccoon-user/count:
-    get:
-      tags:
-        - RaccoonUserResource
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: integer
-                format: int64
-      summary: Count
-  /raccoon-user/{id}:
-    put:
-      tags:
-        - RaccoonUserResource
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RaccoonUser'
-        required: true
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RaccoonUser'
-        '400':
-          description: Bad Request
-      summary: Update
-    get:
-      tags:
-        - RaccoonUserResource
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RaccoonUser'
-      summary: Get
-    delete:
-      tags:
-        - RaccoonUserResource
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '204': {}
-      summary: Delete
-  /release:
-    get:
-      tags:
-        - ReleaseResource
-      parameters:
-        - name: id
-          in: query
-          schema:
-            type: integer
-            format: int64
-        - name: musicbrainzId
-          in: query
-          schema:
-            type: string
-        - name: name
-          in: query
-          schema:
-            type: string
-        - name: namedQuery
-          in: query
-          schema:
-            type: string
-        - name: page
-          in: query
-          schema:
-            type: integer
-            format: int32
-            default: 0
-        - name: size
-          in: query
-          schema:
-            type: integer
-            format: int32
-            default: 20
-        - name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
-        - name: spotifyUri
-          in: query
-          schema:
-            type: string
-        - name: type
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Release'
-      summary: List
-    post:
-      tags:
-        - ReleaseResource
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Release'
-        required: true
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Release'
-        '400':
-          description: Bad Request
-      summary: Add
   /release-scrape:
     put:
       responses:
@@ -726,76 +533,6 @@ paths:
       summary: Scrape Releases
       tags:
         - Release Scrape Resource
-  /release/count:
-    get:
-      tags:
-        - ReleaseResource
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: integer
-                format: int64
-      summary: Count
-  /release/{id}:
-    put:
-      tags:
-        - ReleaseResource
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Release'
-        required: true
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Release'
-        '400':
-          description: Bad Request
-      summary: Update
-    get:
-      tags:
-        - ReleaseResource
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Release'
-      summary: Get
-    delete:
-      tags:
-        - ReleaseResource
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '204': {}
-      summary: Delete
   /scrape-taste/lastfm:
     parameters:
       - name: email
@@ -962,4 +699,4 @@ paths:
         - SecurityScheme: []
 info:
   title: release-raccoon-app API
-  version: 0.4.8-SNAPSHOT
+  version: 0.5.0
