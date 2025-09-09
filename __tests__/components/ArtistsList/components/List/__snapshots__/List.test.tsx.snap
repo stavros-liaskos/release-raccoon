@@ -47,7 +47,7 @@ exports[`List matches snapshot 1`] = `
           class="btn flex btn-small lg:ml-8 my-2"
           type="button"
         >
-          Follow
+          Unfollow
         </button>
       </div>
     </div>
@@ -124,7 +124,7 @@ exports[`List matches snapshot 1`] = `
           class="btn flex btn-small lg:ml-8 my-2 border-gh-dark!"
           type="button"
         >
-          Follow
+          Unfollow
         </button>
       </div>
     </div>

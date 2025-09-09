@@ -44,7 +44,7 @@ const ButtonFollowArtist: React.FunctionComponent<ButtonFollowArtistType> = ({
         await unfollowArtist(artist);
       }
 
-      memoryArtistListUpdate(artist as components['schemas']['ArtistDto'], buttonAction);
+      memoryArtistListUpdate({ ...artist, followedByUser: true } as components['schemas']['ArtistDto'], buttonAction);
     } catch (error) {
       console.error(error);
     } finally {

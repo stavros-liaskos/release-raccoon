@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 
 import Badge from '@/components/Badge/Badge';
 import ButtonFollowArtist from '@/components/ButtonFollowArtist/ButtonFollowArtist';
+import { ButtonAction } from '@/components/ButtonFollowArtist/ButtonFollowArtist.types';
 import LastFm from '@/components/Icons/lastfm';
 import Spotify from '@/components/Icons/spotify';
 import { listI18n } from '@/i18n';
@@ -68,7 +69,7 @@ const List = ({ artistsList, buttonAction }: ArtistsListProp) => {
                 <ButtonFollowArtist
                   artist={artist}
                   className={clsx('btn-small lg:ml-8 my-2', index % 2 && 'border-gh-dark!')}
-                  buttonAction={buttonAction}
+                  buttonAction={getButtonAction(buttonAction, artist?.followedByUser)}
                 />
               </div>
             </div>
@@ -78,5 +79,12 @@ const List = ({ artistsList, buttonAction }: ArtistsListProp) => {
     </>
   );
 };
+
+function getButtonAction(buttonAction: ButtonAction, followedByUser?: boolean) {
+  if (typeof followedByUser === 'boolean') {
+    return followedByUser ? ButtonAction.Unfollow : ButtonAction.Follow;
+  }
+  return buttonAction;
+}
 
 export default List;
