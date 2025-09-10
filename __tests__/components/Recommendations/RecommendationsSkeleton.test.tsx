@@ -1,8 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
+import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton';
 import { recommendationsI18n } from '@/i18n';
-
-import RecommendationsSkeleton from './RecommendationsSkeleton';
 
 describe('RecommendationsSkeleton', () => {
   it('renders the title correctly', () => {

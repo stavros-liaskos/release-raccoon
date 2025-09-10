@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 
 import Pagination, { TDirection } from '@/components/Pagination/Pagination';
-import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton/RecommendationsSkeleton';
+import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton';
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
 import { recommendationsI18n } from '@/i18n';
 
