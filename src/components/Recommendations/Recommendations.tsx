@@ -1,8 +1,8 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 
+import ArtistListSkeleton from '@/components/ArtistsList/components/ArtistListSkeleton';
 import Pagination, { TDirection } from '@/components/Pagination/Pagination';
-import RecommendationsSkeleton from '@/components/Recommendations/RecommendationsSkeleton';
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
 import { recommendationsI18n } from '@/i18n';
 
@@ -21,19 +21,20 @@ const Recommendations = () => {
     }
   }, [getRecommendedArtists]);
 
-  if (loadingRecommended) {
-    return <RecommendationsSkeleton />;
-  }
-
   return (
     <>
       <h3 className="h3">{recommendationsI18n.title}</h3>
 
-      <ArtistsList
-        i18n={recommendationsI18n.artistList}
-        artistsList={recommendedArtistList}
-        buttonAction={ButtonAction.Follow}
-      />
+      {loadingRecommended ? (
+        <ArtistListSkeleton />
+      ) : (
+        <ArtistsList
+          i18n={recommendationsI18n.artistList}
+          artistsList={recommendedArtistList}
+          buttonAction={ButtonAction.Follow}
+        />
+      )}
+
       <Pagination
         handleClick={(page: TDirection) => getRecommendedArtists(page)}
         previousI18n={recommendationsI18n.pagination.previous}
