@@ -1,51 +1,12 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import Counter from '@/components/Counter/Counter';
+import { useStats } from '@/hooks/useStats';
 import { loginI18n } from '@/i18n';
-import { Paths } from '@/types/endpoints';
 
 const HeroStats: React.FunctionComponent = () => {
-  const [artistCount, setArtistCount] = useState<number>(0);
-  const [releaseCount, setReleaseCount] = useState<number>(0);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`/${Paths.Stats}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch stats: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        // Check if the response indicates an error
-        if (data.message?.includes('Server Error')) {
-          throw new Error(`API Error: ${data.message}`);
-        }
-
-        setArtistCount(data?.artistCount || 34705);
-        setReleaseCount(data?.releaseCount || 46899);
-      } catch (err) {
-        console.error('Error fetching stats:', err);
-        // Fallback to reasonable defaults
-        setArtistCount(34705);
-        setReleaseCount(46899);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    !artistCount && !releaseCount && fetchStats();
-  }, [artistCount, releaseCount]);
+  const { artistCount, releaseCount, loading } = useStats();
 
   return (
     <div className="grid grid-cols-2 gap-8 max-w-md mx-auto">
