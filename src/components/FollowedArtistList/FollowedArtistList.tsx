@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 
+import ArtistListSkeleton from '@/components/ArtistsList/components/ArtistListSkeleton';
 import FormInput from '@/components/FollowedArtistList/FormInput';
 import Pagination, { TDirection } from '@/components/Pagination/Pagination';
 import { useArtistsListContext } from '@/contexts/ArtistsList/ArtistsListContext';
@@ -9,7 +10,6 @@ import { components } from '@/types/schema';
 
 import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
-import Loading from '../Loading/Loading';
 
 const FollowedArtistList: React.FunctionComponent = () => {
   const { followedArtistList, loading, getFollowedArtists, followedArtistsCurrentPage } = useArtistsListContext();
@@ -21,7 +21,7 @@ const FollowedArtistList: React.FunctionComponent = () => {
         <FormInput handleAction={setFilterInput} i18n={followedArtistListI18n.formInput} />
       </div>
       {loading ? (
-        <Loading />
+        <ArtistListSkeleton />
       ) : (
         <ArtistsList
           i18n={followedArtistListI18n.artistList}
