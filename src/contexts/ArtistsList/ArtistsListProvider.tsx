@@ -1,5 +1,5 @@
 'use client';
-import { FC, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { ButtonAction } from '@/components/ButtonFollowArtist/ButtonFollowArtist.types';
 import { usePaginatedFetch } from '@/hooks/usePaginatedFetch';
@@ -74,23 +74,31 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
     }
   }, [recommendedArtistsData]);
 
-  return (
-    <ArtistsListContext.Provider
-      value={{
-        followedArtistList,
-        getFollowedArtists,
-        loading: loadingFollowed,
-        memoryArtistListUpdate,
-        recommendedArtistList,
-        loadingRecommended,
-        getRecommendedArtists,
-        followedArtistsCurrentPage: followedPagination.page,
-        recommendedArtistsCurrentPage: recommendedPagination.page,
-      }}
-    >
-      {children}
-    </ArtistsListContext.Provider>
+  const value = useMemo(
+    () => ({
+      followedArtistList,
+      getFollowedArtists,
+      loading: loadingFollowed,
+      memoryArtistListUpdate,
+      recommendedArtistList,
+      loadingRecommended,
+      getRecommendedArtists,
+      followedArtistsCurrentPage: followedPagination.page,
+      recommendedArtistsCurrentPage: recommendedPagination.page,
+    }),
+    [
+      followedArtistList,
+      getFollowedArtists,
+      loadingFollowed,
+      memoryArtistListUpdate,
+      recommendedArtistList,
+      loadingRecommended,
+      getRecommendedArtists,
+      followedPagination.page,
+      recommendedPagination.page,
+    ],
   );
+  return <ArtistsListContext.Provider value={value}>{children}</ArtistsListContext.Provider>;
 };
 
 export default ArtistsListProvider;
