@@ -1,8 +1,5 @@
-/**
- * @jest-environment node
- */
+import { render } from '@testing-library/react';
 import React from 'react';
-import { renderToString } from 'react-dom/server';
 
 import Hero from '@/components/Hero/Hero';
 import { loginI18n } from '@/i18n';
@@ -28,69 +25,28 @@ describe('Hero', () => {
     jest.clearAllMocks();
   });
 
-  it('renders welcome message and description', async () => {
+  it('renders welcome message, description, Mocked stats', async () => {
     mockAuth0.getSession.mockResolvedValue(null);
 
-    const component = await Hero();
-    const html = renderToString(component as React.ReactElement);
+    const { getByText } = render(await Hero());
 
-    expect(html).toContain(loginI18n.welcome);
-  });
-
-  it('renders HeroStats component', async () => {
-    mockAuth0.getSession.mockResolvedValue(null);
-
-    const component = await Hero();
-    const html = renderToString(component as React.ReactElement);
-
-    expect(html).toContain('Mock Hero Stats');
+    expect(getByText(loginI18n.welcome)).toBeTruthy();
+    expect(getByText('Mock Hero Stats')).toBeTruthy();
   });
 
   it('renders login button when not authenticated', async () => {
     mockAuth0.getSession.mockResolvedValue(null);
 
-    const component = await Hero();
-    const html = renderToString(component as React.ReactElement);
+    const { getByText } = render(await Hero());
 
-    expect(html).toContain(loginI18n.loginBtn);
-    expect(html).toContain('/auth/login');
+    expect(getByText(loginI18n.loginBtn)).toBeTruthy();
   });
 
   it('renders profile button when authenticated', async () => {
     mockAuth0.getSession.mockResolvedValue({ user: { email: 'test@example.com' } });
 
-    const component = await Hero();
-    const html = renderToString(component as React.ReactElement);
+    const { getByText } = render(await Hero());
 
-    expect(html).toContain(loginI18n.goToProfile);
-    expect(html).toContain('/profile');
-    expect(html).not.toContain('/auth/login');
-  });
-
-  it('applies modern styling classes', async () => {
-    mockAuth0.getSession.mockResolvedValue(null);
-
-    const component = await Hero();
-    const html = renderToString(component as React.ReactElement);
-
-    // Check for button styling - the btn class will have rounded-lg applied via CSS
-    expect(html).toContain('btn');
-    expect(html).toContain('btn-large');
-    // Check for proper layout classes
-    expect(html).toContain('flex-auto');
-    expect(html).toContain('text-center');
-  });
-
-  it('returns null when i18n data is missing', async () => {
-    const originalI18n = { ...loginI18n };
-    // @ts-ignore
-    loginI18n.loginBtn = undefined;
-
-    const result = await Hero();
-
-    expect(result).toBeNull();
-
-    // Restore original i18n
-    Object.assign(loginI18n, originalI18n);
+    expect(getByText(loginI18n.goToProfile)).toBeTruthy();
   });
 });

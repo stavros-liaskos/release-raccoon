@@ -1,6 +1,6 @@
 import { Paths } from '@/types/endpoints';
 
-export type RrStats = {
+type RrStats = {
   artistCount: number;
   releaseCount: number;
 };

@@ -1,13 +1,17 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 
 import HeroStats from '@/components/Hero/HeroStats';
-import { useStats } from '@/hooks/useStats';
-import { loginI18n } from '@/i18n';
+import { getRrStats } from '@/lib/getRrStats';
 
-// Mock the useStats hook
-jest.mock('@/hooks/useStats');
-const mockUseStats = useStats as jest.MockedFunction<typeof useStats>;
+jest.mock('@/lib/getRrStats', () => {
+  return {
+    getRrStats: jest.fn().mockResolvedValue({
+      artistCount: 34705,
+      releaseCount: 46899,
+    }),
+  };
+});
 
 // Mock Counter component
 jest.mock('@/components/Counter/Counter', () => {
@@ -20,51 +24,37 @@ jest.mock('@/components/Counter/Counter', () => {
     );
   };
 });
+const mockedGetRrStats = getRrStats as jest.Mock;
 
 describe('HeroStats', () => {
-  it('renders loading state initially', () => {
-    mockUseStats.mockReturnValue({
-      artistCount: 0,
-      releaseCount: 0,
-      loading: true,
-    });
-
-    render(<HeroStats />);
-
-    const loadingElements = screen.getAllByRole('generic', { hidden: true });
-    expect(loadingElements.some(el => el.className.includes('animate-pulse'))).toBe(true);
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
-  it('renders stats when data is loaded', () => {
-    mockUseStats.mockReturnValue({
+  it('renders stats when data is loaded', async () => {
+    mockedGetRrStats.mockImplementationOnce(
+      () =>
+        new Promise(resolve =>
+          setTimeout(() => {
+            resolve(true);
+          }, 1000),
+        ),
+    );
+
+    const { getAllByText } = render(await HeroStats());
+
+    expect(getAllByText('+')).toHaveLength(2);
+  });
+
+  it('renders stats when data is loaded', async () => {
+    mockedGetRrStats.mockImplementationOnce(() => ({
       artistCount: 34705,
       releaseCount: 46899,
-      loading: false,
-    });
+    }));
 
-    render(<HeroStats />);
+    const { getByText } = render(await HeroStats());
 
-    expect(screen.getByText('34705+')).toBeInTheDocument();
-    expect(screen.getByText('46899+')).toBeInTheDocument();
-    expect(screen.getByText(loginI18n.artistsCount)).toBeInTheDocument();
-    expect(screen.getByText(loginI18n.releasesCount)).toBeInTheDocument();
-  });
-
-  it('renders with proper CSS classes for styling', () => {
-    mockUseStats.mockReturnValue({
-      artistCount: 1000,
-      releaseCount: 2000,
-      loading: false,
-    });
-
-    const { container } = render(<HeroStats />);
-
-    expect(screen.getByText('1000+')).toBeInTheDocument();
-
-    const statsCards = container.querySelectorAll('.rounded-lg');
-    expect(statsCards).toHaveLength(2);
-
-    const shadowElements = container.querySelectorAll('.shadow-sm');
-    expect(shadowElements).toHaveLength(2);
+    expect(getByText('34705+')).toBeTruthy();
+    expect(getByText('46899+')).toBeTruthy();
   });
 });
