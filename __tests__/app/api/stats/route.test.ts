@@ -36,6 +36,9 @@ describe('/api/stats', () => {
         'content-type': 'application/json',
       },
       method: 'GET',
+      next: {
+        revalidate: 86400,
+      },
     });
     expect(data).toEqual(mockStats);
   });

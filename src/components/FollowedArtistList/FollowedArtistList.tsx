@@ -12,7 +12,8 @@ import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 const FollowedArtistList: React.FunctionComponent = () => {
-  const { followedArtistList, loading, getFollowedArtists, followedArtistsCurrentPage } = useArtistsListContext();
+  const { followedArtistList, isLoadingFollowed, getFollowedArtists, followedArtistsCurrentPage } =
+    useArtistsListContext();
   const [filterInput, setFilterInput] = useState('');
 
   return (
@@ -20,7 +21,7 @@ const FollowedArtistList: React.FunctionComponent = () => {
       <div className="flex justify-around items-center w-2/3">
         <FormInput handleAction={setFilterInput} i18n={followedArtistListI18n.formInput} />
       </div>
-      {loading ? (
+      {isLoadingFollowed ? (
         <ArtistListSkeleton />
       ) : (
         <ArtistsList

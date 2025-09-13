@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 import ArtistListSkeleton from '@/components/ArtistsList/components/ArtistListSkeleton';
 import Pagination, { TDirection } from '@/components/Pagination/Pagination';
@@ -10,27 +10,19 @@ import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 const Recommendations = () => {
-  const { recommendedArtistList, loadingRecommended, getRecommendedArtists, recommendedArtistsCurrentPage } =
+  const { recommendedArtistsList, isLoadingRecommended, getRecommendedArtists, recommendedArtistsCurrentPage } =
     useArtistsListContext();
-  const areRecommendedArtistsInitialised = useRef(false);
-
-  useEffect(() => {
-    if (!areRecommendedArtistsInitialised.current) {
-      getRecommendedArtists();
-      areRecommendedArtistsInitialised.current = true;
-    }
-  }, [getRecommendedArtists]);
 
   return (
     <>
       <h3 className="h3">{recommendationsI18n.title}</h3>
 
-      {loadingRecommended ? (
+      {isLoadingRecommended ? (
         <ArtistListSkeleton />
       ) : (
         <ArtistsList
           i18n={recommendationsI18n.artistList}
-          artistsList={recommendedArtistList}
+          artistsList={recommendedArtistsList}
           buttonAction={ButtonAction.Follow}
         />
       )}

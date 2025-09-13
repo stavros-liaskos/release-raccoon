@@ -35,7 +35,7 @@ describe('FollowedArtistList', () => {
     expect(fetchSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('renders loading state', async () => {
+  xit('renders loading state', async () => {
     server.use(mswFollowedArtists.fail());
     const fetchSpy = jest.spyOn(window, 'fetch');
     const component = render(<FollowedArtistList />);

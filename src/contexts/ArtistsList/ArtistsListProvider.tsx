@@ -1,5 +1,5 @@
 'use client';
-import { FC, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { FC, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { ButtonAction } from '@/components/ButtonFollowArtist/ButtonFollowArtist.types';
 import { usePaginatedFetch } from '@/hooks/usePaginatedFetch';
@@ -14,7 +14,6 @@ interface ChildrenProps {
 
 const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   const [followedArtistList, setFollowedArtistList] = useState<components['schemas']['ArtistDto'][]>([]);
-  const areFollowedArtistsInitialised = useRef(false);
 
   // Update artists list state without re-fetching again from the API
   const memoryArtistListUpdate = useCallback(
@@ -33,69 +32,51 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   );
 
   const {
-    data: followedArtistsData,
-    loading: loadingFollowed,
-    pagination: followedPagination,
-    fetchData: getFollowedArtists,
-  } = usePaginatedFetch<components['schemas']['FollowedArtistsResponse']>({
+    data: followedArtists,
+    isLoading: isLoadingFollowed,
+    page: followedPage,
+    getPage: getFollowedArtists,
+  } = usePaginatedFetch({
     endpoint: Paths.FollowedArtists,
   });
 
   useEffect(() => {
-    if (followedArtistsData?.rows) {
-      setFollowedArtistList(followedArtistsData.rows);
+    if (followedArtists?.rows?.length > 0) {
+      setFollowedArtistList(followedArtists.rows);
     }
-  }, [followedArtistsData]);
-
-  useEffect(() => {
-    if (!areFollowedArtistsInitialised.current) {
-      getFollowedArtists();
-      areFollowedArtistsInitialised.current = true;
-    }
-  }, [getFollowedArtists]);
-
-  // --- Recommended Artists ---
-  const [recommendedArtistList, setRecommendedArtistList] = useState<components['schemas']['SearchResultArtistDto'][]>(
-    [],
-  );
+  }, [followedArtists]);
 
   const {
-    data: recommendedArtistsData,
-    loading: loadingRecommended,
-    pagination: recommendedPagination,
-    fetchData: getRecommendedArtists,
-  } = usePaginatedFetch<components['schemas']['SearchResultArtistDto'][]>({
+    data: recommendedArtistsList,
+    isLoading: isLoadingRecommended,
+    page: recommendedPage,
+    getPage: getRecommendedArtists,
+  } = usePaginatedFetch({
     endpoint: Paths.Recommended,
   });
-
-  useEffect(() => {
-    if (recommendedArtistsData) {
-      setRecommendedArtistList(recommendedArtistsData);
-    }
-  }, [recommendedArtistsData]);
 
   const value = useMemo(
     () => ({
       followedArtistList,
       getFollowedArtists,
-      loading: loadingFollowed,
+      isLoadingFollowed,
+      followedArtistsCurrentPage: followedPage,
       memoryArtistListUpdate,
-      recommendedArtistList,
-      loadingRecommended,
+      recommendedArtistsList,
       getRecommendedArtists,
-      followedArtistsCurrentPage: followedPagination.page,
-      recommendedArtistsCurrentPage: recommendedPagination.page,
+      isLoadingRecommended,
+      recommendedArtistsCurrentPage: recommendedPage,
     }),
     [
       followedArtistList,
       getFollowedArtists,
-      loadingFollowed,
+      isLoadingFollowed,
+      followedPage,
       memoryArtistListUpdate,
-      recommendedArtistList,
-      loadingRecommended,
+      recommendedArtistsList,
       getRecommendedArtists,
-      followedPagination.page,
-      recommendedPagination.page,
+      isLoadingRecommended,
+      recommendedPage,
     ],
   );
   return <ArtistsListContext.Provider value={value}>{children}</ArtistsListContext.Provider>;
