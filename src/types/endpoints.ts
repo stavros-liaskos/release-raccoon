@@ -46,5 +46,4 @@ export const API_Paths: { [key: string]: string } = {
   ScrapeSpotifyWithAuth: `scrape-taste/spotify/client-auth`,
   Settings: `me/settings`, // TODO
   Stats: `stats`,
-  ReleaseCount: `release/count`,
 };
