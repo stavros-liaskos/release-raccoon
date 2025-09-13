@@ -13,6 +13,7 @@ export async function GET() {
         'content-type': 'application/json',
       },
       method: 'GET',
+      next: { revalidate: 24 * 60 * 60 }, // Cache for 1 day
     });
 
     if (!response.ok) {
