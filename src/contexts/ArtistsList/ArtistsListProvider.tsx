@@ -38,6 +38,7 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
     getPage: getFollowedArtists,
   } = usePaginatedFetch({
     endpoint: Paths.FollowedArtists,
+    initialPage: 0,
   });
 
   useEffect(() => {

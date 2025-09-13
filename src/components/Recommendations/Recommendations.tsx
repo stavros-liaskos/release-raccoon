@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import ArtistListSkeleton from '@/components/ArtistsList/components/ArtistListSkeleton';
 import Pagination, { TDirection } from '@/components/Pagination/Pagination';
@@ -12,6 +12,12 @@ import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 const Recommendations = () => {
   const { recommendedArtistsList, isLoadingRecommended, getRecommendedArtists, recommendedArtistsCurrentPage } =
     useArtistsListContext();
+
+  useEffect(() => {
+    if (!recommendedArtistsList?.length) {
+      getRecommendedArtists();
+    }
+  }, [getRecommendedArtists, recommendedArtistsList?.length]);
 
   return (
     <>
