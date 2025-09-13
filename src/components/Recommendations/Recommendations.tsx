@@ -14,10 +14,10 @@ const Recommendations = () => {
     useArtistsListContext();
 
   useEffect(() => {
-    if (!recommendedArtistsList?.length) {
+    if (!recommendedArtistsList) {
       getRecommendedArtists();
     }
-  }, [getRecommendedArtists, recommendedArtistsList?.length]);
+  }, [getRecommendedArtists, recommendedArtistsList]);
 
   return (
     <>
@@ -37,7 +37,7 @@ const Recommendations = () => {
         handleClick={(page: TDirection) => getRecommendedArtists(page)}
         previousI18n={recommendationsI18n.pagination.previous}
         nextI18n={recommendationsI18n.pagination.next}
-        disablePrevious={recommendedArtistsCurrentPage === 1}
+        disablePrevious={recommendedArtistsCurrentPage === 0}
       />
     </>
   );

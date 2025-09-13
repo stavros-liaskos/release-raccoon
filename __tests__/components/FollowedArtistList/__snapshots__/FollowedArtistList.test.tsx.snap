@@ -153,7 +153,8 @@ exports[`FollowedArtistList matches snapshot 1`] = `
     class="flex justify-center mt-4"
   >
     <button
-      class="btn btn-large flex rounded-r-none border-r-0 w-24"
+      class="btn btn-large flex rounded-r-none border-r-0 w-24 btn-disabled"
+      disabled=""
     >
       Previous
     </button>

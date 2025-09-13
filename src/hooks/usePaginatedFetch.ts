@@ -13,7 +13,7 @@ function pageOffset(page = 0, direction?: TDirection) {
 
   if (direction === 'next') {
     currentPage++;
-  } else if (direction === 'previous' && currentPage > 1) {
+  } else if (direction === 'previous') {
     currentPage--;
   }
   return currentPage;

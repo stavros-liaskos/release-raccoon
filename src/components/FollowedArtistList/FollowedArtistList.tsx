@@ -34,7 +34,7 @@ const FollowedArtistList: React.FunctionComponent = () => {
         handleClick={(page: TDirection) => getFollowedArtists(page)}
         previousI18n={followedArtistListI18n.pagination.previous}
         nextI18n={followedArtistListI18n.pagination.next}
-        disablePrevious={followedArtistsCurrentPage === 1}
+        disablePrevious={followedArtistsCurrentPage === 0}
       />
     </>
   );
