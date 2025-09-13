@@ -6,14 +6,14 @@ import { components } from '@/types/schema';
 
 interface ArtistsListContextType {
   followedArtistList: components['schemas']['ArtistDto'][];
-  loading: boolean;
+  isLoadingFollowed: boolean;
   getFollowedArtists: (direction: TDirection) => void;
   memoryArtistListUpdate: (artist: components['schemas']['ArtistDto'], action: ButtonAction) => void;
-  recommendedArtistList: components['schemas']['SearchResultArtistDto'][];
-  loadingRecommended: boolean;
+  recommendedArtistsList: components['schemas']['SearchResultArtistDto'][];
+  isLoadingRecommended: boolean;
   getRecommendedArtists: (direction?: TDirection) => void;
-  followedArtistsCurrentPage: number;
-  recommendedArtistsCurrentPage: number;
+  followedArtistsCurrentPage?: number;
+  recommendedArtistsCurrentPage?: number;
 }
 
 export const ArtistsListContext: React.Context<ArtistsListContextType> = createContext<ArtistsListContextType>(

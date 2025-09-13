@@ -1,47 +1,47 @@
-import { useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 
 type TDirection = 'next' | 'previous' | undefined;
 
-interface UsePaginatedFetchOptions {
+type UsePaginatedFetchOptions = {
   endpoint: string;
   initialPage?: number;
-  initialOffset?: number;
+};
+
+function pageOffset(page = 0, direction?: TDirection) {
+  let currentPage = page;
+
+  if (direction === 'next') {
+    currentPage++;
+  } else if (direction === 'previous') {
+    currentPage--;
+  }
+  return currentPage;
 }
 
-export const usePaginatedFetch = <T>({ endpoint, initialPage = 0, initialOffset = 10 }: UsePaginatedFetchOptions) => {
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [pagination, setPagination] = useState({
-    page: initialPage,
-    offset: initialOffset,
-  });
+// @ts-ignore
+const fetcher = (...args) => fetch(...args).then(res => res.json());
 
-  const fetchData = useCallback(
-    async (direction?: TDirection) => {
-      setLoading(true);
-      let currentPage = pagination.page;
+export const usePaginatedFetch = ({ endpoint, initialPage }: UsePaginatedFetchOptions) => {
+  const [page, setPage] = useState<number | undefined>(initialPage);
+  const [path, setPath] = useState<string | null>(null);
+  const { data, error, isLoading } = useSWR(path, fetcher);
 
-      if (direction === 'next') {
-        currentPage++;
-      } else if (direction === 'previous' && currentPage > 1) {
-        currentPage--;
-      }
+  useEffect(() => {
+    if (page !== undefined) {
+      setPath(`${endpoint}?page=${page}&offset=10`);
+    }
+  }, [endpoint, page]);
 
-      try {
-        const response = await fetch(`${endpoint}?page=${currentPage}&offset=${pagination.offset}`, {
-          method: 'GET',
-        });
-        const result: T = await response.json();
-        setData(result);
-        setPagination(prev => ({ ...prev, page: currentPage }));
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [endpoint, pagination],
-  );
+  if (error) {
+    console.error(error);
+  }
 
-  return { data, loading, pagination, fetchData };
+  function getPage(direction: TDirection) {
+    const newPage = pageOffset(page, direction);
+
+    setPage(newPage);
+  }
+
+  return { data, isLoading, page, getPage };
 };
