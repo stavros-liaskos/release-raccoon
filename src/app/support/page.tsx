@@ -2,7 +2,7 @@ import React from 'react';
 
 import { supportI18n } from '@/i18n';
 
-export default function SupportPage() {
+export default function SupportPage(_: Readonly<PageProps<'/support'>>) {
   return (
     <div className="flex flex-auto flex-col items-center justify-center w-full">
       <h2 className="rr-text text-center text-4xl mb-3">{supportI18n.title}</h2>

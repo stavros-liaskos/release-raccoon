@@ -1,11 +1,13 @@
 // Auth0 external endpoints
-export const Auth0Endpoints: { [key: string]: string } = {
+import { AppRouteHandlerRoutes, AppRoutes } from '../../.next/types/routes';
+
+export const Auth0Endpoints = {
   Login: '/auth/login',
   Logout: '/auth/logout',
-};
+} as unknown as { [key: string]: AppRoutes };
 
 // FE navigation paths
-export const NavigationPaths: { [key: string]: string } = {
+export const NavigationPaths: { [key: string]: AppRoutes } = {
   Home: '/',
   Profile: '/profile',
   Settings: '/profile/settings',
@@ -19,7 +21,7 @@ export const SpotifyPaths: { [key: string]: string } = {
 };
 
 // Router Handler endpoints (aka Next.js API routes)
-export const Paths: { [key: string]: string } = {
+export const Paths = {
   Auth: '/api/auth/me',
   Search: `api/protected/artist/search`,
   Recommended: `api/protected/artists/recommended`,
@@ -31,7 +33,7 @@ export const Paths: { [key: string]: string } = {
   SpotifyCode: `api/protected/spotify`,
   Settings: `api/protected/settings`, // TODO
   Stats: `api/stats`,
-};
+} as unknown as { [key: string]: AppRouteHandlerRoutes };
 
 // External API paths
 export const API_Paths: { [key: string]: string } = {

@@ -3,14 +3,15 @@
   "description": "A music release newsletter",
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev --turbopack --experimental-https",
-    "build": "next build",
+    "build": "yarn typegen && next build --turbopack",
+    "typegen": "next typegen",
     "start": "next start",
     "lint": "next lint --fix",
     "test": "jest",
     "knip": "knip",
     "depcheck": "depcheck",
     "prettier": "prettier \"**/*\" --write",
-    "all": "yarn knip && yarn depcheck && yarn prettier && yarn lint && yarn test -u"
+    "all": "yarn knip && yarn depcheck && yarn typegen && yarn prettier && yarn lint && yarn test -u"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.9.0",

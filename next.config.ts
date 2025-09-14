@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  typedRoutes: true,
   // experimental: { // enable when stable PPR is released
   //   ppr: 'incremental',
   // },
