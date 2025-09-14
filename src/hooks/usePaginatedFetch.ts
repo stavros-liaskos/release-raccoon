@@ -29,6 +29,7 @@ export const usePaginatedFetch = ({ endpoint, initialPage }: UsePaginatedFetchOp
 
   useEffect(() => {
     if (page !== undefined) {
+      console.warn(`${endpoint}?page=${page}&offset=10`);
       setPath(`${endpoint}?page=${page}&offset=10`);
     }
   }, [endpoint, page]);
@@ -39,6 +40,7 @@ export const usePaginatedFetch = ({ endpoint, initialPage }: UsePaginatedFetchOp
 
   function getPage(direction: TDirection) {
     const newPage = pageOffset(page, direction);
+    console.log('newPage', newPage);
 
     setPage(newPage);
   }
