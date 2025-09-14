@@ -15,9 +15,11 @@ const Recommendations = () => {
 
   useEffect(() => {
     if (!recommendedArtistsList) {
+      console.warn('INIT CALLED FOR RECOS');
       getRecommendedArtists();
     }
-  }, [getRecommendedArtists, recommendedArtistsList]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
