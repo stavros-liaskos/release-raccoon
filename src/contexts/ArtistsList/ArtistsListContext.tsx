@@ -9,7 +9,7 @@ interface ArtistsListContextType {
   isLoadingFollowed: boolean;
   getFollowedArtists: (direction: TDirection) => void;
   memoryArtistListUpdate: (artist: components['schemas']['ArtistDto'], action: ButtonAction) => void;
-  recommendedArtistsList: components['schemas']['SearchResultArtistDto'][];
+  recommendedArtistList: components['schemas']['SearchResultArtistDto'][];
   isLoadingRecommended: boolean;
   getRecommendedArtists: (direction?: TDirection) => void;
   followedArtistsCurrentPage?: number;
