@@ -8,7 +8,7 @@ import ArtistsListProvider from '@/contexts/ArtistsList/ArtistsListProvider';
 import SearchProvider from '@/contexts/Search/SearchProvider';
 import { searchI18n } from '@/i18n';
 
-export default async function Page() {
+export default async function Page(_: Readonly<PageProps<'/profile'>>) {
   const tabs = [
     {
       label: 'Followed Artists',

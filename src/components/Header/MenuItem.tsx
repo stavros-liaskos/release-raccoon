@@ -2,8 +2,10 @@ import clsx from 'clsx/lite';
 import Link from 'next/link';
 import React, { ReactNode } from 'react';
 
+import { AppRoutes } from '../../../.next/types/routes';
+
 interface MenuItemProps {
-  href: string;
+  href: AppRoutes;
   icon: ReactNode;
   children: ReactNode;
   danger?: boolean;
