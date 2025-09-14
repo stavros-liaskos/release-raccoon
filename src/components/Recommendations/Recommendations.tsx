@@ -10,14 +10,14 @@ import ArtistsList from '../ArtistsList/ArtistsList';
 import { ButtonAction } from '../ButtonFollowArtist/ButtonFollowArtist.types';
 
 const Recommendations = () => {
-  const { recommendedArtistsList, isLoadingRecommended, getRecommendedArtists, recommendedArtistsCurrentPage } =
+  const { recommendedArtistList, isLoadingRecommended, getRecommendedArtists, recommendedArtistsCurrentPage } =
     useArtistsListContext();
 
   useEffect(() => {
-    if (!recommendedArtistsList) {
+    if (recommendedArtistList.length < 1) {
       getRecommendedArtists();
     }
-  }, [getRecommendedArtists, recommendedArtistsList]);
+  }, [getRecommendedArtists, recommendedArtistList]);
 
   return (
     <>
@@ -28,7 +28,7 @@ const Recommendations = () => {
       ) : (
         <ArtistsList
           i18n={recommendationsI18n.artistList}
-          artistsList={recommendedArtistsList}
+          artistsList={recommendedArtistList}
           buttonAction={ButtonAction.Follow}
         />
       )}

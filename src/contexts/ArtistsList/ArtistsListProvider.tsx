@@ -14,18 +14,20 @@ interface ChildrenProps {
 
 const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   const [followedArtistList, setFollowedArtistList] = useState<components['schemas']['ArtistDto'][]>([]);
+  const [recommendedArtistList, setRecommendedArtistList] = useState<components['schemas']['ArtistDto'][]>([]);
 
-  // Update artists list state without re-fetching again from the API
+  // Update followed artists list without re-fetching again from the API
   const memoryArtistListUpdate = useCallback(
     (artist: components['schemas']['ArtistDto'], action: ButtonAction) => {
       if (action === ButtonAction.Unfollow) {
-        setFollowedArtistList(
-          followedArtistList.filter(followedArtist => {
+        setFollowedArtistList(fList =>
+          fList.filter(followedArtist => {
             return artist?.id ? followedArtist.id !== artist.id : followedArtist.name !== artist.name; // search dto does not have an id
           }),
         );
       } else {
         setFollowedArtistList([artist, ...followedArtistList]);
+        setRecommendedArtistList(rList => rList.filter(recommendedArtist => recommendedArtist.id !== artist.id));
       }
     },
     [followedArtistList],
@@ -48,13 +50,19 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
   }, [followedArtists]);
 
   const {
-    data: recommendedArtistsList,
+    data: recommendedArtists,
     isLoading: isLoadingRecommended,
     page: recommendedPage,
     getPage: getRecommendedArtists,
   } = usePaginatedFetch({
     endpoint: Paths.Recommended,
   });
+
+  useEffect(() => {
+    if (recommendedArtists?.rows?.length > 0) {
+      setRecommendedArtistList(recommendedArtists.rows);
+    }
+  }, [recommendedArtists]);
 
   const value = useMemo(
     () => ({
@@ -63,7 +71,7 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
       isLoadingFollowed,
       followedArtistsCurrentPage: followedPage,
       memoryArtistListUpdate,
-      recommendedArtistsList,
+      recommendedArtistList,
       getRecommendedArtists,
       isLoadingRecommended,
       recommendedArtistsCurrentPage: recommendedPage,
@@ -74,7 +82,7 @@ const ArtistsListProvider: FC<ChildrenProps> = ({ children }) => {
       isLoadingFollowed,
       followedPage,
       memoryArtistListUpdate,
-      recommendedArtistsList,
+      recommendedArtistList,
       getRecommendedArtists,
       isLoadingRecommended,
       recommendedPage,

@@ -7,7 +7,7 @@ export const GET = auth0.withApiAuthRequired(async (req: NextRequest) => {
   try {
     const authorization = req.headers.get('Authorization');
     const searchParams = req.nextUrl.searchParams;
-    const page = Number(searchParams.get('page')) || 1;
+    const page = Number(searchParams.get('page')) || 1; // TODO fix 0 in BE
     const offset = Number(searchParams.get('offset')) || 10;
 
     const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.Recommended}?page=${page}&offset=${offset}`, {
@@ -21,7 +21,7 @@ export const GET = auth0.withApiAuthRequired(async (req: NextRequest) => {
       throw new Error(`Error fetching recommended artists: ${response.statusText}`);
     }
     const data = await response.json();
-    return NextResponse.json(data.rows);
+    return NextResponse.json(data);
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: 'Internal Server Error', error }, { status: 500 });
