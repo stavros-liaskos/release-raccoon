@@ -7,7 +7,7 @@ export const GET = auth0.withApiAuthRequired(async (req: NextRequest) => {
   try {
     const authorization = req.headers.get('Authorization');
     const searchParams = req.nextUrl.searchParams;
-    const page = Number(searchParams.get('page')) || 1; // TODO fix 0 in BE
+    const page = Number(searchParams.get('page')) || 0;
     const offset = Number(searchParams.get('offset')) || 10;
 
     const response = await fetch(`${process.env.API_BASE_URL}/${API_Paths.Recommended}?page=${page}&offset=${offset}`, {
