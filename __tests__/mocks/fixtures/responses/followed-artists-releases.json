@@ -1,0 +1,59 @@
+{
+  "total": 3,
+  "releases": [
+    {
+      "id": 1,
+      "name": "Test Album",
+      "type": "ALBUM",
+      "spotifyUri": "spotify:album:123abc",
+      "musicbrainzId": "mb-123",
+      "releasedOn": "2025-10-01",
+      "artists": [
+        {
+          "id": 1,
+          "name": "Test Artist",
+          "spotifyUri": "spotify:artist:artist123",
+          "musicbrainzId": "artist-mb-123"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Test Single",
+      "type": "SINGLE",
+      "spotifyUri": "spotify:album:456def",
+      "musicbrainzId": "mb-456",
+      "releasedOn": "2025-10-01",
+      "artists": [
+        {
+          "id": 2,
+          "name": "Another Artist",
+          "spotifyUri": "spotify:artist:artist456",
+          "musicbrainzId": "artist-mb-456"
+        },
+        {
+          "id": 3,
+          "name": "Featured Artist",
+          "spotifyUri": "spotify:artist:artist789",
+          "musicbrainzId": "artist-mb-789"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Old Album",
+      "type": "ALBUM",
+      "spotifyUri": "spotify:album:789ghi",
+      "musicbrainzId": "mb-789",
+      "releasedOn": "2025-09-15",
+      "artists": [
+        {
+          "id": 1,
+          "name": "Test Artist",
+          "spotifyUri": "spotify:artist:artist123",
+          "musicbrainzId": "artist-mb-123"
+        }
+      ]
+    }
+  ]
+}

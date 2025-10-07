@@ -4,6 +4,7 @@ import { API_Paths, Paths } from '@/types/endpoints';
 import { components } from '@/types/schema';
 
 import followedArtists from './fixtures/responses/followed-artists.json';
+import followedArtistsReleases from './fixtures/responses/followed-artists-releases.json';
 import raccoonUser from './fixtures/responses/raccoon-user.json';
 
 export const mswFollowedArtists = {
@@ -71,4 +72,12 @@ export const mswRaccoonUser = {
     http.get(Paths.RaccoonUser, () => {
       return HttpResponse.json(raccoonUser, { status: 200 });
     }),
+};
+
+export const mswFollowedArtistsReleases = {
+  success: () =>
+    http.get(Paths.FollowedArtistsReleases, () => {
+      return HttpResponse.json(followedArtistsReleases, { status: 200 });
+    }),
+  fail: () => http.get(Paths.FollowedArtistsReleases, () => HttpResponse.error()),
 };
