@@ -5,6 +5,20 @@ import { NextRequest } from 'next/server';
  */
 import { GET } from '@/app/api/releases/route';
 
+function getRequest(queryInString: string = '') {
+  return {
+    nextUrl: new URL('http://localhost/api/releases' + queryInString),
+    headers: {
+      get: (key: string) => {
+        if (key === 'Authorization') {
+          return 'Bearer test';
+        }
+        return null;
+      },
+    },
+  } as unknown as NextRequest;
+}
+
 jest.mock('next/server', () => {
   const originalModule = jest.requireActual('next/server');
   return {
@@ -20,39 +34,16 @@ jest.mock('next/server', () => {
 });
 
 describe('/releases API', () => {
-  it('should return 200 and followed artists releases', async () => {
-    const req = {
-      nextUrl: new URL('http://localhost/api/releases'),
-      headers: {
-        get: (key: string) => {
-          if (key === 'Authorization') {
-            return 'Bearer test';
-          }
-          return null;
-        },
-      },
-    } as unknown as NextRequest;
-    const res = await GET(req);
+  it.each(
+    // @ts-ignore
+    [{ query: '' }, { query: '?days=7' }],
+    'should return 200 and followed artists releases',
+    async ({ query }: { query: string }) => {
+      const res = await GET(getRequest(query));
 
-    expect(res.status).toBe(200);
-  });
-
-  it('should handle days query parameter', async () => {
-    const req = {
-      nextUrl: new URL('http://localhost/api/protected/followed-artists/releases?days=7'),
-      headers: {
-        get: (key: string) => {
-          if (key === 'Authorization') {
-            return 'Bearer test';
-          }
-          return null;
-        },
-      },
-    } as unknown as NextRequest;
-    const res = await GET(req);
-
-    expect(res.status).toBe(200);
-  });
+      expect(res.status).toBe(200);
+    },
+  );
 
   it.todo('handle backend error correctly');
 });
