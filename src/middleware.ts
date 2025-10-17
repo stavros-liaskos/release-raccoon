@@ -48,6 +48,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    '/((?!_next/static|_next/image|sw.js|workbox|app_icons|api/stats|api/releases|support|favicon.ico|favicon.svg|apple-icon.png|sitemap.xml|robots.txt|manifest.json|noflash.js).*)',
+    '/((?!_next/static|_next/image|sw.js|workbox|app_icons|api/stats|support|favicon.ico|favicon.svg|apple-icon.png|sitemap.xml|robots.txt|manifest.json|noflash.js).*)',
   ],
 };
