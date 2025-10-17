@@ -35,8 +35,5 @@ describe('/protected/followed-artists API', () => {
     const res = await GET(req);
 
     expect(res.status).toBe(200);
-    // expect(JSON.parse(body)).toHaveProperty('rows');
   });
-
-  it.todo('handle success, handler error correctly');
 });
