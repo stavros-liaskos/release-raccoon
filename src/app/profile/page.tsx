@@ -1,6 +1,7 @@
 import React from 'react';
 
 import FollowedArtistList from '@/components/FollowedArtistList/FollowedArtistList';
+import FollowedArtistsReleasesServer from '@/components/FollowedArtistsReleases/FollowedArtistsReleasesServer';
 import Recommendations from '@/components/Recommendations/Recommendations';
 import Search from '@/components/Search/Search';
 import Tabs from '@/components/Tabs/Tabs';
@@ -10,6 +11,10 @@ import { searchI18n } from '@/i18n';
 
 export default async function Page(_: Readonly<PageProps<'/profile'>>) {
   const tabs = [
+    {
+      label: 'New Releases',
+      content: <FollowedArtistsReleasesServer />,
+    },
     {
       label: 'Followed Artists',
       content: <FollowedArtistList />,

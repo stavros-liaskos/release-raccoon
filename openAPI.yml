@@ -18,6 +18,9 @@ components:
           type: string
         musicbrainzId:
           type: string
+        followerCount:
+          type: integer
+          format: int32
         spotifyUriId:
           type: string
     ArtistDto:
@@ -50,6 +53,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SearchResultArtistDto'
+    FollowedArtistsRelease:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        type:
+          type: string
+        spotifyUri:
+          type: string
+        musicbrainzId:
+          type: string
+        releasedOn:
+          $ref: '#/components/schemas/LocalDate'
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArtistDto'
+    FollowedArtistsReleaseResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        releases:
+          type: array
+          items:
+            $ref: '#/components/schemas/FollowedArtistsRelease'
     FollowedArtistsResponse:
       type: object
       properties:
@@ -243,7 +276,7 @@ components:
   securitySchemes:
     SecurityScheme:
       type: openIdConnect
-      openIdConnectUrl: http://localhost:8181/realms/RaccoonRealm/.well-known/openid-configuration
+      openIdConnectUrl: https://rr-dev.eu.auth0.com/.well-known/openid-configuration
       description: Authentication
 paths:
   /:
@@ -290,9 +323,9 @@ paths:
           in: query
           schema:
             type: integer
-            exclusiveMinimum: 0
             format: int32
             default: 0
+            minimum: 0
         - name: size
           in: query
           schema:
@@ -320,9 +353,9 @@ paths:
           in: query
           schema:
             type: integer
-            exclusiveMinimum: 0
             format: int32
             default: 0
+            minimum: 0
         - name: size
           in: query
           schema:
@@ -342,7 +375,7 @@ paths:
           description: Not Authorized
         '403':
           description: Not Allowed
-      summary: Get Followed
+      summary: Get Recommended Artists
       tags:
         - Artist Resource
       security:
@@ -440,6 +473,31 @@ paths:
         '403':
           description: Not Allowed
       summary: Get Followed Artists
+      tags:
+        - User Profile Resource
+      security:
+        - SecurityScheme: []
+  /me/followed-artists/releases:
+    get:
+      parameters:
+        - name: days
+          in: query
+          schema:
+            type: integer
+            format: int32
+          required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowedArtistsReleaseResponse'
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
+      summary: Get Followed Artists Releases
       tags:
         - User Profile Resource
       security:
@@ -683,20 +741,6 @@ paths:
       summary: Get Release Count
       tags:
         - Stats Resource
-  /test-ui/test-ui:
-    get:
-      responses:
-        '200':
-          description: OK
-        '401':
-          description: Not Authorized
-        '403':
-          description: Not Allowed
-      summary: Get Recommended
-      tags:
-        - Test Resource
-      security:
-        - SecurityScheme: []
 info:
   title: release-raccoon-app API
-  version: 0.5.0
+  version: 0.5.1-SNAPSHOT

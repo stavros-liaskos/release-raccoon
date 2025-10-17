@@ -149,7 +149,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** Get Followed */
+    /** Get Recommended Artists */
     get: {
       parameters: {
         query?: {
@@ -382,6 +382,58 @@ export interface paths {
           };
           content: {
             'application/json': components['schemas']['FollowedArtistsResponse'];
+          };
+        };
+        /** @description Not Authorized */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+        /** @description Not Allowed */
+        403: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/me/followed-artists/releases': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get Followed Artists Releases */
+    get: {
+      parameters: {
+        query?: {
+          days?: number;
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['FollowedArtistsReleaseResponse'];
           };
         };
         /** @description Not Authorized */
@@ -1021,54 +1073,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/test-ui/test-ui': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get Recommended */
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description OK */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content?: never;
-        };
-        /** @description Not Authorized */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content?: never;
-        };
-        /** @description Not Allowed */
-        403: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content?: never;
-        };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1081,6 +1085,8 @@ export interface components {
       lastfmUri?: string;
       spotifyUri?: string;
       musicbrainzId?: string;
+      /** Format: int32 */
+      followerCount?: number;
       spotifyUriId?: string;
     };
     ArtistDto: {
@@ -1097,6 +1103,21 @@ export interface components {
       /** Format: int32 */
       count?: number;
       artists?: components['schemas']['SearchResultArtistDto'][];
+    };
+    FollowedArtistsRelease: {
+      /** Format: int64 */
+      id?: number;
+      name?: string;
+      type?: string;
+      spotifyUri?: string;
+      musicbrainzId?: string;
+      releasedOn?: components['schemas']['LocalDate'];
+      artists?: components['schemas']['ArtistDto'][];
+    };
+    FollowedArtistsReleaseResponse: {
+      /** Format: int32 */
+      total?: number;
+      releases?: components['schemas']['FollowedArtistsRelease'][];
     };
     FollowedArtistsResponse: {
       /** Format: int64 */

@@ -7,7 +7,7 @@ import followedArtists from './fixtures/responses/followed-artists.json';
 import raccoonUser from './fixtures/responses/raccoon-user.json';
 
 export const mswFollowedArtists = {
-  success: (artistQuantity: number = 2) => {
+  success: () => {
     return http.get(`${Paths.FollowedArtists}`, ({ request }) => {
       const url = new URL(request.url);
       const page = Number(url.searchParams.get('page')) || 1;

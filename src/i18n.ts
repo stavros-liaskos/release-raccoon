@@ -104,3 +104,9 @@ export const supportI18n = {
   text: 'If you need help, please reach out to us at',
   email: 'releaseraccoon at gmail.com',
 };
+
+export const followedArtistsReleasesI18n = {
+  title: 'New Releases',
+  noReleases: 'No new releases from your followed artists',
+  viewOnSpotify: 'View on Spotify',
+};
