@@ -20,7 +20,7 @@ jest.mock('next/server', () => {
 });
 
 describe('/protected/followed-artists API', () => {
-  it('should return 200 and new releases', async () => {
+  it('should return 200 and releases', async () => {
     const req = {
       nextUrl: new URL('http://localhost/me/followed-artists?page=1&offset=10'),
       headers: {
