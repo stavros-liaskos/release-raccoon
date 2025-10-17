@@ -72,11 +72,3 @@ export const mswRaccoonUser = {
       return HttpResponse.json(raccoonUser, { status: 200 });
     }),
 };
-
-// export const mswFollowedArtistsReleases = {
-//   success: () =>
-//     http.get(Paths.FollowedArtistsReleases, () => {
-//       return HttpResponse.json(followedArtistsReleases, { status: 200 });
-//     }),
-//   fail: () => http.get(Paths.FollowedArtistsReleases, () => HttpResponse.error()),
-// };
