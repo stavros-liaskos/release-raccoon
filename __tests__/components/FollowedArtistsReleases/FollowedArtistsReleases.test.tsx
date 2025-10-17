@@ -1,110 +1,102 @@
-import { http, HttpResponse } from 'msw';
 import React from 'react';
 
 import FollowedArtistsReleases from '@/components/FollowedArtistsReleases/FollowedArtistsReleases';
 import { followedArtistsReleasesI18n } from '@/i18n';
-import { mswFollowedArtistsReleases } from '@/mocks/mockApi';
-import { Paths } from '@/types/endpoints';
+import { components } from '@/types/schema';
 
-import { initServer, renderWithAct } from '../../testUtils/testUtils';
+import { renderWithAct } from '../../testUtils/testUtils';
 
 describe('FollowedArtistsReleases', () => {
-  const server = initServer();
-
-  it.each([
-    {
-      props: {
-        i18n: {},
-      },
-    },
-    { props: {} },
-  ])('renders without data without crashing', async ({ props }) => {
-    server.use(mswFollowedArtistsReleases.success());
-    // @ts-ignore
-    await renderWithAct(<FollowedArtistsReleases {...props} />);
-  });
-
-  it('renders releases grouped by date', async () => {
-    server.use(mswFollowedArtistsReleases.success());
-    const component = await renderWithAct(<FollowedArtistsReleases i18n={followedArtistsReleasesI18n} />);
-
-    // Check for the title
-    const title = await component.findByText(followedArtistsReleasesI18n.title);
-    expect(title).toBeInTheDocument();
-
-    // Check for release names
-    const testAlbum = await component.findByText('Test Album');
-    expect(testAlbum).toBeInTheDocument();
-
-    const testSingle = await component.findByText('Test Single');
-    expect(testSingle).toBeInTheDocument();
-
-    const oldAlbum = await component.findByText('Old Album');
-    expect(oldAlbum).toBeInTheDocument();
-  });
-
-  it('renders artist names correctly', async () => {
-    server.use(mswFollowedArtistsReleases.success());
-    const component = await renderWithAct(<FollowedArtistsReleases i18n={followedArtistsReleasesI18n} />);
-
-    // Single artist (appears multiple times)
-    const testArtists = await component.findAllByText('Test Artist');
-    expect(testArtists.length).toBeGreaterThan(0);
-
-    // Multiple artists
-    const multipleArtists = await component.findByText('Another Artist, Featured Artist');
-    expect(multipleArtists).toBeInTheDocument();
-  });
-
-  it('renders release types correctly', async () => {
-    server.use(mswFollowedArtistsReleases.success());
-    const component = await renderWithAct(<FollowedArtistsReleases i18n={followedArtistsReleasesI18n} />);
-
-    const albumTypes = await component.findAllByText('album');
-    expect(albumTypes).toHaveLength(2);
-
-    const singleType = await component.findByText('single');
-    expect(singleType).toBeInTheDocument();
-  });
-
-  it('renders Spotify links', async () => {
-    server.use(mswFollowedArtistsReleases.success());
-    const component = await renderWithAct(<FollowedArtistsReleases i18n={followedArtistsReleasesI18n} />);
-
-    const spotifyLinks = await component.findAllByText(`${followedArtistsReleasesI18n.viewOnSpotify} →`);
-    expect(spotifyLinks).toHaveLength(3);
-
-    // Check that the link has correct href
-    const firstLink = spotifyLinks[0].closest('a');
-    expect(firstLink).toHaveAttribute('href', 'https://open.spotify.com/album/123abc');
-    expect(firstLink).toHaveAttribute('target', '_blank');
-    expect(firstLink).toHaveAttribute('rel', 'noopener noreferrer');
-  });
-
-  it('displays no releases message when there are no releases', async () => {
-    server.use(
-      http.get(Paths.FollowedArtistsReleases, () => {
-        return HttpResponse.json({ total: 0, releases: [] }, { status: 200 });
-      })
+  it('renders loading state when initialReleases is null', async () => {
+    const component = await renderWithAct(
+      // @ts-expect-error testing null prop
+      <FollowedArtistsReleases i18n={followedArtistsReleasesI18n} initialReleases={null} />,
     );
-    const component = await renderWithAct(<FollowedArtistsReleases i18n={followedArtistsReleasesI18n} />);
 
     const noReleasesMessage = await component.findByText(followedArtistsReleasesI18n.noReleases);
     expect(noReleasesMessage).toBeInTheDocument();
   });
 
-  it('displays error message on fetch failure', async () => {
-    server.use(mswFollowedArtistsReleases.fail());
-    const component = await renderWithAct(<FollowedArtistsReleases i18n={followedArtistsReleasesI18n} />);
+  it('renders empty state when releases array is empty', async () => {
+    const component = await renderWithAct(
+      <FollowedArtistsReleases i18n={followedArtistsReleasesI18n} initialReleases={{ releases: [] }} />,
+    );
 
-    const errorMessage = await component.findByText(/Error loading releases/);
-    expect(errorMessage).toBeInTheDocument();
+    const noReleasesMessage = await component.findByText(followedArtistsReleasesI18n.noReleases);
+    expect(noReleasesMessage).toBeInTheDocument();
   });
 
-  it('matches snapshot', async () => {
-    server.use(mswFollowedArtistsReleases.success());
+  it('renders grouped releases by date correctly', async () => {
+    const mockReleases = {
+      releases: [
+        { id: '1', name: 'Album 1', releasedOn: '2023-10-01', artists: [{ name: 'Artist 1' }], type: 'album' },
+        { id: '2', name: 'Album 2', releasedOn: '2023-10-01', artists: [{ name: 'Artist 2' }], type: 'album' },
+        { id: '3', name: 'Single 1', releasedOn: '2023-09-01', artists: [{ name: 'Artist 3' }], type: 'single' },
+      ],
+    } as unknown as components['schemas']['FollowedArtistsReleaseResponse'];
 
-    const component = await renderWithAct(<FollowedArtistsReleases i18n={followedArtistsReleasesI18n} />);
-    expect(component.container).toMatchSnapshot();
+    const component = await renderWithAct(
+      <FollowedArtistsReleases i18n={followedArtistsReleasesI18n} initialReleases={mockReleases} />,
+    );
+
+    const firstDate = await component.findByText('October 1, 2023');
+    const secondDate = await component.findByText('September 1, 2023');
+    expect(firstDate).toBeInTheDocument();
+    expect(secondDate).toBeInTheDocument();
+
+    const album1 = await component.findByText('Album 1');
+    const album2 = await component.findByText('Album 2');
+    const single1 = await component.findByText('Single 1');
+    expect(album1).toBeInTheDocument();
+    expect(album2).toBeInTheDocument();
+    expect(single1).toBeInTheDocument();
+  });
+
+  it('renders Spotify links correctly when spotifyUri is provided', async () => {
+    const mockReleases = {
+      releases: [
+        {
+          id: '1',
+          name: 'Album 1',
+          releasedOn: '2023-10-01',
+          artists: [{ name: 'Artist 1' }],
+          type: 'album',
+          spotifyUri: 'spotify:album:123abc',
+        },
+      ],
+    } as unknown as components['schemas']['FollowedArtistsReleaseResponse'];
+
+    const component = await renderWithAct(
+      <FollowedArtistsReleases i18n={followedArtistsReleasesI18n} initialReleases={mockReleases} />,
+    );
+
+    const spotifyLink = await component.findByText(`${followedArtistsReleasesI18n.viewOnSpotify} →`);
+    expect(spotifyLink).toBeInTheDocument();
+
+    const linkElement = spotifyLink.closest('a');
+    expect(linkElement).toHaveAttribute('href', 'https://open.spotify.com/album/123abc');
+    expect(linkElement).toHaveAttribute('target', '_blank');
+    expect(linkElement).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
+  it('does not render Spotify links when spotifyUri is missing', async () => {
+    const mockReleases = {
+      releases: [
+        {
+          id: '1',
+          name: 'Album 1',
+          releasedOn: '2023-10-01',
+          artists: [{ name: 'Artist 1' }],
+          type: 'album',
+        },
+      ],
+    } as unknown as components['schemas']['FollowedArtistsReleaseResponse'];
+
+    const component = await renderWithAct(
+      <FollowedArtistsReleases i18n={followedArtistsReleasesI18n} initialReleases={mockReleases} />,
+    );
+
+    const spotifyLink = component.queryByText(`${followedArtistsReleasesI18n.viewOnSpotify} →`);
+    expect(spotifyLink).not.toBeInTheDocument();
   });
 });

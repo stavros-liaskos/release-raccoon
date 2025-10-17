@@ -1,19 +1,19 @@
 import React from 'react';
 
 import FollowedArtistList from '@/components/FollowedArtistList/FollowedArtistList';
-import FollowedArtistsReleases from '@/components/FollowedArtistsReleases/FollowedArtistsReleases';
+import FollowedArtistsReleasesServer from '@/components/FollowedArtistsReleases/FollowedArtistsReleasesServer';
 import Recommendations from '@/components/Recommendations/Recommendations';
 import Search from '@/components/Search/Search';
 import Tabs from '@/components/Tabs/Tabs';
 import ArtistsListProvider from '@/contexts/ArtistsList/ArtistsListProvider';
 import SearchProvider from '@/contexts/Search/SearchProvider';
-import { followedArtistsReleasesI18n, searchI18n } from '@/i18n';
+import { searchI18n } from '@/i18n';
 
 export default async function Page(_: Readonly<PageProps<'/profile'>>) {
   const tabs = [
     {
       label: 'New Releases',
-      content: <FollowedArtistsReleases i18n={followedArtistsReleasesI18n} />,
+      content: <FollowedArtistsReleasesServer />,
     },
     {
       label: 'Followed Artists',

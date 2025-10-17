@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server';
 /**
  * @jest-environment node
  */
-import { GET } from '@/app/api/protected/followed-artists/releases/route';
+import { GET } from '@/app/api/releases/route';
 
 jest.mock('next/server', () => {
   const originalModule = jest.requireActual('next/server');
@@ -19,10 +19,10 @@ jest.mock('next/server', () => {
   };
 });
 
-describe('/protected/followed-artists/releases API', () => {
+describe('/releases API', () => {
   it('should return 200 and followed artists releases', async () => {
     const req = {
-      nextUrl: new URL('http://localhost/api/protected/followed-artists/releases'),
+      nextUrl: new URL('http://localhost/api/releases'),
       headers: {
         get: (key: string) => {
           if (key === 'Authorization') {

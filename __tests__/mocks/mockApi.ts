@@ -4,11 +4,10 @@ import { API_Paths, Paths } from '@/types/endpoints';
 import { components } from '@/types/schema';
 
 import followedArtists from './fixtures/responses/followed-artists.json';
-import followedArtistsReleases from './fixtures/responses/followed-artists-releases.json';
 import raccoonUser from './fixtures/responses/raccoon-user.json';
 
 export const mswFollowedArtists = {
-  success: (artistQuantity: number = 2) => {
+  success: () => {
     return http.get(`${Paths.FollowedArtists}`, ({ request }) => {
       const url = new URL(request.url);
       const page = Number(url.searchParams.get('page')) || 1;
@@ -74,10 +73,10 @@ export const mswRaccoonUser = {
     }),
 };
 
-export const mswFollowedArtistsReleases = {
-  success: () =>
-    http.get(Paths.FollowedArtistsReleases, () => {
-      return HttpResponse.json(followedArtistsReleases, { status: 200 });
-    }),
-  fail: () => http.get(Paths.FollowedArtistsReleases, () => HttpResponse.error()),
-};
+// export const mswFollowedArtistsReleases = {
+//   success: () =>
+//     http.get(Paths.FollowedArtistsReleases, () => {
+//       return HttpResponse.json(followedArtistsReleases, { status: 200 });
+//     }),
+//   fail: () => http.get(Paths.FollowedArtistsReleases, () => HttpResponse.error()),
+// };

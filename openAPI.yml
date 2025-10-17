@@ -9,7 +9,7 @@ components:
           type: integer
           format: int64
         createDate:
-          $ref: "#/components/schemas/LocalDateTime"
+          $ref: '#/components/schemas/LocalDateTime'
         name:
           type: string
         lastfmUri:
@@ -52,7 +52,7 @@ components:
         artists:
           type: array
           items:
-            $ref: "#/components/schemas/SearchResultArtistDto"
+            $ref: '#/components/schemas/SearchResultArtistDto'
     FollowedArtistsRelease:
       type: object
       properties:
@@ -68,11 +68,11 @@ components:
         musicbrainzId:
           type: string
         releasedOn:
-          $ref: "#/components/schemas/LocalDate"
+          $ref: '#/components/schemas/LocalDate'
         artists:
           type: array
           items:
-            $ref: "#/components/schemas/ArtistDto"
+            $ref: '#/components/schemas/ArtistDto'
     FollowedArtistsReleaseResponse:
       type: object
       properties:
@@ -82,7 +82,7 @@ components:
         releases:
           type: array
           items:
-            $ref: "#/components/schemas/FollowedArtistsRelease"
+            $ref: '#/components/schemas/FollowedArtistsRelease'
     FollowedArtistsResponse:
       type: object
       properties:
@@ -92,7 +92,7 @@ components:
         rows:
           type: array
           items:
-            $ref: "#/components/schemas/ArtistDto"
+            $ref: '#/components/schemas/ArtistDto'
     LocalDate:
       type: string
       format: date
@@ -120,15 +120,15 @@ components:
         spotifyEnabled:
           type: boolean
         lastNotified:
-          $ref: "#/components/schemas/LocalDate"
+          $ref: '#/components/schemas/LocalDate'
         createDate:
-          $ref: "#/components/schemas/LocalDateTime"
+          $ref: '#/components/schemas/LocalDateTime'
         modifyDate:
-          $ref: "#/components/schemas/LocalDateTime"
+          $ref: '#/components/schemas/LocalDateTime'
         lastSpotifyScrape:
-          $ref: "#/components/schemas/LocalDateTime"
+          $ref: '#/components/schemas/LocalDateTime'
         lastLastFmScrape:
-          $ref: "#/components/schemas/LocalDateTime"
+          $ref: '#/components/schemas/LocalDateTime'
     RegisterUserRequest:
       type: object
       required:
@@ -155,12 +155,12 @@ components:
         musicbrainzId:
           type: string
         releasedOn:
-          $ref: "#/components/schemas/LocalDate"
+          $ref: '#/components/schemas/LocalDate'
     ReleaseScrapeResponse:
       type: object
       properties:
         scrape:
-          $ref: "#/components/schemas/Scrape"
+          $ref: '#/components/schemas/Scrape'
     Scrape:
       type: object
       properties:
@@ -168,11 +168,11 @@ components:
           type: integer
           format: int64
         createDate:
-          $ref: "#/components/schemas/LocalDateTime"
+          $ref: '#/components/schemas/LocalDateTime'
         modifyDate:
-          $ref: "#/components/schemas/LocalDateTime"
+          $ref: '#/components/schemas/LocalDateTime'
         completeDate:
-          $ref: "#/components/schemas/LocalDateTime"
+          $ref: '#/components/schemas/LocalDateTime'
         releasesFromSpotify:
           type: integer
           format: int64
@@ -193,7 +193,7 @@ components:
         releases:
           type: array
           items:
-            $ref: "#/components/schemas/Release"
+            $ref: '#/components/schemas/Release'
     SearchResultArtistDto:
       type: object
       required:
@@ -231,11 +231,11 @@ components:
         hasNewRelease:
           type: boolean
         user:
-          $ref: "#/components/schemas/RaccoonUser"
+          $ref: '#/components/schemas/RaccoonUser'
           type: object
           writeOnly: true
         artist:
-          $ref: "#/components/schemas/Artist"
+          $ref: '#/components/schemas/Artist'
           type: object
           writeOnly: true
     UserProfile:
@@ -259,7 +259,7 @@ components:
           type: integer
           format: int64
         user:
-          $ref: "#/components/schemas/RaccoonUser"
+          $ref: '#/components/schemas/RaccoonUser'
         notifyIntervalDays:
           type: integer
           format: int32
@@ -282,7 +282,7 @@ paths:
   /:
     get:
       responses:
-        "200":
+        '200':
           description: OK
       summary: Index
       tags:
@@ -301,15 +301,15 @@ paths:
             format: int32
           required: false
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ArtistSearchResponse"
-        "401":
+                $ref: '#/components/schemas/ArtistSearchResponse'
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
       summary: Search Artists
       tags:
@@ -335,11 +335,11 @@ paths:
             default: 10
             maximum: 100
       responses:
-        "200":
+        '200':
           description: OK
-        "401":
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
       summary: Get All
       tags:
@@ -365,15 +365,15 @@ paths:
             default: 10
             maximum: 100
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FollowedArtistsResponse"
-        "401":
+                $ref: '#/components/schemas/FollowedArtistsResponse'
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
       summary: Get Recommended Artists
       tags:
@@ -388,11 +388,11 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
-        "401":
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
       summary: Registration Callback
       tags:
@@ -413,11 +413,11 @@ paths:
             type: string
           required: false
       responses:
-        "200":
+        '200':
           description: OK
-        "401":
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
       summary: Enable Taste Sources
       tags:
@@ -430,16 +430,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SearchResultArtistDto"
+              $ref: '#/components/schemas/SearchResultArtistDto'
         required: true
       responses:
-        "200":
+        '200':
           description: OK
-        "401":
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
-        "400":
+        '400':
           description: Bad Request
       summary: Follow Artist
       tags:
@@ -462,15 +462,15 @@ paths:
             format: int32
           required: false
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FollowedArtistsResponse"
-        "401":
+                $ref: '#/components/schemas/FollowedArtistsResponse'
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
       summary: Get Followed Artists
       tags:
@@ -487,15 +487,15 @@ paths:
             format: int32
           required: false
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FollowedArtistsReleaseResponse"
-        "401":
+                $ref: '#/components/schemas/FollowedArtistsReleaseResponse'
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
       summary: Get Followed Artists Releases
       tags:
@@ -505,15 +505,15 @@ paths:
   /me/profile:
     get:
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserProfile"
-        "401":
+                $ref: '#/components/schemas/UserProfile'
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
       summary: Get User Profile
       tags:
@@ -526,24 +526,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserSettings"
+              $ref: '#/components/schemas/UserSettings'
         required: true
       responses:
-        "201":
+        '201':
           description: Created
-        "400":
+        '400':
           description: Bad Request
       summary: Set User Settings
       tags:
         - User Settings Resource
     get:
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserSettingsDto"
+                $ref: '#/components/schemas/UserSettingsDto'
       summary: Get User Settings
       tags:
         - User Settings Resource
@@ -556,11 +556,11 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
-        "401":
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
       summary: Unfollow Artist
       tags:
@@ -570,7 +570,7 @@ paths:
   /notify-users:
     get:
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
@@ -582,12 +582,12 @@ paths:
   /release-scrape:
     put:
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ReleaseScrapeResponse"
+                $ref: '#/components/schemas/ReleaseScrapeResponse'
       summary: Scrape Releases
       tags:
         - Release Scrape Resource
@@ -599,17 +599,17 @@ paths:
           type: string
     get:
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/UserArtist"
-        "401":
+                  $ref: '#/components/schemas/UserArtist'
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
       summary: Scrape Lastfm Taste
       tags:
@@ -624,11 +624,11 @@ paths:
           type: string
     get:
       responses:
-        "200":
+        '200':
           description: OK
-        "401":
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
       summary: Scrape Spotify Taste Web App
       tags:
@@ -646,22 +646,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SpotifyAuth"
+              $ref: '#/components/schemas/SpotifyAuth'
         required: true
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/UserArtist"
-        "401":
+                  $ref: '#/components/schemas/UserArtist'
+        '401':
           description: Not Authorized
-        "403":
+        '403':
           description: Not Allowed
-        "400":
+        '400':
           description: Bad Request
       summary: Scrape Spotify Taste Client Auth
       tags:
@@ -684,7 +684,7 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
       summary: Complete Auth
       tags:
@@ -694,12 +694,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RegisterUserRequest"
+              $ref: '#/components/schemas/RegisterUserRequest'
         required: true
       responses:
-        "200":
+        '200':
           description: OK
-        "400":
+        '400':
           description: Bad Request
       summary: Authorize Spotify
       tags:
@@ -712,7 +712,7 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
       summary: Get User Top Artists
       tags:
@@ -720,7 +720,7 @@ paths:
   /stats:
     get:
       responses:
-        "200":
+        '200':
           description: OK
       summary: Get All Stats
       tags:
@@ -728,7 +728,7 @@ paths:
   /stats/artists/count:
     get:
       responses:
-        "200":
+        '200':
           description: OK
       summary: Get Artist Count
       tags:
@@ -736,7 +736,7 @@ paths:
   /stats/releases/count:
     get:
       responses:
-        "200":
+        '200':
           description: OK
       summary: Get Release Count
       tags:

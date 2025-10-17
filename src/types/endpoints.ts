@@ -27,7 +27,7 @@ export const Paths = {
   Recommended: `api/protected/artists/recommended`,
   Follow: `api/protected/follow`,
   FollowedArtists: `api/protected/followed-artists`,
-  FollowedArtistsReleases: `api/protected/followed-artists/releases`,
+  FollowedArtistsReleases: `api/releases`,
   UnfollowArtist: `api/protected/unfollow`,
   RaccoonUser: `api/protected/profile`,
   ScrapeLastFM: `api/protected/scrape-taste/lastfm`,
